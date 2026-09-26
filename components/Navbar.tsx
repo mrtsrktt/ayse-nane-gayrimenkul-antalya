@@ -24,6 +24,7 @@ export default function Navbar() {
     { name: 'Portföy', href: '/#portfoy' },
     { name: 'Bölgeler', href: '/#bolgeler' },
     { name: 'Hizmetler', href: '/#degerleme' },
+    { name: 'Ekip & CRM', href: '/ekip', isCrm: true },
     { name: 'Hakkımda', href: '/#hakkimda' },
     { name: 'İçgörüler', href: '/blog' },
     { name: 'İletişim', href: '/#iletisim' },
@@ -62,14 +63,19 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Nav Links */}
-          <nav className="hidden lg:flex items-center gap-7">
+          <nav className="hidden lg:flex items-center gap-6">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-xs font-medium tracking-wide text-brand-text hover:text-bronze transition-colors py-1 relative"
+                className="text-xs font-medium tracking-wide text-brand-text hover:text-bronze transition-colors py-1 relative flex items-center gap-1.5"
               >
-                {link.name}
+                <span>{link.name}</span>
+                {link.isCrm && (
+                  <span className="text-[9px] px-1.5 py-0.5 rounded bg-ivory text-bronze border border-limestone/60 font-semibold tracking-wider">
+                    CRM
+                  </span>
+                )}
               </Link>
             ))}
           </nav>
@@ -163,6 +169,11 @@ export default function Navbar() {
                 className="text-sm font-medium text-brand-text hover:text-bronze py-2 border-b border-limestone/30 flex items-center justify-between"
               >
                 <span>{link.name}</span>
+                {link.isCrm && (
+                  <span className="text-[10px] px-2 py-0.5 rounded bg-ivory text-bronze border border-limestone/60 font-semibold tracking-wider">
+                    CRM
+                  </span>
+                )}
               </Link>
             ))}
 

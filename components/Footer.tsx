@@ -74,6 +74,14 @@ export default function Footer() {
                 <Link href="/blog" className="hover:text-bronze transition-colors">İçgörüler & Piyasa Raporları</Link>
               </li>
               <li>
+                <Link href="/ekip" className="hover:text-bronze transition-colors inline-flex items-center gap-1.5">
+                  <span>Ekip & CRM Portalı</span>
+                  <span className="text-[9px] px-1.5 py-0.2 rounded bg-white text-bronze border border-limestone/70 font-semibold tracking-wider">
+                    CRM
+                  </span>
+                </Link>
+              </li>
+              <li>
                 <Link href="/#hakkimda" className="hover:text-bronze transition-colors">Ayşe Nane Hakkında</Link>
               </li>
               <li>

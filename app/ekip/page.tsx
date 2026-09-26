@@ -246,18 +246,19 @@ export default function TeamAndCrmPage() {
         <div className="max-w-content mx-auto flex flex-wrap items-center justify-between gap-3 text-xs">
           <div className="flex items-center gap-2">
             <span className="p-1 rounded-lg bg-white border border-limestone text-bronze">
-              <Lock className="w-3.5 h-3.5" />
+              <ShieldCheck className="w-3.5 h-3.5 text-bronze" />
             </span>
             <span className="font-bold text-ink">
-              Dahili Danışman Masası & CRM Simülasyonu
+              Ayşe Nane & Ekibi Portalı (Danışman Masası & CRM)
             </span>
             <span className="hidden md:inline text-limestone">|</span>
             <span className="text-brand-muted hidden md:inline">
-              Bu alan dahili kullanım içindir; sunulan kayıtlar demo amaçlı kurgulanmıştır.
+              Müşteri görüşme, talep ve portföy aşama takip sistemi.
             </span>
           </div>
 
           <div className="inline-flex items-center gap-1.5 text-[11px] text-brand-muted bg-white px-3 py-1 rounded-full border border-limestone font-medium">
+            <span className="w-2 h-2 rounded-full bg-olive animate-pulse"></span>
             <span>Demo Veri Ortamı</span>
           </div>
         </div>
@@ -335,7 +336,7 @@ export default function TeamAndCrmPage() {
                 Görüşülen Müşteriler & Portföy Talepleri
               </h2>
               <p className="text-xs text-brand-muted mt-0.5">
-                Görüşme notları, bütçeler ve aşama takibi (Demo veri simülasyonu).
+                Görüşme notları, bütçeler ve aşama takibi (Demo veri ortamı).
               </p>
             </div>
 
