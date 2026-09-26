@@ -55,15 +55,15 @@ export default function Hero({ onSearch }: HeroProps) {
           {/* Left Column: Headlines & Search (7 cols) */}
           <div className="lg:col-span-7 text-center lg:text-left space-y-6">
             {/* Top Gold Pill */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel border border-gold-400/40 text-gold-300 text-xs sm:text-sm font-medium shadow-xl">
-              <Sparkles className="w-4 h-4 text-gold-400" />
-              <span>Antalya • Kaş • Kalkan • Lara • Konyaaltı • Döşemealtı</span>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel border border-gold-400/40 text-gold-300 text-xs font-medium shadow-xl tracking-widest uppercase">
+              <span className="w-1.5 h-1.5 rounded-full bg-gold-400 animate-pulse" />
+              <span>36°53&apos;N 30°42&apos;E • Antalya • Kaş • Kalkan • Döşemealtı</span>
             </div>
 
             {/* Main Title */}
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-bold text-white tracking-tight leading-[1.15]">
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-bold text-white tracking-tight leading-[1.12]">
               Akdeniz’in Kalbinde Hayalinizdeki Yaşama ve <br className="hidden md:inline" />
-              <span className="gold-gradient-text">Doğru Yatırıma Açılan Kapı</span>
+              <span className="gold-gradient-text italic font-normal">Kusursuz Yatırıma</span> Açılan Kapı
             </h1>
 
             {/* Subtitle */}

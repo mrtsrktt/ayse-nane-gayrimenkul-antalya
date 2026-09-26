@@ -9,6 +9,7 @@ import RoiCalculator from '@/components/RoiCalculator';
 import AboutSection from '@/components/AboutSection';
 import InstagramSection from '@/components/InstagramSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
+import BlogSection from '@/components/BlogSection';
 import FaqSection from '@/components/FaqSection';
 import ContactSection from '@/components/ContactSection';
 
@@ -54,7 +55,10 @@ export default function HomePage() {
       {/* 8. Verified Testimonials & International Investor Stories */}
       <TestimonialsSection />
 
-      {/* 9. Real Estate & Legal FAQ Accordion */}
+      {/* 9. Editorial Blog & Market Research Insights */}
+      <BlogSection />
+
+      {/* 10. Real Estate & Legal FAQ Accordion */}
       <FaqSection />
 
       {/* 10. Contact Information & Consultation Appointment Booking */}

@@ -76,22 +76,28 @@ export default function Footer() {
             <h4 className="text-white text-xs font-bold uppercase tracking-wider">Hızlı Erişim</h4>
             <ul className="space-y-2">
               <li>
-                <a href="#portfoy" className="hover:text-gold-300 transition-colors">Seçkin Portföy</a>
+                <Link href="/#portfoy" className="hover:text-gold-300 transition-colors">Seçkin Portföy</Link>
               </li>
               <li>
-                <a href="#bolgeler" className="hover:text-gold-300 transition-colors">Bölge Rehberi</a>
+                <Link href="/#bolgeler" className="hover:text-gold-300 transition-colors">Bölge Rehberi</Link>
               </li>
               <li>
-                <a href="#degerleme" className="hover:text-gold-300 transition-colors">Mülk Değerleme</a>
+                <Link href="/#degerleme" className="hover:text-gold-300 transition-colors">Mülk Değerleme</Link>
               </li>
               <li>
-                <a href="#yatirim-hesapla" className="hover:text-gold-300 transition-colors">Yatırım Hesaplayıcı</a>
+                <Link href="/#yatirim-hesapla" className="hover:text-gold-300 transition-colors">Yatırım Hesaplayıcı</Link>
               </li>
               <li>
-                <a href="#hakkimda" className="hover:text-gold-300 transition-colors">Ayşe Nane Kimdir?</a>
+                <Link href="/blog" className="hover:text-gold-300 transition-colors text-gold-400 font-semibold">Blog & Analizler</Link>
               </li>
               <li>
-                <a href="#sss" className="hover:text-gold-300 transition-colors">Sıkça Sorulan Sorular</a>
+                <Link href="/ekip" className="hover:text-gold-300 transition-colors text-slate-300">Ekip & CRM Portalı</Link>
+              </li>
+              <li>
+                <Link href="/#hakkimda" className="hover:text-gold-300 transition-colors">Ayşe Nane Kimdir?</Link>
+              </li>
+              <li>
+                <Link href="/#sss" className="hover:text-gold-300 transition-colors">Sıkça Sorulan Sorular</Link>
               </li>
             </ul>
           </div>

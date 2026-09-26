@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Phone, MessageCircle, Menu, X, ShieldCheck, Globe, Compass, Instagram } from 'lucide-react';
+import { Phone, MessageCircle, Menu, X, ShieldCheck, Globe, Compass, Instagram, Lock } from 'lucide-react';
 import { siteConfig } from '@/data/siteConfig';
 
 export default function Navbar() {
@@ -20,13 +20,14 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: 'Portföy', href: '#portfoy' },
-    { name: 'Bölgeler', href: '#bolgeler' },
-    { name: 'Mülk Değerleme', href: '#degerleme' },
-    { name: 'Yatırım Getirisi', href: '#yatirim-hesapla' },
-    { name: 'Hakkımda', href: '#hakkimda' },
-    { name: 'S.S.S.', href: '#sss' },
-    { name: 'İletişim', href: '#iletisim' },
+    { name: 'Portföy', href: '/#portfoy' },
+    { name: 'Bölgeler', href: '/#bolgeler' },
+    { name: 'Mülk Değerleme', href: '/#degerleme' },
+    { name: 'Yatırım Getirisi', href: '/#yatirim-hesapla' },
+    { name: 'Blog', href: '/blog' },
+    { name: 'Ekip & CRM', href: '/ekip', isLock: true },
+    { name: 'Hakkımda', href: '/#hakkimda' },
+    { name: 'İletişim', href: '/#iletisim' },
   ];
 
   return (
@@ -119,15 +120,20 @@ export default function Navbar() {
           </Link>
 
           {/* Desktop Nav Links */}
-          <nav className="hidden lg:flex items-center gap-7">
+          <nav className="hidden lg:flex items-center gap-6">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.name}
                 href={link.href}
-                className="text-sm font-medium text-slate-200 hover:text-gold-300 transition-colors relative py-1 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-gold-400 hover:after:w-full after:transition-all after:duration-300"
+                className="text-sm font-medium text-slate-200 hover:text-gold-300 transition-colors relative py-1 flex items-center gap-1.5"
               >
-                {link.name}
-              </a>
+                <span>{link.name}</span>
+                {link.isLock && (
+                  <span className="inline-flex items-center gap-1 text-[10px] bg-gold-500/20 text-gold-300 border border-gold-500/40 px-1.5 py-0.5 rounded-full font-bold">
+                    <Lock className="w-2.5 h-2.5" /> CRM
+                  </span>
+                )}
+              </Link>
             ))}
           </nav>
 
@@ -168,14 +174,19 @@ export default function Navbar() {
         <div className="lg:hidden bg-navy-950/98 backdrop-blur-xl border-b border-gold-500/20 px-6 py-6 transition-all shadow-2xl">
           <div className="flex flex-col gap-4">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.name}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-base font-medium text-slate-200 hover:text-gold-300 py-1 border-b border-slate-800/60"
+                className="text-base font-medium text-slate-200 hover:text-gold-300 py-1 border-b border-slate-800/60 flex items-center justify-between"
               >
-                {link.name}
-              </a>
+                <span>{link.name}</span>
+                {link.isLock && (
+                  <span className="inline-flex items-center gap-1 text-[10px] bg-gold-500/20 text-gold-300 border border-gold-500/40 px-2 py-0.5 rounded-full font-bold">
+                    <Lock className="w-2.5 h-2.5" /> Danışman Portalı
+                  </span>
+                )}
+              </Link>
             ))}
             <div className="pt-4 flex flex-col gap-3">
               <a
