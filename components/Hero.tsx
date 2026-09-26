@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { Search, ArrowRight, MapPin, Home } from 'lucide-react';
+import { Search, ArrowRight, MapPin, Home, MessageCircle } from 'lucide-react';
+import { siteConfig } from '@/data/siteConfig';
 
 interface HeroProps {
   onSearch: (filters: { type: string; location: string }) => void;
@@ -49,19 +50,24 @@ export default function Hero({ onSearch }: HeroProps) {
               {/* 1. Upper Tag / Eyebrow */}
               <div className="flex items-center gap-2 mb-2.5 sm:mb-3.5">
                 <span className="w-5 sm:w-6 h-px bg-bronze" />
-                <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-widest text-bronze">
-                  Ayşe Nane • Antalya Lüks Gayrimenkul
+                <span className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-bronze">
+                  AYŞE NANE • MYK SEVİYE 5 LİSANSLI GAYRİMENKUL DANIŞMANI
                 </span>
               </div>
 
               {/* 2. Strong H1 Headline */}
               <h1 className="text-xl sm:text-3xl lg:text-5xl font-serif font-bold text-ink leading-snug tracking-tight mb-2.5 sm:mb-4 break-normal">
-                Antalya’da Rafine Yaşam <br className="sm:hidden" />ve Stratejik Mülk Yatırımı
+                Antalya’da Doğru Mülk Kararları İçin Yanınızdayım
               </h1>
 
               {/* 3. Concise Description */}
               <p className="text-xs sm:text-base lg:text-lg text-brand-muted font-normal leading-relaxed mb-5 sm:mb-6 max-w-xl break-normal">
-                Döşemealtı’nın müstakil villalarından Lara falez hattı ve Kaş sahillerine; 12 yıllık lisanslı danışmanlık güvencesiyle kişiye özel gayrimenkul yönetimi.
+                <span className="sm:hidden">
+                  Ben Ayşe Nane. 12 yılı aşkın Antalya deneyimimle mülk alım, satış ve yatırım süreçlerinde doğrulanmış veriler, şeffaf tapu incelemesi ve birebir danışmanlık sunuyorum.
+                </span>
+                <span className="hidden sm:inline">
+                  Ben Ayşe Nane. 12 yılı aşkın süredir Antalya’da konut alım, satış ve yatırım süreçlerini; sahada doğrulanmış emsal analizi, şeffaf tapu incelemesi ve birebir danışmanlıkla yönetiyorum. Döşemealtı’ndan Lara’ya, Kaş-Kalkan’dan Belek’e kadar her adımda doğrudan yanınızdayım.
+                </span>
               </p>
 
               {/* 4. Dedicated Mobile Editorial Portrait Card (Visible strictly on mobile/tablet <lg) */}
@@ -99,12 +105,20 @@ export default function Hero({ onSearch }: HeroProps) {
               {/* 5. Primary CTAs */}
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3.5 max-w-md">
                 <a href="#portfoy" className="btn-primary text-center">
-                  <span>Seçkin Portföyü Keşfet</span>
+                  <span>Seçkin Portföyü İnceleyin</span>
                   <ArrowRight className="w-4 h-4 ml-1 inline" />
                 </a>
 
-                <a href="#degerleme" className="btn-secondary text-center">
-                  <span>Ücretsiz Mülk Değerleme</span>
+                <a
+                  href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(
+                    'Merhaba Ayşe Hanım, gayrimenkul alım/satım sürecim hakkında sizinle birebir görüşmek istiyorum.'
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-secondary text-center flex items-center justify-center gap-1.5"
+                >
+                  <MessageCircle className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>Ayşe Hanım ile Görüşün</span>
                 </a>
               </div>
             </div>
