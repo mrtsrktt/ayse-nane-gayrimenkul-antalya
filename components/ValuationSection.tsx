@@ -174,7 +174,7 @@ export default function ValuationSection() {
                       <input
                         type="tel"
                         required
-                        placeholder="0532 000 00 00"
+                        placeholder="0505 172 52 84"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         className="w-full bg-slate-950/80 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-gold-400"

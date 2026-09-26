@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Phone, MessageCircle, Menu, X, ShieldCheck, Globe, Compass, Instagram } from 'lucide-react';
 import { siteConfig } from '@/data/siteConfig';
 
@@ -96,10 +97,16 @@ export default function Navbar() {
         }`}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          {/* Brand Logo */}
+          {/* Brand Logo with Ayşe Hanım Portrait */}
           <Link href="/" className="group flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full border border-gold-400 flex items-center justify-center bg-gradient-to-br from-gold-500/20 to-navy-900 shadow-inner group-hover:border-gold-300 transition-colors">
-              <Compass className="w-5 h-5 text-gold-400 group-hover:rotate-45 transition-transform duration-500" />
+            <div className="relative w-11 h-11 rounded-full border-2 border-gold-400 overflow-hidden shadow-md group-hover:border-gold-300 transition-colors shrink-0">
+              <Image
+                src="/ayse-nane.jpg"
+                alt="Ayşe Nane"
+                fill
+                priority
+                className="object-cover object-top"
+              />
             </div>
             <div>
               <span className="block font-serif text-xl sm:text-2xl font-bold tracking-wider text-white group-hover:text-gold-200 transition-colors">

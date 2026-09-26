@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Compass, ShieldCheck, MapPin, Phone, Mail, Instagram, Linkedin, Youtube, ArrowUp } from 'lucide-react';
 import { siteConfig } from '@/data/siteConfig';
 
@@ -17,8 +18,13 @@ export default function Footer() {
           {/* Brand Info (4 cols) */}
           <div className="lg:col-span-4 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full border border-gold-400 flex items-center justify-center bg-gold-500/10">
-                <Compass className="w-5 h-5 text-gold-400" />
+              <div className="relative w-11 h-11 rounded-full border-2 border-gold-400 overflow-hidden shadow-inner shrink-0">
+                <Image
+                  src="/ayse-nane.jpg"
+                  alt="Ayşe Nane"
+                  fill
+                  className="object-cover object-top"
+                />
               </div>
               <div>
                 <span className="block font-serif text-xl font-bold tracking-wider text-white">

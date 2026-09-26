@@ -252,7 +252,7 @@ export default function ContactSection() {
                     <input
                       type="tel"
                       required
-                      placeholder="0532 000 00 00"
+                      placeholder="0505 172 52 84"
                       value={appointment.phone}
                       onChange={(e) => setAppointment({ ...appointment, phone: e.target.value })}
                       className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 focus:outline-none focus:border-gold-500"

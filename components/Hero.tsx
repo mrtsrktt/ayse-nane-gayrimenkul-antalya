@@ -2,7 +2,19 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { Search, MapPin, Home, ArrowRight, ShieldCheck, Award, Sparkles, PhoneCall } from 'lucide-react';
+import {
+  Search,
+  MapPin,
+  Home,
+  ArrowRight,
+  ShieldCheck,
+  Award,
+  Sparkles,
+  PhoneCall,
+  MessageCircle,
+  Instagram,
+  CheckCircle2
+} from 'lucide-react';
 import { siteConfig } from '@/data/siteConfig';
 
 interface HeroProps {
@@ -23,7 +35,7 @@ export default function Hero({ onSearch }: HeroProps) {
   };
 
   return (
-    <section className="relative min-h-[92vh] flex items-center justify-center pt-28 pb-20 overflow-hidden bg-navy-950">
+    <section className="relative min-h-[94vh] flex items-center justify-center pt-32 pb-16 overflow-hidden bg-navy-950">
       {/* Background Image with Dark Vignette */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -31,105 +43,191 @@ export default function Hero({ onSearch }: HeroProps) {
           alt="Antalya Lüks Gayrimenkul"
           fill
           priority
-          className="object-cover object-center scale-105 transition-transform duration-10000 hover:scale-100"
+          className="object-cover object-center scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/75 to-navy-950/60" />
-        <div className="absolute inset-0 bg-radial-gradient from-transparent via-navy-950/40 to-navy-950/90" />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/80 to-navy-950/65" />
+        <div className="absolute inset-0 bg-radial-gradient from-transparent via-navy-950/50 to-navy-950/90" />
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        {/* Top Gold Pill */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel border border-gold-400/40 text-gold-300 text-xs sm:text-sm font-medium mb-6 shadow-xl animate-fade-in">
-          <Sparkles className="w-4 h-4 text-gold-400" />
-          <span>Antalya • Kaş • Kalkan • Lara • Konyaaltı • Döşemealtı</span>
-        </div>
-
-        {/* Main Title */}
-        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-bold text-white tracking-tight leading-[1.15] mb-6">
-          Akdeniz’in Kalbinde Hayalinizdeki Yaşama ve <br className="hidden md:inline" />
-          <span className="gold-gradient-text">Doğru Yatırıma Açılan Kapı</span>
-        </h1>
-
-        {/* Subtitle */}
-        <p className="max-w-3xl mx-auto text-base sm:text-lg lg:text-xl text-slate-300 font-light leading-relaxed mb-10">
-          Antalya’nın en seçkin villaları, panoramik falez rezidansları ve yüksek getirili arsa portföyleriyle;
-          <strong className="text-white font-medium"> Ayşe Nane</strong> güvencesiyle geleceğinizi inşa edin.
-        </p>
-
-        {/* Search & Filter Bar */}
-        <div className="max-w-4xl mx-auto glass-panel p-3 sm:p-4 rounded-2xl shadow-2xl border border-gold-500/30 mb-12">
-          <form onSubmit={handleFilterSubmit} className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
-            {/* Property Type */}
-            <div className="sm:col-span-5 text-left bg-slate-900/80 border border-slate-700/80 rounded-xl px-4 py-3 focus-within:border-gold-400 transition-colors">
-              <label className="block text-[11px] font-semibold text-gold-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
-                <Home className="w-3.5 h-3.5" /> Mülk Tipi
-              </label>
-              <select
-                value={selectedType}
-                onChange={(e) => setSelectedType(e.target.value)}
-                className="w-full bg-transparent text-white font-medium text-sm focus:outline-none cursor-pointer"
-              >
-                <option value="all" className="bg-navy-900 text-white">Tüm Mülk Tipleri</option>
-                <option value="villa" className="bg-navy-900 text-white">Lüks Villalar & Malikâneler</option>
-                <option value="apartment" className="bg-navy-900 text-white">Deniz Manzaralı Rezidans & Daire</option>
-                <option value="land" className="bg-navy-900 text-white">Yatırımlık Villa & Ticari Arsalar</option>
-                <option value="commercial" className="bg-navy-900 text-white">Turistik & Ticari Gayrimenkul</option>
-              </select>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        {/* Main 2-Column Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+          {/* Left Column: Headlines & Search (7 cols) */}
+          <div className="lg:col-span-7 text-center lg:text-left space-y-6">
+            {/* Top Gold Pill */}
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel border border-gold-400/40 text-gold-300 text-xs sm:text-sm font-medium shadow-xl">
+              <Sparkles className="w-4 h-4 text-gold-400" />
+              <span>Antalya • Kaş • Kalkan • Lara • Konyaaltı • Döşemealtı</span>
             </div>
 
-            {/* Location */}
-            <div className="sm:col-span-4 text-left bg-slate-900/80 border border-slate-700/80 rounded-xl px-4 py-3 focus-within:border-gold-400 transition-colors">
-              <label className="block text-[11px] font-semibold text-gold-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5" /> Konum / Bölge
-              </label>
-              <select
-                value={selectedLocation}
-                onChange={(e) => setSelectedLocation(e.target.value)}
-                className="w-full bg-transparent text-white font-medium text-sm focus:outline-none cursor-pointer"
-              >
-                <option value="all" className="bg-navy-900 text-white">Tüm Antalya Bölgeleri</option>
-                <option value="Döşemealtı" className="bg-navy-900 text-white">Döşemealtı (Lüks Villalar)</option>
-                <option value="Lara" className="bg-navy-900 text-white">Lara & Falezler</option>
-                <option value="Konyaaltı" className="bg-navy-900 text-white">Konyaaltı Sahili</option>
-                <option value="Kaş" className="bg-navy-900 text-white">Kaş & Kalkan</option>
-                <option value="Belek" className="bg-navy-900 text-white">Belek Golf Bölgesi</option>
-                <option value="Alanya" className="bg-navy-900 text-white">Alanya & Kargıcak</option>
-              </select>
+            {/* Main Title */}
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-bold text-white tracking-tight leading-[1.15]">
+              Akdeniz’in Kalbinde Hayalinizdeki Yaşama ve <br className="hidden md:inline" />
+              <span className="gold-gradient-text">Doğru Yatırıma Açılan Kapı</span>
+            </h1>
+
+            {/* Subtitle */}
+            <p className="text-base sm:text-lg text-slate-300 font-light leading-relaxed max-w-2xl mx-auto lg:mx-0">
+              Antalya’nın en seçkin villaları, panoramik falez rezidansları ve yüksek getirili arsa portföyleriyle;
+              <strong className="text-white font-medium"> {siteConfig.agentName}</strong> güvencesiyle geleceğinizi inşa edin.
+            </p>
+
+            {/* Search & Filter Bar */}
+            <div className="glass-panel p-3 sm:p-4 rounded-2xl shadow-2xl border border-gold-500/30">
+              <form onSubmit={handleFilterSubmit} className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
+                {/* Property Type */}
+                <div className="sm:col-span-5 text-left bg-slate-900/80 border border-slate-700/80 rounded-xl px-4 py-3 focus-within:border-gold-400 transition-colors">
+                  <label className="block text-[11px] font-semibold text-gold-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                    <Home className="w-3.5 h-3.5" /> Mülk Tipi
+                  </label>
+                  <select
+                    value={selectedType}
+                    onChange={(e) => setSelectedType(e.target.value)}
+                    className="w-full bg-transparent text-white font-medium text-sm focus:outline-none cursor-pointer"
+                  >
+                    <option value="all" className="bg-navy-900 text-white">Tüm Mülk Tipleri</option>
+                    <option value="villa" className="bg-navy-900 text-white">Lüks Villalar & Malikâneler</option>
+                    <option value="apartment" className="bg-navy-900 text-white">Deniz Manzaralı Rezidans & Daire</option>
+                    <option value="land" className="bg-navy-900 text-white">Yatırımlık Villa & Ticari Arsalar</option>
+                    <option value="commercial" className="bg-navy-900 text-white">Turistik & Ticari Gayrimenkul</option>
+                  </select>
+                </div>
+
+                {/* Location */}
+                <div className="sm:col-span-4 text-left bg-slate-900/80 border border-slate-700/80 rounded-xl px-4 py-3 focus-within:border-gold-400 transition-colors">
+                  <label className="block text-[11px] font-semibold text-gold-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                    <MapPin className="w-3.5 h-3.5" /> Konum / Bölge
+                  </label>
+                  <select
+                    value={selectedLocation}
+                    onChange={(e) => setSelectedLocation(e.target.value)}
+                    className="w-full bg-transparent text-white font-medium text-sm focus:outline-none cursor-pointer"
+                  >
+                    <option value="all" className="bg-navy-900 text-white">Tüm Antalya Bölgeleri</option>
+                    <option value="Döşemealtı" className="bg-navy-900 text-white">Döşemealtı (Lüks Villalar)</option>
+                    <option value="Lara" className="bg-navy-900 text-white">Lara & Falezler</option>
+                    <option value="Konyaaltı" className="bg-navy-900 text-white">Konyaaltı Sahili</option>
+                    <option value="Kaş" className="bg-navy-900 text-white">Kaş & Kalkan</option>
+                    <option value="Belek" className="bg-navy-900 text-white">Belek Golf Bölgesi</option>
+                    <option value="Alanya" className="bg-navy-900 text-white">Alanya & Kargıcak</option>
+                  </select>
+                </div>
+
+                {/* Submit Button */}
+                <div className="sm:col-span-3">
+                  <button
+                    type="submit"
+                    className="w-full gold-gradient-button font-bold text-sm tracking-wide py-3.5 px-6 rounded-xl flex items-center justify-center gap-2 shadow-lg"
+                  >
+                    <Search className="w-4 h-4" />
+                    <span>İlanları Bul</span>
+                  </button>
+                </div>
+              </form>
             </div>
 
-            {/* Submit Button */}
-            <div className="sm:col-span-3">
-              <button
-                type="submit"
-                className="w-full gold-gradient-button font-bold text-sm tracking-wide py-3.5 px-6 rounded-xl flex items-center justify-center gap-2 shadow-lg"
+            {/* Quick CTA Links */}
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 text-sm pt-2">
+              <a
+                href="#portfoy"
+                className="inline-flex items-center gap-2 text-white font-medium hover:text-gold-300 transition-colors bg-white/10 hover:bg-white/15 px-5 py-2.5 rounded-full backdrop-blur-sm border border-white/10"
               >
-                <Search className="w-4 h-4" />
-                <span>İlanları Bul</span>
-              </button>
+                Öne Çıkan Portföyü İncele
+                <ArrowRight className="w-4 h-4 text-gold-400" />
+              </a>
+              <a
+                href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(
+                  'Merhaba Ayşe Hanım, Antalya gayrimenkul portföyünüz hakkında bilgi almak istiyorum.'
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors bg-emerald-950/60 hover:bg-emerald-900/60 px-5 py-2.5 rounded-full border border-emerald-500/30 backdrop-blur-sm font-semibold"
+              >
+                <MessageCircle className="w-4 h-4" />
+                WhatsApp ile Danışın
+              </a>
             </div>
-          </form>
-        </div>
+          </div>
 
-        {/* Quick CTA Links */}
-        <div className="flex flex-wrap items-center justify-center gap-4 text-sm">
-          <a
-            href="#portfoy"
-            className="inline-flex items-center gap-2 text-white font-medium hover:text-gold-300 transition-colors bg-white/10 hover:bg-white/15 px-5 py-2.5 rounded-full backdrop-blur-sm border border-white/10"
-          >
-            Öne Çıkan Portföyü İncele
-            <ArrowRight className="w-4 h-4 text-gold-400" />
-          </a>
-          <a
-            href="#hakkimda"
-            className="inline-flex items-center gap-2 text-gold-300 hover:text-white transition-colors bg-gold-500/10 hover:bg-gold-500/20 px-5 py-2.5 rounded-full border border-gold-400/30 backdrop-blur-sm"
-          >
-            <Award className="w-4 h-4 text-gold-400" />
-            Ayşe Nane Kimdir?
-          </a>
+          {/* Right Column: Ayşe Nane Prominent Executive Portrait Card (5 cols) */}
+          <div className="lg:col-span-5 flex justify-center">
+            <div className="relative w-full max-w-md bg-gradient-to-b from-navy-900/90 via-navy-950/95 to-navy-950 p-4 sm:p-5 rounded-3xl border-2 border-gold-500/40 shadow-2xl backdrop-blur-xl">
+              {/* Gold Top Badge */}
+              <div className="flex items-center justify-between gap-2 mb-3">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold-500/20 text-gold-300 text-xs font-bold border border-gold-500/40">
+                  <ShieldCheck className="w-3.5 h-3.5 text-gold-400" />
+                  MYK Seviye 5 Lisanslı
+                </span>
+                <span className="flex items-center gap-1.5 text-[11px] text-emerald-400 font-semibold bg-emerald-950/80 px-2.5 py-0.5 rounded-full border border-emerald-500/30">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  Müsait & Çevrim İçi
+                </span>
+              </div>
+
+              {/* Photo Container */}
+              <div className="relative h-80 sm:h-96 w-full rounded-2xl overflow-hidden border border-gold-500/30 shadow-inner group">
+                <Image
+                  src="/ayse-nane.jpg"
+                  alt="Ayşe Nane Gayrimenkul Danışmanı"
+                  fill
+                  priority
+                  className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-transparent to-transparent opacity-80" />
+
+                {/* Floating Bottom Card on Photo */}
+                <div className="absolute bottom-3 left-3 right-3 p-3.5 rounded-xl bg-navy-950/85 backdrop-blur-md border border-gold-500/30 text-white">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="font-serif font-bold text-lg text-white flex items-center gap-1.5">
+                        <span>{siteConfig.agentName}</span>
+                        <CheckCircle2 className="w-4 h-4 text-blue-400 fill-blue-400/20" />
+                      </h3>
+                      <p className="text-xs text-gold-300 font-medium">
+                        Lüks Konut & Yatırım Danışmanı
+                      </p>
+                    </div>
+                    <a
+                      href={siteConfig.instagramUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-2 rounded-lg bg-pink-600/20 border border-pink-500/30 text-pink-400 hover:text-white hover:bg-pink-600 transition-colors"
+                      title="Instagram Profili"
+                    >
+                      <Instagram className="w-4 h-4" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              {/* Contact Actions in Hero Card */}
+              <div className="mt-4 grid grid-cols-2 gap-2.5">
+                <a
+                  href={`tel:${siteConfig.phone}`}
+                  className="bg-white/10 hover:bg-white/15 text-white font-bold text-xs py-3 px-3 rounded-xl flex items-center justify-center gap-1.5 transition-colors border border-white/10"
+                >
+                  <PhoneCall className="w-3.5 h-3.5 text-gold-400" />
+                  <span className="truncate">{siteConfig.phoneDisplay}</span>
+                </a>
+
+                <a
+                  href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(
+                    'Merhaba Ayşe Hanım, portföyünüz hakkında görüşmek istiyorum.'
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="gold-gradient-button font-bold text-xs py-3 px-3 rounded-xl flex items-center justify-center gap-1.5 shadow-md"
+                >
+                  <MessageCircle className="w-3.5 h-3.5" />
+                  <span>WhatsApp Yaz</span>
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Stats Strip */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mt-16 pt-10 border-t border-slate-800/80 text-left">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mt-14 pt-10 border-t border-slate-800/80 text-left">
           {siteConfig.stats.map((stat, idx) => (
             <div key={idx} className="bg-navy-900/50 backdrop-blur-md p-4 rounded-xl border border-slate-800/60">
               <p className="text-2xl sm:text-3xl font-serif font-bold text-gold-400 mb-1">{stat.value}</p>
