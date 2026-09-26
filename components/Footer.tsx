@@ -12,13 +12,13 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-navy-950 text-slate-400 text-xs border-t border-gold-500/20 pt-16 pb-12">
+    <footer className="bg-[#070A12] text-slate-400 text-xs border-t border-white/[0.08] pt-16 pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-slate-800">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-white/[0.08]">
           {/* Brand Info (4 cols) */}
           <div className="lg:col-span-4 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="relative w-11 h-11 rounded-full border-2 border-gold-400 overflow-hidden shadow-inner shrink-0">
+              <div className="relative w-12 h-12 rounded-full border-2 border-[#C5A059] overflow-hidden shadow-inner shrink-0">
                 <Image
                   src="/ayse-nane.jpg"
                   alt="Ayşe Nane"
@@ -27,11 +27,11 @@ export default function Footer() {
                 />
               </div>
               <div>
-                <span className="block font-serif text-xl font-bold tracking-wider text-white">
+                <span className="block font-serif text-2xl font-bold tracking-wider text-white">
                   AYŞE NANE
                 </span>
-                <span className="block text-[10px] tracking-[0.2em] uppercase text-gold-400 font-medium">
-                  Gayrimenkul & Yatırım
+                <span className="block text-[10px] tracking-[0.25em] uppercase text-[#DEC07E] font-medium">
+                  Gayrimenkul & Yatırım • Antalya
                 </span>
               </div>
             </div>
@@ -45,7 +45,7 @@ export default function Footer() {
                 href={siteConfig.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full bg-slate-900 border border-slate-700 flex items-center justify-center text-slate-300 hover:text-gold-400 hover:border-gold-400 transition-colors"
+                className="w-9 h-9 rounded-xl bg-[#0C1222] border border-white/10 flex items-center justify-center text-slate-300 hover:text-[#DEC07E] hover:border-[#DEC07E]/40 transition-colors"
                 aria-label="Instagram"
               >
                 <Instagram className="w-4 h-4" />
@@ -54,7 +54,7 @@ export default function Footer() {
                 href={siteConfig.linkedinUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full bg-slate-900 border border-slate-700 flex items-center justify-center text-slate-300 hover:text-gold-400 hover:border-gold-400 transition-colors"
+                className="w-9 h-9 rounded-xl bg-[#0C1222] border border-white/10 flex items-center justify-center text-slate-300 hover:text-[#DEC07E] hover:border-[#DEC07E]/40 transition-colors"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="w-4 h-4" />
@@ -63,7 +63,7 @@ export default function Footer() {
                 href={siteConfig.youtubeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full bg-slate-900 border border-slate-700 flex items-center justify-center text-slate-300 hover:text-gold-400 hover:border-gold-400 transition-colors"
+                className="w-9 h-9 rounded-xl bg-[#0C1222] border border-white/10 flex items-center justify-center text-slate-300 hover:text-[#DEC07E] hover:border-[#DEC07E]/40 transition-colors"
                 aria-label="YouTube"
               >
                 <Youtube className="w-4 h-4" />
@@ -73,56 +73,56 @@ export default function Footer() {
 
           {/* Quick Links (2 cols) */}
           <div className="lg:col-span-2 space-y-3">
-            <h4 className="text-white text-xs font-bold uppercase tracking-wider">Hızlı Erişim</h4>
-            <ul className="space-y-2">
+            <h4 className="text-white text-xs font-bold uppercase tracking-wider">Hızlı Menü</h4>
+            <ul className="space-y-2.5">
               <li>
-                <Link href="/#portfoy" className="hover:text-gold-300 transition-colors">Seçkin Portföy</Link>
+                <Link href="/#portfoy" className="hover:text-[#DEC07E] transition-colors">Seçkin Portföy</Link>
               </li>
               <li>
-                <Link href="/#bolgeler" className="hover:text-gold-300 transition-colors">Bölge Rehberi</Link>
+                <Link href="/#bolgeler" className="hover:text-[#DEC07E] transition-colors">Bölge Rehberi</Link>
               </li>
               <li>
-                <Link href="/#degerleme" className="hover:text-gold-300 transition-colors">Mülk Değerleme</Link>
+                <Link href="/#degerleme" className="hover:text-[#DEC07E] transition-colors">Mülk Değerleme</Link>
               </li>
               <li>
-                <Link href="/#yatirim-hesapla" className="hover:text-gold-300 transition-colors">Yatırım Hesaplayıcı</Link>
+                <Link href="/#yatirim-hesapla" className="hover:text-[#DEC07E] transition-colors">Yatırım Hesaplayıcı</Link>
               </li>
               <li>
-                <Link href="/blog" className="hover:text-gold-300 transition-colors text-gold-400 font-semibold">Blog & Analizler</Link>
+                <Link href="/blog" className="hover:text-[#DEC07E] transition-colors text-[#DEC07E] font-semibold">Blog & Piyasa Raporları</Link>
               </li>
               <li>
-                <Link href="/ekip" className="hover:text-gold-300 transition-colors text-slate-300">Ekip & CRM Portalı</Link>
+                <Link href="/ekip" className="hover:text-[#DEC07E] transition-colors text-slate-300">Ekip & CRM Portalı</Link>
               </li>
               <li>
-                <Link href="/#hakkimda" className="hover:text-gold-300 transition-colors">Ayşe Nane Kimdir?</Link>
+                <Link href="/#hakkimda" className="hover:text-[#DEC07E] transition-colors">Ayşe Nane Kimdir?</Link>
               </li>
               <li>
-                <Link href="/#sss" className="hover:text-gold-300 transition-colors">Sıkça Sorulan Sorular</Link>
+                <Link href="/#sss" className="hover:text-[#DEC07E] transition-colors">Sıkça Sorulan Sorular</Link>
               </li>
             </ul>
           </div>
 
           {/* Popular Regions (3 cols) */}
           <div className="lg:col-span-3 space-y-3">
-            <h4 className="text-white text-xs font-bold uppercase tracking-wider">Antalya Bölgeleri</h4>
-            <ul className="space-y-2">
+            <h4 className="text-white text-xs font-bold uppercase tracking-wider">Antalya Mikro-Piyasalar</h4>
+            <ul className="space-y-2.5">
               <li>
-                <a href="#portfoy" className="hover:text-gold-300 transition-colors">Döşemealtı Müstakil Villalar</a>
+                <a href="#portfoy" className="hover:text-[#DEC07E] transition-colors">Döşemealtı Müstakil Villalar</a>
               </li>
               <li>
-                <a href="#portfoy" className="hover:text-gold-300 transition-colors">Lara & Falez Rezidansları</a>
+                <a href="#portfoy" className="hover:text-[#DEC07E] transition-colors">Lara & Falez Rezidansları</a>
               </li>
               <li>
-                <a href="#portfoy" className="hover:text-gold-300 transition-colors">Konyaaltı Sahil Daireleri</a>
+                <a href="#portfoy" className="hover:text-[#DEC07E] transition-colors">Konyaaltı Sahil Daireleri</a>
               </li>
               <li>
-                <a href="#portfoy" className="hover:text-gold-300 transition-colors">Kaş & Kalkan Panoramik Villalar</a>
+                <a href="#portfoy" className="hover:text-[#DEC07E] transition-colors">Kaş & Kalkan Panoramik Villalar</a>
               </li>
               <li>
-                <a href="#portfoy" className="hover:text-gold-300 transition-colors">Belek Golf & Malikâne Projeleri</a>
+                <a href="#portfoy" className="hover:text-[#DEC07E] transition-colors">Belek Golf & Malikâne Projeleri</a>
               </li>
               <li>
-                <a href="#portfoy" className="hover:text-gold-300 transition-colors">Alanya Denize Sıfır Konutlar</a>
+                <a href="#portfoy" className="hover:text-[#DEC07E] transition-colors">Alanya Denize Sıfır Konutlar</a>
               </li>
             </ul>
           </div>
@@ -130,11 +130,11 @@ export default function Footer() {
           {/* Licenses & Regulatory (3 cols) */}
           <div className="lg:col-span-3 space-y-3">
             <h4 className="text-white text-xs font-bold uppercase tracking-wider">Resmi Akreditasyonlar</h4>
-            <div className="space-y-2 text-[11px] text-slate-400">
+            <div className="space-y-2.5 text-[11px] text-slate-400">
               {siteConfig.licenses.map((lic, i) => (
-                <div key={i} className="p-2.5 rounded-xl bg-slate-900 border border-slate-800">
+                <div key={i} className="p-3 rounded-xl bg-[#0C1222] border border-white/[0.08]">
                   <p className="font-semibold text-slate-200">{lic.title}</p>
-                  <p className="text-gold-400/80 text-[10px] mt-0.5">{lic.code}</p>
+                  <p className="text-[#DEC07E] text-[10px] mt-0.5">{lic.code}</p>
                 </div>
               ))}
             </div>
@@ -152,7 +152,7 @@ export default function Footer() {
             <span>KVKK Aydınlatma Metni</span>
             <button
               onClick={scrollToTop}
-              className="p-2 rounded-full bg-slate-900 border border-slate-700 text-slate-300 hover:text-white hover:border-gold-400 transition-colors"
+              className="p-2.5 rounded-xl bg-[#0C1222] border border-white/10 text-slate-300 hover:text-white hover:border-[#DEC07E]/50 transition-colors"
               title="Yukarı Çık"
               aria-label="Sayfanın Başına Dön"
             >

@@ -49,8 +49,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="tr" className="scroll-smooth">
-      <body className="bg-slate-50 text-slate-900 font-sans antialiased selection:bg-gold-500 selection:text-navy-950">
+    <html lang="tr" className="scroll-smooth bg-[#070A12]">
+      <body className="bg-[#070A12] text-slate-100 font-sans antialiased selection:bg-gold-500 selection:text-navy-950">
         <Navbar />
         <main className="min-h-screen">{children}</main>
         <Footer />

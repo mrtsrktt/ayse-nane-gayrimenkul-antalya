@@ -33,7 +33,7 @@ export default function Navbar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
       {/* Top Gold Bar */}
-      <div className="bg-navy-950 text-slate-300 text-xs border-b border-gold-500/20 py-1.5 px-4 sm:px-8">
+      <div className="bg-[#070A12] text-slate-300 text-xs border-b border-[#C5A059]/20 py-2 px-4 sm:px-8">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-2">
             <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-gold-500/10 text-gold-300 font-medium border border-gold-500/30">
@@ -93,8 +93,8 @@ export default function Navbar() {
       <div
         className={`transition-all duration-300 px-4 sm:px-8 ${
           scrolled
-            ? 'bg-navy-950/95 backdrop-blur-md shadow-2xl py-3 border-b border-gold-500/20'
-            : 'bg-gradient-to-b from-navy-950/90 via-navy-950/70 to-transparent py-5'
+            ? 'bg-[#070A12]/95 backdrop-blur-xl shadow-2xl py-3 border-b border-[#C5A059]/20'
+            : 'bg-gradient-to-b from-[#070A12]/95 via-[#070A12]/75 to-transparent py-5'
         }`}
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -171,7 +171,7 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-navy-950/98 backdrop-blur-xl border-b border-gold-500/20 px-6 py-6 transition-all shadow-2xl">
+        <div className="lg:hidden bg-[#070A12]/98 backdrop-blur-2xl border-b border-[#C5A059]/20 px-6 py-6 transition-all shadow-2xl">
           <div className="flex flex-col gap-4">
             {navLinks.map((link) => (
               <Link

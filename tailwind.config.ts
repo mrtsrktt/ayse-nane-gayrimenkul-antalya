@@ -13,6 +13,13 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        obsidian: {
+          950: '#070A12',
+          900: '#0C1222',
+          850: '#111A2E',
+          800: '#16223B',
+          700: '#1E2F52',
+        },
         gold: {
           50: '#FDFBF7',
           100: '#FAF4E8',
@@ -27,8 +34,8 @@ const config: Config = {
         },
         navy: {
           800: '#141E30',
-          900: '#0F172A',
-          950: '#0A0F1D',
+          900: '#0C1222',
+          950: '#070A12',
         },
       },
       fontFamily: {

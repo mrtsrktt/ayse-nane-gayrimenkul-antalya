@@ -66,23 +66,22 @@ export default function ValuationSection() {
   ];
 
   return (
-    <section id="degerleme" className="py-24 bg-navy-950 text-white relative overflow-hidden">
+    <section id="degerleme" className="py-24 bg-[#070A12] text-white relative overflow-hidden border-t border-white/[0.08]">
       {/* Subtle background glow */}
-      <div className="absolute top-0 right-1/4 w-96 h-96 bg-gold-500/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-[#C5A059]/5 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Left Info Column (7 cols) */}
+          {/* Left Info Column (6 cols) */}
           <div className="lg:col-span-6 space-y-8">
             <div>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-300 text-xs font-semibold uppercase tracking-wider mb-4">
-                <Sparkles className="w-3.5 h-3.5 text-gold-400" />
-                Mülk Sahiplerine Özel Hizmet
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-[#C5A059]/30 text-[#DEC07E] text-[11px] font-semibold uppercase tracking-[0.2em] mb-4">
+                <Sparkles className="w-3.5 h-3.5 text-[#DEC07E]" />
+                Mülk Sahiplerine Özel Danışmanlık
               </div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-white tracking-tight leading-tight">
                 Mülkünüzün Gerçek Değerini <br />
-                <span className="gold-gradient-text">Ücretsiz Öğrenin</span>
+                <span className="gold-gradient-text italic font-serif font-normal">Ücretsiz & Bilimsel</span> Olarak Öğrenin
               </h2>
               <p className="text-slate-300 text-sm sm:text-base leading-relaxed mt-4">
                 Antalya’da villanızı, rezidans dairenizi veya arsanızı satmak istiyorsanız; yanlış fiyatlandırma ile zaman kaybetmeyin. Ayşe Nane’nin 12 yıllık bölge tecrübesiyle hazırlanan detaylı ekspertiz ve pazarlama planıyla mülkünüzü en doğru alıcıyla buluşturun.
@@ -94,19 +93,19 @@ export default function ValuationSection() {
               {benefits.map((item, idx) => (
                 <div
                   key={idx}
-                  className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 backdrop-blur-sm hover:border-gold-500/40 transition-colors"
+                  className="p-5 rounded-2xl bg-[#0C1222] border border-white/[0.08] hover:border-[#C5A059]/40 transition-colors"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-gold-500/10 border border-gold-500/30 flex items-center justify-center mb-3">
-                    <item.icon className="w-5 h-5 text-gold-400" />
+                  <div className="w-10 h-10 rounded-xl bg-white/[0.04] border border-[#C5A059]/30 flex items-center justify-center mb-3">
+                    <item.icon className="w-5 h-5 text-[#DEC07E]" />
                   </div>
-                  <h3 className="text-sm font-bold text-white mb-1">{item.title}</h3>
+                  <h3 className="text-sm font-bold text-white mb-1.5">{item.title}</h3>
                   <p className="text-xs text-slate-400 leading-relaxed">{item.desc}</p>
                 </div>
               ))}
             </div>
 
             {/* Direct WhatsApp Callout */}
-            <div className="pt-2 flex items-center gap-4 text-xs text-slate-400">
+            <div className="pt-2 flex flex-wrap items-center gap-4 text-xs text-slate-400">
               <span>Form doldurmak istemiyor musunuz?</span>
               <a
                 href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(
@@ -114,17 +113,17 @@ export default function ValuationSection() {
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-gold-300 hover:text-gold-200 font-semibold underline underline-offset-4"
+                className="inline-flex items-center gap-1.5 text-[#DEC07E] hover:text-white font-semibold underline underline-offset-4"
               >
                 <MessageCircle className="w-4 h-4 text-emerald-400" />
-                WhatsApp’tan Hemen Yazın
+                WhatsApp’tan Hemen İletişime Geçin
               </a>
             </div>
           </div>
 
           {/* Right Form Column (6 cols) */}
           <div className="lg:col-span-6">
-            <div className="bg-slate-900/90 border border-gold-500/30 rounded-3xl p-6 sm:p-10 shadow-2xl backdrop-blur-xl relative">
+            <div className="bg-[#0C1222] border border-[#C5A059]/30 rounded-3xl p-6 sm:p-10 shadow-2xl backdrop-blur-xl relative">
               {submitted ? (
                 <div className="text-center py-12 space-y-4">
                   <div className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-400 text-emerald-400 flex items-center justify-center mx-auto">
@@ -136,16 +135,16 @@ export default function ValuationSection() {
                   </p>
                   <button
                     onClick={() => setSubmitted(false)}
-                    className="mt-4 text-xs font-semibold text-gold-300 hover:underline"
+                    className="mt-4 text-xs font-semibold text-[#DEC07E] hover:underline"
                   >
                     Yeni bir mülk değerleme formu doldur
                   </button>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="border-b border-slate-800 pb-4 mb-2">
+                  <div className="border-b border-white/[0.08] pb-4 mb-2">
                     <h3 className="text-xl font-serif font-bold text-white flex items-center gap-2">
-                      <Calculator className="w-5 h-5 text-gold-400" /> Ücretsiz Ekspertiz Talep Formu
+                      <Calculator className="w-5 h-5 text-[#DEC07E]" /> Ücretsiz Ekspertiz Talep Formu
                     </h3>
                     <p className="text-xs text-slate-400 mt-1">
                       Mülk bilgilerinizi iletin, 24 saat içinde kapsamlı değerleme raporunuzu sunalım.
@@ -163,7 +162,7 @@ export default function ValuationSection() {
                         placeholder="Örn: Mehmet Yılmaz"
                         value={formData.fullName}
                         onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                        className="w-full bg-slate-950/80 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-gold-400"
+                        className="w-full bg-[#070A12] border border-white/10 rounded-xl px-3.5 py-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#DEC07E]/70"
                       />
                     </div>
 
@@ -177,7 +176,7 @@ export default function ValuationSection() {
                         placeholder="0505 172 52 84"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full bg-slate-950/80 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-gold-400"
+                        className="w-full bg-[#070A12] border border-white/10 rounded-xl px-3.5 py-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#DEC07E]/70"
                       />
                     </div>
                   </div>
@@ -190,7 +189,7 @@ export default function ValuationSection() {
                       <select
                         value={formData.propertyType}
                         onChange={(e) => setFormData({ ...formData, propertyType: e.target.value })}
-                        className="w-full bg-slate-950/80 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-gold-400 cursor-pointer"
+                        className="w-full bg-[#070A12] border border-white/10 rounded-xl px-3.5 py-3 text-xs text-white focus:outline-none focus:border-[#DEC07E]/70 cursor-pointer"
                       >
                         <option value="villa">Müstakil Villa / Malikâne</option>
                         <option value="apartment">Rezidans / Daire</option>
@@ -206,7 +205,7 @@ export default function ValuationSection() {
                       <select
                         value={formData.district}
                         onChange={(e) => setFormData({ ...formData, district: e.target.value })}
-                        className="w-full bg-slate-950/80 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-gold-400 cursor-pointer"
+                        className="w-full bg-[#070A12] border border-white/10 rounded-xl px-3.5 py-3 text-xs text-white focus:outline-none focus:border-[#DEC07E]/70 cursor-pointer"
                       >
                         <option value="Döşemealtı">Döşemealtı</option>
                         <option value="Lara">Lara / Muratpaşa</option>
@@ -229,7 +228,7 @@ export default function ValuationSection() {
                         placeholder="Örn: 250"
                         value={formData.area}
                         onChange={(e) => setFormData({ ...formData, area: e.target.value })}
-                        className="w-full bg-slate-950/80 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-gold-400"
+                        className="w-full bg-[#070A12] border border-white/10 rounded-xl px-3.5 py-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#DEC07E]/70"
                       />
                     </div>
 
@@ -242,7 +241,7 @@ export default function ValuationSection() {
                         placeholder="Örn: 4+1 veya Arsa"
                         value={formData.rooms}
                         onChange={(e) => setFormData({ ...formData, rooms: e.target.value })}
-                        className="w-full bg-slate-950/80 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-gold-400"
+                        className="w-full bg-[#070A12] border border-white/10 rounded-xl px-3.5 py-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#DEC07E]/70"
                       />
                     </div>
                   </div>
@@ -256,13 +255,13 @@ export default function ValuationSection() {
                       placeholder="Özel havuz, deniz manzarası, tapu durumu veya beklediğiniz tahmini fiyat aralığı..."
                       value={formData.note}
                       onChange={(e) => setFormData({ ...formData, note: e.target.value })}
-                      className="w-full bg-slate-950/80 border border-slate-700 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-gold-400 resize-none"
+                      className="w-full bg-[#070A12] border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#DEC07E]/70 resize-none"
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full gold-gradient-button text-xs font-bold uppercase tracking-wider py-3.5 px-6 rounded-xl shadow-lg mt-2 flex items-center justify-center gap-2"
+                    className="w-full gold-gradient-button text-xs font-bold uppercase tracking-wider py-4 px-6 rounded-xl shadow-xl mt-2 flex items-center justify-center gap-2"
                   >
                     <span>Ücretsiz Değerleme Raporumu Hazırla</span>
                   </button>
