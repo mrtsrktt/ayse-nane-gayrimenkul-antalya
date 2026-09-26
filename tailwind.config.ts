@@ -1,7 +1,11 @@
 import type { Config } from "tailwindcss";
+import path from "path";
 
 const config: Config = {
   content: [
+    path.join(__dirname, "./pages/**/*.{js,ts,jsx,tsx,mdx}"),
+    path.join(__dirname, "./components/**/*.{js,ts,jsx,tsx,mdx}"),
+    path.join(__dirname, "./app/**/*.{js,ts,jsx,tsx,mdx}"),
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
@@ -15,7 +19,7 @@ const config: Config = {
           200: '#F3E4C6',
           300: '#EBD1A0',
           400: '#DEC07E',
-          500: '#C5A059', // Classic Luxury Gold
+          500: '#C5A059',
           600: '#B0883B',
           700: '#8C6724',
           800: '#684B19',
