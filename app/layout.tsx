@@ -8,7 +8,6 @@ import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 const libreBaskerville = Libre_Baskerville({
   subsets: ['latin', 'latin-ext'],
   weight: ['400', '700'],
-  style: ['normal', 'italic'],
   variable: '--font-serif',
   display: 'swap',
 });
