@@ -13,12 +13,13 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        obsidian: {
-          950: '#070A12',
-          900: '#0C1222',
-          850: '#111A2E',
-          800: '#16223B',
-          700: '#1E2F52',
+        sand: {
+          50: '#FDFCFB',
+          100: '#FAF9F5',
+          200: '#F4F1EA',
+          300: '#EAE6DF',
+          400: '#D5CFC5',
+          500: '#B8B0A2',
         },
         gold: {
           50: '#FDFBF7',
@@ -26,21 +27,26 @@ const config: Config = {
           200: '#F3E4C6',
           300: '#EBD1A0',
           400: '#DEC07E',
-          500: '#C5A059',
-          600: '#B0883B',
-          700: '#8C6724',
-          800: '#684B19',
-          900: '#463210',
+          500: '#B89047',
+          600: '#9E7A36',
+          700: '#7E6128',
+          800: '#5F491E',
+          900: '#3F3014',
         },
-        navy: {
-          800: '#141E30',
-          900: '#0C1222',
-          950: '#070A12',
+        aegean: {
+          50: '#F0F4F8',
+          100: '#D9E2EC',
+          200: '#BCCCDC',
+          300: '#9FB3C8',
+          700: '#1E3A5F',
+          800: '#142742',
+          900: '#0F1E36',
+          950: '#0A1424',
         },
       },
       fontFamily: {
-        sans: ['var(--font-sans)', 'system-ui', 'sans-serif'],
-        serif: ['var(--font-serif)', 'Georgia', 'serif'],
+        sans: ['var(--font-sans)', 'Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+        serif: ['var(--font-serif)', 'Cormorant Garamond', 'Georgia', 'serif'],
       },
     },
   },

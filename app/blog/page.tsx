@@ -46,19 +46,19 @@ export default function BlogIndexPage() {
   const regularPosts = filteredPosts.filter((p) => p.slug !== featuredPost?.slug);
 
   return (
-    <div className="pt-32 pb-24 bg-[#070A12] min-h-screen text-white">
+    <div className="pt-36 pb-24 bg-[#FAF9F5] min-h-screen text-slate-800">
       {/* Editorial Header */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-        <div className="border-b border-white/[0.08] pb-10 text-center max-w-4xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-[#C5A059]/30 text-[#DEC07E] text-[11px] font-semibold uppercase tracking-[0.2em] mb-4">
-            <Sparkles className="w-3.5 h-3.5 text-[#DEC07E]" />
+        <div className="border-b border-[#EAE6DF] pb-10 text-center max-w-4xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#DFC596] text-[#7E6128] text-[11px] font-bold uppercase tracking-[0.2em] mb-4 shadow-sm">
+            <Sparkles className="w-3.5 h-3.5 text-[#B89047]" />
             Antalya Yatırım & Gayrimenkul Bülteni
           </div>
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-bold text-white tracking-tight leading-tight mb-4">
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-bold text-[#0F1E36] tracking-tight leading-tight mb-4">
             Akdeniz Gayrimenkul Piyasası, <br className="hidden sm:inline" />
             <span className="gold-gradient-text italic font-serif font-normal">Yatırım ve Hukuk Rehberi</span>
           </h1>
-          <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto font-light">
+          <p className="text-slate-600 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto font-light">
             Antalya, Kaş, Kalkan ve Döşemealtı’nda konut fiyat trendleri, döviz bazlı kira amortismanı, yabancıya vatandaşlık mevzuatı ve arsa imar kuralları üzerine Ayşe Nane’den derinlemesine analizler.
           </p>
         </div>
@@ -71,10 +71,10 @@ export default function BlogIndexPage() {
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`text-xs font-semibold px-4 py-2.5 rounded-xl transition-all ${
+                className={`text-xs font-bold px-4 py-2.5 rounded-xl transition-all ${
                   selectedCategory === cat.id
-                    ? 'gold-gradient-button text-[#070A12] shadow-lg'
-                    : 'bg-[#0C1222] text-slate-300 hover:text-white hover:bg-white/[0.08] border border-white/10'
+                    ? 'gold-gradient-button text-white shadow-md'
+                    : 'bg-white text-slate-600 hover:text-[#0F1E36] hover:bg-[#F4F1EA] border border-[#EAE6DF] shadow-sm'
                 }`}
               >
                 {cat.label}
@@ -90,7 +90,7 @@ export default function BlogIndexPage() {
               placeholder="Makalelerde arayın..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-[#0C1222] border border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-[#DEC07E]/70 shadow-sm"
+              className="w-full bg-white border border-[#EAE6DF] rounded-xl pl-10 pr-4 py-2.5 text-xs text-[#0F1E36] placeholder-slate-400 focus:outline-none focus:border-[#B89047] shadow-sm"
             />
           </div>
         </div>
@@ -99,9 +99,9 @@ export default function BlogIndexPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Featured Editorial Post Card */}
         {featuredPost && (
-          <div className="bg-[#0C1222] text-white rounded-3xl overflow-hidden border border-[#C5A059]/30 shadow-2xl grid grid-cols-1 lg:grid-cols-12 group">
+          <div className="bg-white text-slate-800 rounded-3xl overflow-hidden border border-[#DFC596] shadow-[0_20px_50px_rgba(15,30,54,0.08)] grid grid-cols-1 lg:grid-cols-12 group">
             {/* Image (7 cols) */}
-            <div className="lg:col-span-7 relative h-72 sm:h-96 lg:h-auto min-h-[360px] overflow-hidden">
+            <div className="lg:col-span-7 relative h-72 sm:h-96 lg:h-auto min-h-[360px] overflow-hidden bg-slate-100">
               <Image
                 src={featuredPost.coverImage}
                 alt={featuredPost.title}
@@ -109,9 +109,9 @@ export default function BlogIndexPage() {
                 priority
                 className="object-cover object-center group-hover:scale-105 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0C1222] via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-[#0C1222]" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent lg:hidden" />
               <div className="absolute top-4 left-4 z-10">
-                <span className="px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider gold-gradient-button text-[#070A12] shadow-md">
+                <span className="px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider gold-gradient-button text-white shadow-md">
                   Öne Çıkan Başyazı
                 </span>
               </div>
@@ -120,32 +120,32 @@ export default function BlogIndexPage() {
             {/* Content (5 cols) */}
             <div className="lg:col-span-5 p-6 sm:p-10 flex flex-col justify-between">
               <div className="space-y-4">
-                <div className="flex items-center gap-3 text-xs text-slate-400">
-                  <span className="text-[#DEC07E] font-semibold">{featuredPost.category}</span>
+                <div className="flex items-center gap-3 text-xs text-slate-400 font-medium">
+                  <span className="text-[#7E6128] font-bold">{featuredPost.category}</span>
                   <span>•</span>
                   <span className="flex items-center gap-1">
-                    <Clock className="w-3.5 h-3.5 text-[#DEC07E]" /> {featuredPost.readTime}
+                    <Clock className="w-3.5 h-3.5 text-[#B89047]" /> {featuredPost.readTime}
                   </span>
                   <span>•</span>
                   <span className="flex items-center gap-1">
-                    <Calendar className="w-3.5 h-3.5 text-[#DEC07E]" /> {featuredPost.publishDate}
+                    <Calendar className="w-3.5 h-3.5 text-[#B89047]" /> {featuredPost.publishDate}
                   </span>
                 </div>
 
                 <Link href={`/blog/${featuredPost.slug}`}>
-                  <h2 className="text-2xl sm:text-3xl font-serif font-bold text-white hover:text-[#DEC07E] transition-colors leading-snug">
+                  <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#0F1E36] hover:text-[#B89047] transition-colors leading-snug">
                     {featuredPost.title}
                   </h2>
                 </Link>
 
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed line-clamp-3">
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed line-clamp-3 font-light">
                   {featuredPost.summary}
                 </p>
               </div>
 
-              <div className="pt-6 border-t border-white/[0.08] flex items-center justify-between">
+              <div className="pt-6 border-t border-slate-100 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="relative w-10 h-10 rounded-full overflow-hidden border border-[#C5A059] shrink-0">
+                  <div className="relative w-10 h-10 rounded-full overflow-hidden border border-[#DFC596] shrink-0">
                     <Image
                       src={featuredPost.author.image}
                       alt={featuredPost.author.name}
@@ -154,8 +154,8 @@ export default function BlogIndexPage() {
                     />
                   </div>
                   <div>
-                    <p className="text-xs font-bold text-white">{featuredPost.author.name}</p>
-                    <p className="text-[10px] text-[#DEC07E]">{featuredPost.author.role}</p>
+                    <p className="text-xs font-bold text-[#0F1E36]">{featuredPost.author.name}</p>
+                    <p className="text-[10px] text-[#7E6128] font-medium">{featuredPost.author.role}</p>
                   </div>
                 </div>
 
@@ -176,11 +176,11 @@ export default function BlogIndexPage() {
           {regularPosts.map((post) => (
             <article
               key={post.slug}
-              className="bg-[#0C1222] rounded-3xl overflow-hidden border border-white/[0.08] shadow-xl hover:border-[#C5A059]/50 transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
+              className="bg-white rounded-3xl overflow-hidden border border-[#EAE6DF] shadow-[0_10px_30px_rgba(15,30,54,0.06)] hover:border-[#DFC596] transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
             >
               <div>
                 {/* Image */}
-                <div className="relative h-56 w-full overflow-hidden bg-[#070A12]">
+                <div className="relative h-56 w-full overflow-hidden bg-slate-100">
                   <Image
                     src={post.coverImage}
                     alt={post.title}
@@ -189,7 +189,7 @@ export default function BlogIndexPage() {
                     className="object-cover object-center group-hover:scale-105 transition-transform duration-700"
                   />
                   <div className="absolute top-3 left-3 z-10">
-                    <span className="px-3 py-1 rounded-full text-[11px] font-bold tracking-wide uppercase bg-[#070A12]/85 text-[#DEC07E] border border-[#C5A059]/30 backdrop-blur-md">
+                    <span className="px-3 py-1 rounded-full text-[11px] font-bold tracking-wide uppercase bg-white/95 text-[#7E6128] border border-[#DFC596] shadow-sm backdrop-blur-md">
                       {post.category}
                     </span>
                   </div>
@@ -197,37 +197,37 @@ export default function BlogIndexPage() {
 
                 {/* Content */}
                 <div className="p-6 space-y-3">
-                  <div className="flex items-center gap-3 text-xs text-slate-400">
+                  <div className="flex items-center gap-3 text-xs text-slate-400 font-medium">
                     <span className="flex items-center gap-1">
-                      <Clock className="w-3.5 h-3.5 text-[#DEC07E]" /> {post.readTime}
+                      <Clock className="w-3.5 h-3.5 text-[#B89047]" /> {post.readTime}
                     </span>
                     <span>•</span>
                     <span className="flex items-center gap-1">
-                      <Calendar className="w-3.5 h-3.5 text-[#DEC07E]" /> {post.publishDate}
+                      <Calendar className="w-3.5 h-3.5 text-[#B89047]" /> {post.publishDate}
                     </span>
                   </div>
 
                   <Link href={`/blog/${post.slug}`}>
-                    <h3 className="text-lg font-serif font-bold text-white group-hover:text-[#DEC07E] transition-colors leading-snug line-clamp-2">
+                    <h3 className="text-lg font-serif font-bold text-[#0F1E36] group-hover:text-[#B89047] transition-colors leading-snug line-clamp-2">
                       {post.title}
                     </h3>
                   </Link>
 
-                  <p className="text-xs text-slate-300 line-clamp-3 leading-relaxed">
+                  <p className="text-xs text-slate-500 line-clamp-3 leading-relaxed font-light">
                     {post.summary}
                   </p>
                 </div>
               </div>
 
               {/* Card Footer */}
-              <div className="p-6 pt-0 border-t border-white/[0.08] flex items-center justify-between">
-                <span className="text-[11px] font-medium text-slate-400">
-                  Yazar: <strong className="text-white">{post.author.name}</strong>
+              <div className="p-6 pt-0 border-t border-slate-100 flex items-center justify-between">
+                <span className="text-[11px] font-medium text-slate-500">
+                  Yazar: <strong className="text-[#0F1E36]">{post.author.name}</strong>
                 </span>
 
                 <Link
                   href={`/blog/${post.slug}`}
-                  className="text-xs font-bold text-[#DEC07E] hover:text-white flex items-center gap-1 transition-colors"
+                  className="text-xs font-bold text-[#B89047] hover:text-[#7E6128] flex items-center gap-1 transition-colors"
                 >
                   <span>Devamını Oku</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -238,15 +238,15 @@ export default function BlogIndexPage() {
         </div>
 
         {/* Newsletter / Consultation CTA Banner */}
-        <div className="bg-[#0C1222] text-white rounded-3xl p-8 sm:p-12 border border-[#C5A059]/30 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl">
+        <div className="bg-white rounded-3xl p-8 sm:p-12 border border-[#DFC596] flex flex-col md:flex-row items-center justify-between gap-6 shadow-[0_20px_50px_rgba(15,30,54,0.06)]">
           <div className="max-w-2xl space-y-2">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#DEC07E]">
+            <span className="text-xs font-bold uppercase tracking-widest text-[#7E6128]">
               Kişiye Özel Yatırım Analizi
             </span>
-            <h3 className="text-2xl sm:text-3xl font-serif font-bold text-white">
+            <h3 className="text-2xl sm:text-3xl font-serif font-bold text-[#0F1E36]">
               Antalya’da Doğru Mülk Seçimi İçin Bize Danışın
             </h3>
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-light">
               İster Türk Vatandaşlığı hedefleyin, ister Kaş Kalkan’da yüksek döviz getirili bir villa; Ayşe Nane ile birebir yatırım planınızı oluşturun.
             </p>
           </div>
@@ -257,7 +257,7 @@ export default function BlogIndexPage() {
             )}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="gold-gradient-button text-[#070A12] text-xs font-bold uppercase tracking-wider px-6 py-4 rounded-xl shrink-0 shadow-xl flex items-center gap-2"
+            className="gold-gradient-button text-xs font-bold uppercase tracking-wider px-6 py-4 rounded-xl shrink-0 shadow-md flex items-center gap-2"
           >
             <span>Ayşe Hanım ile İletişime Geçin</span>
             <ArrowRight className="w-4 h-4" />

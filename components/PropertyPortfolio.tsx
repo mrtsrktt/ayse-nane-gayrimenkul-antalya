@@ -70,37 +70,37 @@ export default function PropertyPortfolio({
   };
 
   return (
-    <section id="portfoy" className="py-28 bg-[#070A12] text-white relative">
-      <div className="editorial-divider mb-20" />
+    <section id="portfoy" className="py-24 bg-[#FAF9F5] text-slate-800 relative">
+      <div className="editorial-divider mb-16" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full luxury-glass text-gold-300 text-xs font-semibold tracking-widest uppercase mb-4">
-            <Sparkles className="w-3.5 h-3.5 text-gold-400" />
+        <div className="text-center max-w-3xl mx-auto mb-14">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#DFC596] text-[#7E6128] text-xs font-bold tracking-widest uppercase mb-4 shadow-sm">
+            <Sparkles className="w-3.5 h-3.5 text-[#B89047]" />
             Özel & Doğrulanmış Lüks Portföy
           </div>
-          <h2 className="text-3xl sm:text-5xl font-serif font-bold text-white tracking-tight leading-tight mb-4">
+          <h2 className="text-3xl sm:text-5xl font-serif font-bold text-[#0F1E36] tracking-tight leading-tight mb-4">
             Antalya’nın En Seçkin <br className="hidden sm:inline" />
             <span className="gold-gradient-text italic font-normal">Gayrimenkul Koleksiyonu</span>
           </h2>
-          <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
+          <p className="text-slate-500 text-sm sm:text-base leading-relaxed">
             Hukuki, imar ve ekspertiz incelemeleri bizzat Ayşe Nane tarafından tamamlanmış; tapu devrine ve vatandaşlık kriterlerine uygun nadide mülkler.
           </p>
         </div>
 
         {/* Filter Controls Bar */}
-        <div className="space-y-5 mb-12">
+        <div className="space-y-4 mb-12">
           {/* Category Tabs */}
           <div className="flex flex-wrap items-center justify-center gap-2">
             {categories.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setSelectedType(cat.id)}
-                className={`text-xs sm:text-sm font-semibold px-5 py-3 rounded-2xl transition-all duration-300 ${
+                className={`text-xs sm:text-sm font-bold px-5 py-3 rounded-2xl transition-all duration-300 ${
                   selectedType === cat.id
-                    ? 'bg-gradient-to-r from-gold-500 to-amber-600 text-navy-950 font-bold shadow-lg shadow-gold-500/20'
-                    : 'bg-white/5 text-slate-300 hover:bg-white/10 hover:text-white border border-white/10'
+                    ? 'gold-gradient-button text-white shadow-md'
+                    : 'bg-white text-slate-600 hover:text-[#0F1E36] hover:bg-[#F4F1EA] border border-[#EAE6DF] shadow-sm'
                 }`}
               >
                 {cat.label}
@@ -109,20 +109,17 @@ export default function PropertyPortfolio({
           </div>
 
           {/* District Pills & Sorting */}
-          <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-white/10">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-2">
             {/* Districts */}
             <div className="flex flex-wrap items-center gap-1.5">
-              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider mr-2">
-                Bölge:
-              </span>
               {districts.map((dist) => (
                 <button
                   key={dist.id}
                   onClick={() => setSelectedDistrict(dist.id)}
-                  className={`text-xs px-3.5 py-1.5 rounded-xl transition-all ${
+                  className={`text-xs font-semibold px-3.5 py-1.5 rounded-xl transition-all ${
                     selectedDistrict === dist.id
-                      ? 'bg-white text-navy-950 font-bold shadow-md'
-                      : 'bg-white/5 text-slate-400 hover:text-white hover:bg-white/10 border border-white/5'
+                      ? 'bg-[#0F1E36] text-white shadow-sm'
+                      : 'bg-white text-slate-500 hover:text-[#0F1E36] border border-[#EAE6DF]'
                   }`}
                 >
                   {dist.label}
@@ -130,23 +127,30 @@ export default function PropertyPortfolio({
               ))}
             </div>
 
-            {/* Sorting & Counter */}
-            <div className="flex items-center gap-4 ml-auto">
-              <span className="text-xs text-slate-400 font-medium hidden sm:inline">
-                <strong className="text-gold-300">{filteredProperties.length}</strong> ilan listeleniyor
-              </span>
-              <div className="flex items-center gap-2 bg-white/5 px-3 py-1.5 rounded-xl border border-white/10 text-xs text-slate-200">
-                <SlidersHorizontal className="w-3.5 h-3.5 text-gold-400" />
+            {/* Sorting & Reset */}
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 bg-white px-3 py-1.5 rounded-xl border border-[#EAE6DF] shadow-sm">
+                <SlidersHorizontal className="w-3.5 h-3.5 text-[#B89047]" />
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value as any)}
-                  className="bg-transparent font-medium text-slate-200 focus:outline-none cursor-pointer"
+                  className="bg-transparent text-xs font-semibold text-[#0F1E36] focus:outline-none cursor-pointer"
                 >
-                  <option value="featured" className="bg-navy-900 text-white">Öne Çıkanlar</option>
-                  <option value="price-desc" className="bg-navy-900 text-white">Fiyat: Azalan</option>
-                  <option value="price-asc" className="bg-navy-900 text-white">Fiyat: Artan</option>
+                  <option value="featured">Öne Çıkan Sıralama</option>
+                  <option value="price-desc">Fiyat: Yüksekten Düşüğe</option>
+                  <option value="price-asc">Fiyat: Düşükten Yükseğe</option>
                 </select>
               </div>
+
+              {(selectedType !== 'all' || selectedDistrict !== 'all') && (
+                <button
+                  onClick={handleResetFilters}
+                  className="p-2 rounded-xl bg-white border border-[#EAE6DF] text-slate-500 hover:text-[#0F1E36] shadow-sm"
+                  title="Filtreleri Sıfırla"
+                >
+                  <RefreshCw className="w-3.5 h-3.5" />
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -158,62 +162,32 @@ export default function PropertyPortfolio({
               <PropertyCard
                 key={property.id}
                 property={property}
-                onOpenModal={setActiveProperty}
+                onOpenModal={(prop) => setActiveProperty(prop)}
               />
             ))}
           </div>
         ) : (
-          <div className="luxury-glass rounded-3xl p-12 text-center max-w-lg mx-auto shadow-2xl">
-            <div className="w-16 h-16 rounded-full bg-white/5 text-slate-400 flex items-center justify-center mx-auto mb-4 border border-white/10">
-              <SlidersHorizontal className="w-8 h-8" />
-            </div>
-            <h3 className="text-lg font-serif font-bold text-white mb-2">
-              Seçilen Kriterlere Uygun İlan Bulunamadı
-            </h3>
-            <p className="text-xs text-slate-400 mb-6">
-              Filtreleri sıfırlayarak tüm portföyü görüntüleyebilir veya aradığınız kriterleri Ayşe Hanım’a doğrudan iletebilirsiniz.
+          <div className="text-center py-16 bg-white rounded-3xl border border-[#EAE6DF] shadow-sm">
+            <p className="text-slate-500 text-sm mb-4">
+              Seçtiğiniz kriterlere uygun ilan bulunamadı.
             </p>
             <button
               onClick={handleResetFilters}
-              className="inline-flex items-center gap-2 text-xs font-semibold px-5 py-2.5 rounded-xl gold-gradient-button"
+              className="gold-gradient-button text-xs font-bold px-6 py-2.5 rounded-xl uppercase tracking-wider"
             >
-              <RefreshCw className="w-3.5 h-3.5" />
-              <span>Filtreleri Sıfırla</span>
+              Tüm Portföyü Göster
             </button>
           </div>
         )}
-
-        {/* Bottom VIP Off-Market Box */}
-        <div className="mt-20 luxury-glass rounded-3xl p-8 sm:p-12 border border-gold-500/30 flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-gold-500/10 rounded-full blur-3xl pointer-events-none" />
-
-          <div className="max-w-2xl space-y-2 relative z-10">
-            <span className="text-xs font-bold uppercase tracking-widest text-gold-400 block">
-              Gizli & Off-Market Portföy Hizmeti
-            </span>
-            <h3 className="text-2xl sm:text-3xl font-serif font-bold text-white">
-              Web Sitemizde Listelenmeyen Özel Malikâneleri Keşfedin
-            </h3>
-            <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
-              Mülk sahiplerinin yüksek gizlilik talebi doğrultusunda internette açık olarak yayınlanmayan falez villaları, özel resort arazileri ve golf malikâneleri için doğrudan Ayşe Hanım ile gizlilik sözleşmesi (NDA) kapsamında görüşebilirsiniz.
-            </p>
-          </div>
-
-          <a
-            href="#iletisim"
-            className="gold-gradient-button text-xs uppercase tracking-wider font-bold px-7 py-4 rounded-xl shrink-0 shadow-xl flex items-center gap-2 relative z-10"
-          >
-            <span>VIP Portföy Talep Et</span>
-            <ArrowRight className="w-4 h-4" />
-          </a>
-        </div>
       </div>
 
       {/* Property Details Modal */}
-      <PropertyModal
-        property={activeProperty}
-        onClose={() => setActiveProperty(null)}
-      />
+      {activeProperty && (
+        <PropertyModal
+          property={activeProperty}
+          onClose={() => setActiveProperty(null)}
+        />
+      )}
     </section>
   );
 }

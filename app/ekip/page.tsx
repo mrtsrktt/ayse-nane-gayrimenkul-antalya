@@ -223,42 +223,42 @@ export default function TeamAndCrmPage() {
   const getStageBadgeClass = (stage: ClientRecord['stage']) => {
     switch (stage) {
       case 'Yeni Talep':
-        return 'bg-blue-500/20 text-blue-300 border-blue-500/40';
+        return 'bg-blue-50 text-blue-700 border-blue-200';
       case 'Görüşme Yapıldı':
-        return 'bg-purple-500/20 text-purple-300 border-purple-500/40';
+        return 'bg-purple-50 text-purple-700 border-purple-200';
       case 'Mülk Gezildi':
-        return 'bg-amber-500/20 text-amber-300 border-amber-500/40';
+        return 'bg-amber-50 text-amber-700 border-amber-200';
       case 'Teklif / Pazarlık':
-        return 'bg-orange-500/20 text-orange-300 border-orange-500/40';
+        return 'bg-orange-50 text-orange-700 border-orange-200';
       case 'Tapu Aşaması':
-        return 'bg-cyan-500/20 text-cyan-300 border-cyan-500/40';
+        return 'bg-cyan-50 text-cyan-700 border-cyan-200';
       case 'Satış Kapatıldı':
-        return 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40';
+        return 'bg-emerald-50 text-emerald-700 border-emerald-200';
       default:
-        return 'bg-white/10 text-white border-white/20';
+        return 'bg-slate-50 text-slate-700 border-slate-200';
     }
   };
 
   return (
-    <div className="pt-28 pb-24 bg-[#070A12] min-h-screen text-white">
+    <div className="pt-32 pb-24 bg-[#FAF9F5] min-h-screen text-slate-800">
       {/* Security Banner Notice */}
-      <div className="bg-[#0C1222] text-white border-b border-[#C5A059]/30 py-3 px-4 sm:px-8">
+      <div className="bg-[#F4F1EA] text-slate-700 border-b border-[#EAE6DF] py-3 px-4 sm:px-8">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 text-xs">
           <div className="flex items-center gap-2">
-            <span className="p-1 rounded-lg bg-[#C5A059]/20 text-[#DEC07E] border border-[#C5A059]/30">
+            <span className="p-1 rounded-lg bg-white border border-[#DFC596] text-[#B89047]">
               <Lock className="w-3.5 h-3.5" />
             </span>
-            <span className="font-semibold text-[#DEC07E]">
+            <span className="font-bold text-[#0F1E36]">
               Ayşe Nane & Ekibi İç Portalı (CRM & Danışman Masası)
             </span>
-            <span className="hidden md:inline text-slate-500">|</span>
-            <span className="text-slate-300 hidden md:inline">
+            <span className="hidden md:inline text-slate-300">|</span>
+            <span className="text-slate-500 hidden md:inline">
               Müşteri Görüşme ve Portföy Takip Sistemi
             </span>
           </div>
 
-          <div className="inline-flex items-center gap-1.5 text-[11px] text-emerald-400 bg-emerald-950/80 px-3 py-1 rounded-full border border-emerald-500/30">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <div className="inline-flex items-center gap-1.5 text-[11px] text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200 font-semibold">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
             <span>Yönetici Önizleme Modu Aktif (Şifresiz Erişim)</span>
           </div>
         </div>
@@ -269,14 +269,14 @@ export default function TeamAndCrmPage() {
         <div>
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
             <div>
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#DEC07E] block mb-1">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#7E6128] block mb-1">
                 Lüks Gayrimenkul & Yatırım Kadrosu
               </span>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-white tracking-tight">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#0F1E36] tracking-tight">
                 Ayşe Nane ve Danışman Ekibi
               </h1>
             </div>
-            <p className="text-xs sm:text-sm text-slate-400 max-w-md font-light">
+            <p className="text-xs sm:text-sm text-slate-500 max-w-md font-light">
               Hukuki, finansal ve saha uzmanlığını bir araya getiren A sınıfı danışman kadromuzla Antalya’da kusursuz mülk alım-satım deneyimi.
             </p>
           </div>
@@ -285,10 +285,10 @@ export default function TeamAndCrmPage() {
             {teamMembers.map((member, idx) => (
               <div
                 key={idx}
-                className="bg-[#0C1222] rounded-3xl p-5 border border-white/[0.08] shadow-xl hover:border-[#C5A059]/40 transition-all duration-300 flex flex-col justify-between"
+                className="bg-white rounded-3xl p-5 border border-[#EAE6DF] shadow-[0_10px_30px_rgba(15,30,54,0.06)] hover:border-[#DFC596] transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
-                  <div className="relative h-64 w-full rounded-2xl overflow-hidden bg-[#070A12] mb-4 border border-white/10 group">
+                  <div className="relative h-64 w-full rounded-2xl overflow-hidden bg-slate-100 mb-4 border border-[#EAE6DF] group">
                     <Image
                       src={member.image}
                       alt={member.name}
@@ -296,26 +296,26 @@ export default function TeamAndCrmPage() {
                       className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
                     />
                     <div className="absolute top-3 left-3">
-                      <span className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#070A12]/85 text-[#DEC07E] border border-[#C5A059]/40 backdrop-blur-md">
+                      <span className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-white/95 text-[#7E6128] border border-[#DFC596] shadow-sm backdrop-blur-md">
                         {member.badge}
                       </span>
                     </div>
                   </div>
 
-                  <h3 className="font-serif font-bold text-xl text-white">{member.name}</h3>
-                  <p className="text-xs font-semibold text-[#DEC07E] mb-2">{member.role}</p>
-                  <p className="text-xs text-slate-400 leading-relaxed font-light">{member.focus}</p>
+                  <h3 className="font-serif font-bold text-xl text-[#0F1E36]">{member.name}</h3>
+                  <p className="text-xs font-bold text-[#7E6128] mb-2">{member.role}</p>
+                  <p className="text-xs text-slate-500 leading-relaxed font-light">{member.focus}</p>
                 </div>
 
-                <div className="mt-5 pt-4 border-t border-white/[0.08] flex items-center justify-between text-xs">
+                <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
                   <a
                     href={`tel:${member.phone}`}
-                    className="flex items-center gap-1.5 text-slate-300 hover:text-[#DEC07E] font-medium"
+                    className="flex items-center gap-1.5 text-[#0F1E36] hover:text-[#B89047] font-semibold"
                   >
-                    <Phone className="w-3.5 h-3.5 text-[#DEC07E]" />
+                    <Phone className="w-3.5 h-3.5 text-[#B89047]" />
                     <span>{member.phone}</span>
                   </a>
-                  <span className="text-[10px] font-bold text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-2.5 py-0.5 rounded-full">
+                  <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">
                     Müsait
                   </span>
                 </div>
@@ -325,25 +325,25 @@ export default function TeamAndCrmPage() {
         </div>
 
         {/* Section 2: Interactive CRM Dashboard */}
-        <div className="bg-[#0C1222] rounded-3xl p-6 sm:p-10 border border-[#C5A059]/30 shadow-2xl space-y-8">
+        <div className="bg-white rounded-3xl p-6 sm:p-10 border border-[#DFC596] shadow-[0_20px_50px_rgba(15,30,54,0.08)] space-y-8">
           {/* CRM Header & KPI Stats */}
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-white/[0.08]">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-slate-100">
             <div>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/[0.04] border border-[#C5A059]/30 text-[#DEC07E] text-[11px] font-semibold mb-2">
-                <FileText className="w-3.5 h-3.5 text-[#DEC07E]" />
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#FAF9F5] border border-[#DFC596] text-[#7E6128] text-[11px] font-bold mb-2 shadow-sm">
+                <FileText className="w-3.5 h-3.5 text-[#B89047]" />
                 Müşteri & Görüşme Takip Masası (CRM)
               </div>
-              <h2 className="text-2xl sm:text-3xl font-serif font-bold text-white">
+              <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#0F1E36]">
                 Görüşülen Müşteriler & Portföy Talepleri
               </h2>
-              <p className="text-xs text-slate-400 mt-1 font-light">
+              <p className="text-xs text-slate-500 mt-1 font-light">
                 Görüşme notları, bütçeler, teklif aşamaları ve bir sonraki randevu tarihleri.
               </p>
             </div>
 
             <button
               onClick={() => setShowAddModal(true)}
-              className="gold-gradient-button text-[#070A12] text-xs font-bold uppercase tracking-wider px-5 py-3.5 rounded-xl shadow-lg flex items-center justify-center gap-2 shrink-0"
+              className="gold-gradient-button text-xs font-bold uppercase tracking-wider px-5 py-3.5 rounded-xl shadow-md flex items-center justify-center gap-2 shrink-0 hover:scale-102 transition-transform"
             >
               <PlusCircle className="w-4 h-4" />
               <span>Yeni Müşteri & Görüşme Ekle</span>
@@ -352,38 +352,38 @@ export default function TeamAndCrmPage() {
 
           {/* KPI Mini Cards */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            <div className="p-5 rounded-2xl bg-[#070A12] border border-white/[0.08]">
-              <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">
+            <div className="p-5 rounded-2xl bg-[#FAF9F5] border border-[#EAE6DF]">
+              <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">
                 Kayıtlı Müşteri
               </span>
-              <span className="text-2xl sm:text-3xl font-serif font-bold text-white mt-1 block">
+              <span className="text-2xl sm:text-3xl font-serif font-bold text-[#0F1E36] mt-1 block">
                 {clients.length} Kişi
               </span>
             </div>
 
-            <div className="p-5 rounded-2xl bg-[#070A12] border border-white/[0.08]">
-              <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">
+            <div className="p-5 rounded-2xl bg-[#FAF9F5] border border-[#EAE6DF]">
+              <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">
                 Mülk Gezen / Sıcak
               </span>
-              <span className="text-2xl sm:text-3xl font-serif font-bold text-[#DEC07E] mt-1 block">
+              <span className="text-2xl sm:text-3xl font-serif font-bold text-[#B89047] mt-1 block">
                 {clients.filter((c) => c.stage === 'Mülk Gezildi').length} Müşteri
               </span>
             </div>
 
-            <div className="p-5 rounded-2xl bg-[#070A12] border border-white/[0.08]">
-              <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">
+            <div className="p-5 rounded-2xl bg-[#FAF9F5] border border-[#EAE6DF]">
+              <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">
                 Teklif & Pazarlık
               </span>
-              <span className="text-2xl sm:text-3xl font-serif font-bold text-orange-400 mt-1 block">
+              <span className="text-2xl sm:text-3xl font-serif font-bold text-orange-600 mt-1 block">
                 {clients.filter((c) => c.stage === 'Teklif / Pazarlık').length} Dosya
               </span>
             </div>
 
-            <div className="p-5 rounded-2xl bg-[#070A12] border border-white/[0.08]">
-              <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">
+            <div className="p-5 rounded-2xl bg-[#FAF9F5] border border-[#EAE6DF]">
+              <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">
                 Tapu / Kapanan
               </span>
-              <span className="text-2xl sm:text-3xl font-serif font-bold text-emerald-400 mt-1 block">
+              <span className="text-2xl sm:text-3xl font-serif font-bold text-emerald-700 mt-1 block">
                 {clients.filter((c) => c.stage === 'Tapu Aşaması' || c.stage === 'Satış Kapatıldı').length} İşlem
               </span>
             </div>
@@ -398,7 +398,7 @@ export default function TeamAndCrmPage() {
                 placeholder="Müşteri adı, telefon veya bölge ara..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full bg-[#070A12] border border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#DEC07E]/70"
+                className="w-full bg-[#FAF9F5] border border-[#EAE6DF] rounded-xl pl-10 pr-4 py-2.5 text-xs text-[#0F1E36] placeholder-slate-400 focus:outline-none focus:border-[#B89047]"
               />
             </div>
 
@@ -407,7 +407,7 @@ export default function TeamAndCrmPage() {
               <select
                 value={stageFilter}
                 onChange={(e) => setStageFilter(e.target.value)}
-                className="bg-[#070A12] border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-slate-200 focus:outline-none focus:border-[#DEC07E]/70 cursor-pointer"
+                className="bg-[#FAF9F5] border border-[#EAE6DF] rounded-xl px-3.5 py-2.5 text-xs text-[#0F1E36] font-semibold focus:outline-none focus:border-[#B89047] cursor-pointer"
               >
                 <option value="all">Tüm Aşamalar</option>
                 <option value="Yeni Talep">Yeni Talep</option>
@@ -421,9 +421,9 @@ export default function TeamAndCrmPage() {
           </div>
 
           {/* CRM Table */}
-          <div className="overflow-x-auto rounded-2xl border border-white/[0.08]">
+          <div className="overflow-x-auto rounded-2xl border border-[#EAE6DF]">
             <table className="w-full text-left text-xs">
-              <thead className="bg-[#070A12] text-slate-300 font-bold uppercase tracking-wider text-[11px] border-b border-white/[0.08]">
+              <thead className="bg-[#FAF9F5] text-[#0F1E36] font-bold uppercase tracking-wider text-[11px] border-b border-[#EAE6DF]">
                 <tr>
                   <th className="py-4 px-4">Müşteri</th>
                   <th className="py-4 px-4">İlgilenilen Mülk & Bölge</th>
@@ -434,17 +434,17 @@ export default function TeamAndCrmPage() {
                   <th className="py-4 px-4 text-right">İşlem</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/[0.06]">
+              <tbody className="divide-y divide-slate-100">
                 {filteredClients.map((client) => (
-                  <tr key={client.id} className="hover:bg-[#070A12]/50 transition-colors">
+                  <tr key={client.id} className="hover:bg-[#FAF9F5]/70 transition-colors">
                     <td className="py-4 px-4">
-                      <p className="font-bold text-white text-sm">{client.name}</p>
+                      <p className="font-bold text-[#0F1E36] text-sm">{client.name}</p>
                       <div className="flex items-center gap-2 mt-1">
                         <a
                           href={`tel:${client.phone}`}
-                          className="text-slate-400 hover:text-[#DEC07E] flex items-center gap-1"
+                          className="text-slate-500 hover:text-[#B89047] flex items-center gap-1 font-medium"
                         >
-                          <Phone className="w-3 h-3 text-[#DEC07E]" />
+                          <Phone className="w-3 h-3 text-[#B89047]" />
                           <span>{client.phone}</span>
                         </a>
                         <a
@@ -453,7 +453,7 @@ export default function TeamAndCrmPage() {
                           )}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-emerald-400 hover:text-emerald-300"
+                          className="text-emerald-600 hover:text-emerald-700"
                           title="WhatsApp Gönder"
                         >
                           <MessageCircle className="w-3.5 h-3.5" />
@@ -462,12 +462,12 @@ export default function TeamAndCrmPage() {
                     </td>
 
                     <td className="py-4 px-4">
-                      <p className="font-semibold text-slate-200">{client.propertyInterest}</p>
-                      <span className="text-[11px] text-slate-400">{client.location}</span>
+                      <p className="font-semibold text-[#0F1E36]">{client.propertyInterest}</p>
+                      <span className="text-[11px] text-slate-500">{client.location}</span>
                     </td>
 
                     <td className="py-4 px-4">
-                      <span className="font-serif font-bold text-[#DEC07E] text-sm">{client.budget}</span>
+                      <span className="font-serif font-bold text-[#7E6128] text-sm">{client.budget}</span>
                     </td>
 
                     <td className="py-4 px-4">
@@ -478,23 +478,23 @@ export default function TeamAndCrmPage() {
                           client.stage
                         )}`}
                       >
-                        <option value="Yeni Talep" className="bg-[#0C1222] text-white">Yeni Talep</option>
-                        <option value="Görüşme Yapıldı" className="bg-[#0C1222] text-white">Görüşme Yapıldı</option>
-                        <option value="Mülk Gezildi" className="bg-[#0C1222] text-white">Mülk Gezildi</option>
-                        <option value="Teklif / Pazarlık" className="bg-[#0C1222] text-white">Teklif / Pazarlık</option>
-                        <option value="Tapu Aşaması" className="bg-[#0C1222] text-white">Tapu Aşaması</option>
-                        <option value="Satış Kapatıldı" className="bg-[#0C1222] text-white">Satış Kapatıldı</option>
+                        <option value="Yeni Talep">Yeni Talep</option>
+                        <option value="Görüşme Yapıldı">Görüşme Yapıldı</option>
+                        <option value="Mülk Gezildi">Mülk Gezildi</option>
+                        <option value="Teklif / Pazarlık">Teklif / Pazarlık</option>
+                        <option value="Tapu Aşaması">Tapu Aşaması</option>
+                        <option value="Satış Kapatıldı">Satış Kapatıldı</option>
                       </select>
                     </td>
 
                     <td className="py-4 px-4">
-                      <span className="font-medium text-slate-300">{client.assignedAgent}</span>
+                      <span className="font-semibold text-slate-700">{client.assignedAgent}</span>
                     </td>
 
                     <td className="py-4 px-4 max-w-xs">
-                      <p className="text-slate-300 line-clamp-2 leading-relaxed font-light">{client.notes}</p>
+                      <p className="text-slate-600 line-clamp-2 leading-relaxed font-light">{client.notes}</p>
                       {client.nextMeetingDate && (
-                        <p className="text-[10px] text-[#DEC07E] font-semibold mt-1">
+                        <p className="text-[10px] text-[#7E6128] font-bold mt-1">
                           📅 {client.nextMeetingDate}
                         </p>
                       )}
@@ -503,7 +503,7 @@ export default function TeamAndCrmPage() {
                     <td className="py-4 px-4 text-right">
                       <button
                         onClick={() => handleDeleteClient(client.id)}
-                        className="p-1.5 text-slate-500 hover:text-red-400 rounded-lg transition-colors"
+                        className="p-1.5 text-slate-400 hover:text-red-600 rounded-lg transition-colors"
                         title="Kaydı Sil"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -519,15 +519,15 @@ export default function TeamAndCrmPage() {
 
       {/* Add Client Modal */}
       {showAddModal && (
-        <div className="fixed inset-0 z-50 overflow-y-auto bg-[#070A12]/85 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-[#0C1222] w-full max-w-lg rounded-3xl p-6 sm:p-8 shadow-2xl border border-[#C5A059]/40">
-            <div className="border-b border-white/[0.08] pb-4 mb-4 flex items-center justify-between">
-              <h3 className="text-xl font-serif font-bold text-white flex items-center gap-2">
-                <PlusCircle className="w-5 h-5 text-[#DEC07E]" /> Yeni Müşteri & Görüşme Kaydı
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="bg-white w-full max-w-lg rounded-3xl p-6 sm:p-8 shadow-2xl border border-[#DFC596]">
+            <div className="border-b border-slate-100 pb-4 mb-4 flex items-center justify-between">
+              <h3 className="text-xl font-serif font-bold text-[#0F1E36] flex items-center gap-2">
+                <PlusCircle className="w-5 h-5 text-[#B89047]" /> Yeni Müşteri & Görüşme Kaydı
               </h3>
               <button
                 onClick={() => setShowAddModal(false)}
-                className="text-slate-400 hover:text-white text-sm font-bold"
+                className="text-slate-400 hover:text-[#0F1E36] text-sm font-bold"
               >
                 ✕
               </button>
@@ -536,7 +536,7 @@ export default function TeamAndCrmPage() {
             <form onSubmit={handleAddClient} className="space-y-4">
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-[11px] font-bold text-slate-300 uppercase mb-1">
+                  <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">
                     Müşteri Adı Soyadı *
                   </label>
                   <input
@@ -545,12 +545,12 @@ export default function TeamAndCrmPage() {
                     placeholder="Örn: Ahmet Bey"
                     value={newClient.name}
                     onChange={(e) => setNewClient({ ...newClient, name: e.target.value })}
-                    className="w-full bg-[#070A12] border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#DEC07E]/70"
+                    className="w-full bg-[#FAF9F5] border border-[#EAE6DF] rounded-xl px-3.5 py-2.5 text-xs text-[#0F1E36] placeholder-slate-400 focus:outline-none focus:border-[#B89047]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-bold text-slate-300 uppercase mb-1">
+                  <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">
                     Telefon Numarası *
                   </label>
                   <input
@@ -559,14 +559,14 @@ export default function TeamAndCrmPage() {
                     placeholder="+90 5XX XXX XX XX"
                     value={newClient.phone}
                     onChange={(e) => setNewClient({ ...newClient, phone: e.target.value })}
-                    className="w-full bg-[#070A12] border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#DEC07E]/70"
+                    className="w-full bg-[#FAF9F5] border border-[#EAE6DF] rounded-xl px-3.5 py-2.5 text-xs text-[#0F1E36] placeholder-slate-400 focus:outline-none focus:border-[#B89047]"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-[11px] font-bold text-slate-300 uppercase mb-1">
+                  <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">
                     İlgilenilen Mülk Türü
                   </label>
                   <input
@@ -574,18 +574,18 @@ export default function TeamAndCrmPage() {
                     placeholder="Örn: 4+1 Müstakil Villa"
                     value={newClient.propertyInterest}
                     onChange={(e) => setNewClient({ ...newClient, propertyInterest: e.target.value })}
-                    className="w-full bg-[#070A12] border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#DEC07E]/70"
+                    className="w-full bg-[#FAF9F5] border border-[#EAE6DF] rounded-xl px-3.5 py-2.5 text-xs text-[#0F1E36] placeholder-slate-400 focus:outline-none focus:border-[#B89047]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-bold text-slate-300 uppercase mb-1">
+                  <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">
                     Bölge
                   </label>
                   <select
                     value={newClient.location}
                     onChange={(e) => setNewClient({ ...newClient, location: e.target.value })}
-                    className="w-full bg-[#070A12] border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-[#DEC07E]/70 cursor-pointer"
+                    className="w-full bg-[#FAF9F5] border border-[#EAE6DF] rounded-xl px-3.5 py-2.5 text-xs text-[#0F1E36] focus:outline-none focus:border-[#B89047] cursor-pointer"
                   >
                     <option value="Döşemealtı">Döşemealtı</option>
                     <option value="Lara">Lara</option>
@@ -599,7 +599,7 @@ export default function TeamAndCrmPage() {
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-[11px] font-bold text-slate-300 uppercase mb-1">
+                  <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">
                     Bütçe
                   </label>
                   <input
@@ -607,18 +607,18 @@ export default function TeamAndCrmPage() {
                     placeholder="Örn: 25.000.000 ₺"
                     value={newClient.budget}
                     onChange={(e) => setNewClient({ ...newClient, budget: e.target.value })}
-                    className="w-full bg-[#070A12] border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#DEC07E]/70"
+                    className="w-full bg-[#FAF9F5] border border-[#EAE6DF] rounded-xl px-3.5 py-2.5 text-xs text-[#0F1E36] placeholder-slate-400 focus:outline-none focus:border-[#B89047]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[11px] font-bold text-slate-300 uppercase mb-1">
+                  <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">
                     Sorumlu Danışman
                   </label>
                   <select
                     value={newClient.assignedAgent}
                     onChange={(e) => setNewClient({ ...newClient, assignedAgent: e.target.value })}
-                    className="w-full bg-[#070A12] border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-[#DEC07E]/70 cursor-pointer"
+                    className="w-full bg-[#FAF9F5] border border-[#EAE6DF] rounded-xl px-3.5 py-2.5 text-xs text-[#0F1E36] focus:outline-none focus:border-[#B89047] cursor-pointer"
                   >
                     <option value="Ayşe Nane">Ayşe Nane</option>
                     <option value="Kerem Taş">Kerem Taş</option>
@@ -629,13 +629,13 @@ export default function TeamAndCrmPage() {
               </div>
 
               <div>
-                <label className="block text-[11px] font-bold text-slate-300 uppercase mb-1">
+                <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">
                   Aşama / Durum
                 </label>
                 <select
                   value={newClient.stage}
                   onChange={(e) => setNewClient({ ...newClient, stage: e.target.value as any })}
-                  className="w-full bg-[#070A12] border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-[#DEC07E]/70 cursor-pointer"
+                  className="w-full bg-[#FAF9F5] border border-[#EAE6DF] rounded-xl px-3.5 py-2.5 text-xs text-[#0F1E36] focus:outline-none focus:border-[#B89047] cursor-pointer"
                 >
                   <option value="Yeni Talep">Yeni Talep</option>
                   <option value="Görüşme Yapıldı">Görüşme Yapıldı</option>
@@ -647,7 +647,7 @@ export default function TeamAndCrmPage() {
               </div>
 
               <div>
-                <label className="block text-[11px] font-bold text-slate-300 uppercase mb-1">
+                <label className="block text-[11px] font-bold text-slate-700 uppercase mb-1">
                   Görüşme Notları & Sonraki Adım
                 </label>
                 <textarea
@@ -655,7 +655,7 @@ export default function TeamAndCrmPage() {
                   placeholder="Müşterinin özel istekleri, bütçe esnekliği, gezilen villa veya sonraki randevu tarihi..."
                   value={newClient.notes}
                   onChange={(e) => setNewClient({ ...newClient, notes: e.target.value })}
-                  className="w-full bg-[#070A12] border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#DEC07E]/70 resize-none"
+                  className="w-full bg-[#FAF9F5] border border-[#EAE6DF] rounded-xl px-3.5 py-2.5 text-xs text-[#0F1E36] placeholder-slate-400 focus:outline-none focus:border-[#B89047] resize-none"
                 />
               </div>
 
@@ -663,13 +663,13 @@ export default function TeamAndCrmPage() {
                 <button
                   type="button"
                   onClick={() => setShowAddModal(false)}
-                  className="w-1/2 py-3 rounded-xl border border-white/10 text-xs font-bold text-slate-300 hover:bg-white/[0.06]"
+                  className="w-1/2 py-3 rounded-xl border border-[#EAE6DF] text-xs font-bold text-slate-600 hover:bg-[#FAF9F5]"
                 >
                   Vazgeç
                 </button>
                 <button
                   type="submit"
-                  className="w-1/2 gold-gradient-button text-[#070A12] py-3 rounded-xl text-xs font-bold uppercase tracking-wider shadow-lg"
+                  className="w-1/2 gold-gradient-button py-3 rounded-xl text-xs font-bold uppercase tracking-wider shadow-sm"
                 >
                   Kaydet
                 </button>

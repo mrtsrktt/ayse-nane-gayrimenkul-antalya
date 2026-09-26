@@ -24,29 +24,29 @@ export default function FloatingWhatsApp() {
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
       {/* Pop-up Chat Card */}
       {isOpen && (
-        <div className="mb-3 w-80 sm:w-96 bg-[#0B1120] rounded-3xl shadow-2xl border border-gold-500/40 overflow-hidden animate-fade-in text-white backdrop-blur-2xl">
+        <div className="mb-3 w-80 sm:w-96 bg-white rounded-3xl shadow-[0_20px_50px_rgba(15,30,54,0.18)] border border-[#DFC596] overflow-hidden animate-fade-in text-slate-800">
           {/* Header */}
-          <div className="bg-[#070A12] text-white p-4 flex items-center justify-between border-b border-white/10">
+          <div className="bg-[#FAF9F5] p-4 flex items-center justify-between border-b border-[#EAE6DF]">
             <div className="flex items-center gap-3">
-              <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-gold-400">
+              <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-[#B89047]">
                 <Image
                   src="/ayse-nane.jpg"
                   alt={siteConfig.agentName}
                   fill
                   className="object-cover"
                 />
-                <span className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-400 border-2 border-navy-950" />
+                <span className="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-emerald-500 border-2 border-white" />
               </div>
               <div>
-                <h4 className="text-sm font-bold text-white leading-tight">{siteConfig.agentName}</h4>
-                <p className="text-[11px] text-emerald-400 font-medium">Şu an çevrim içi</p>
+                <h4 className="text-sm font-bold text-[#0F1E36] leading-tight">{siteConfig.agentName}</h4>
+                <p className="text-[11px] text-emerald-600 font-semibold">Şu an çevrim içi</p>
                 <p className="text-[10px] text-slate-400">Ortalama 5 dk içinde yanıtlar</p>
               </div>
             </div>
 
             <button
               onClick={() => setIsOpen(false)}
-              className="p-1.5 text-slate-400 hover:text-white rounded-full transition-colors"
+              className="p-1.5 text-slate-400 hover:text-[#0F1E36] rounded-full transition-colors"
               aria-label="Kapat"
             >
               <X className="w-5 h-5" />
@@ -54,9 +54,9 @@ export default function FloatingWhatsApp() {
           </div>
 
           {/* Chat Body */}
-          <div className="p-4 bg-slate-900/60 space-y-3">
-            <div className="bg-white/5 p-3.5 rounded-2xl rounded-tl-sm border border-white/10 shadow-sm text-xs text-slate-200 leading-relaxed">
-              <p className="font-bold text-white mb-1">Merhaba! 👋</p>
+          <div className="p-4 bg-white space-y-3">
+            <div className="bg-[#FAF9F5] p-3.5 rounded-2xl rounded-tl-sm border border-[#EAE6DF] shadow-sm text-xs text-slate-700 leading-relaxed">
+              <p className="font-bold text-[#0F1E36] mb-1">Merhaba! 👋</p>
               <p>
                 Antalya’da lüks villa, deniz manzaralı rezidans veya mülkünüzün değerleme ve satışı konusunda size nasıl yardımcı olabilirim?
               </p>
@@ -64,56 +64,55 @@ export default function FloatingWhatsApp() {
 
             {/* Quick Chips */}
             <div className="space-y-1.5 pt-1">
-              <p className="text-[10px] uppercase font-bold text-gold-400 tracking-wider">
+              <p className="text-[10px] uppercase font-bold text-[#7E6128] tracking-wider">
                 Hızlı Konu Seçin:
               </p>
               {quickMessages.map((msg, idx) => (
                 <button
                   key={idx}
                   onClick={() => handleOpenWhatsApp(msg.text)}
-                  className="w-full text-left p-2.5 rounded-xl bg-white/5 hover:bg-gold-500/10 border border-white/5 hover:border-gold-500/30 text-xs text-slate-200 transition-colors flex items-center justify-between"
+                  className="w-full text-left p-2.5 rounded-xl bg-[#FAF9F5] hover:bg-[#F4F1EA] border border-[#EAE6DF] hover:border-[#B89047] text-xs text-slate-700 transition-colors flex items-center justify-between"
                 >
                   <span className="truncate">{msg.text}</span>
-                  <Send className="w-3 h-3 text-gold-400 shrink-0 ml-1" />
+                  <Send className="w-3 h-3 text-[#B89047] shrink-0 ml-1" />
                 </button>
               ))}
             </div>
           </div>
 
           {/* Action Footer */}
-          <div className="p-3 bg-[#070A12] border-t border-white/10 flex gap-2">
+          <div className="p-3 bg-[#FAF9F5] border-t border-[#EAE6DF] flex gap-2">
             <button
               onClick={() => handleOpenWhatsApp()}
-              className="flex-1 bg-gradient-to-r from-emerald-500 to-teal-500 hover:opacity-95 text-navy-950 font-bold text-xs py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 transition-colors shadow-lg"
+              className="flex-1 bg-gradient-to-r from-emerald-600 to-teal-600 hover:opacity-95 text-white font-bold text-xs py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 transition-colors shadow-md"
             >
-              <MessageCircle className="w-4 h-4 text-navy-950" />
+              <MessageCircle className="w-4 h-4" />
               <span>WhatsApp Başlat</span>
             </button>
             <a
               href={`tel:${siteConfig.phone}`}
-              className="p-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white transition-colors"
+              className="p-2.5 rounded-xl bg-white border border-[#EAE6DF] hover:bg-[#F4F1EA] text-[#0F1E36] transition-colors shadow-sm"
               title="Telefonla Ara"
             >
-              <PhoneCall className="w-4 h-4 text-gold-400" />
+              <PhoneCall className="w-4 h-4 text-[#B89047]" />
             </a>
           </div>
         </div>
       )}
 
-      {/* Main Trigger Button */}
+      {/* Floating Trigger Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="group relative flex items-center gap-3 bg-gradient-to-r from-emerald-500 to-teal-500 text-navy-950 px-5 py-3.5 rounded-full shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 border border-emerald-400/40"
-        aria-label="WhatsApp Canlı Danışma"
+        className="group relative flex items-center gap-2.5 bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 text-white p-3 sm:px-5 sm:py-3.5 rounded-full shadow-[0_10px_30px_rgba(5,150,105,0.4)] hover:shadow-[0_15px_35px_rgba(5,150,105,0.6)] transition-all hover:scale-105 active:scale-95"
+        aria-label="WhatsApp İletişim Hattı"
       >
-        <span className="relative flex h-3 w-3">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-200 opacity-75" />
-          <span className="relative inline-flex rounded-full h-3 w-3 bg-navy-950" />
-        </span>
-
-        <MessageCircle className="w-6 h-6 text-navy-950" />
-        <span className="text-xs font-bold tracking-wide hidden sm:inline">
-          Ayşe Hanım’a WhatsApp’tan Yazın
+        <div className="relative">
+          <MessageCircle className="w-6 h-6" />
+          <span className="absolute -top-1 -right-1 w-3 h-3 bg-amber-300 rounded-full animate-ping" />
+          <span className="absolute -top-1 -right-1 w-3 h-3 bg-amber-400 rounded-full" />
+        </div>
+        <span className="hidden sm:inline font-bold text-xs uppercase tracking-wider">
+          Ayşe Hanım ile İletişim
         </span>
       </button>
     </div>
