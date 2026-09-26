@@ -6,7 +6,7 @@ import Footer from '@/components/Footer';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 
 const libreBaskerville = Libre_Baskerville({
-  subsets: ['latin'],
+  subsets: ['latin', 'latin-ext'],
   weight: ['400', '700'],
   style: ['normal', 'italic'],
   variable: '--font-serif',
@@ -14,7 +14,7 @@ const libreBaskerville = Libre_Baskerville({
 });
 
 const manrope = Manrope({
-  subsets: ['latin'],
+  subsets: ['latin', 'latin-ext'],
   weight: ['300', '400', '500', '600', '700'],
   variable: '--font-sans',
   display: 'swap',
