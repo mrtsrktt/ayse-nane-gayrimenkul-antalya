@@ -35,20 +35,22 @@ export default function Hero({ onSearch }: HeroProps) {
   };
 
   return (
-    <section className="relative min-h-[94vh] flex items-center justify-center pt-36 pb-20 overflow-hidden bg-[#FAF9F5]">
-      {/* Background Architectural Canvas with Bright Sunlit Mediterranean Warmth */}
-      <div className="absolute inset-0 z-0">
+    <section className="relative min-h-[96vh] flex items-center justify-center pt-36 pb-20 overflow-hidden bg-[#FAF9F5]">
+      {/* Background Architectural Canvas - High Visibility Vivid Mediterranean Villa */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
         <Image
-          src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2400&q=85"
-          alt="Antalya Lüks Gayrimenkul"
+          src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=2400&q=90"
+          alt="Antalya Lüks Gayrimenkul & Müstakil Villalar"
           fill
           priority
-          className="object-cover object-center scale-105 opacity-25"
+          sizes="100vw"
+          className="object-cover object-center scale-100 opacity-90"
         />
-        {/* Luminous warm cream and alabaster gradients */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#FAF9F5] via-[#FAF9F5]/75 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#FAF9F5] via-[#FAF9F5]/85 to-transparent" />
-        <div className="absolute -top-24 right-1/4 w-[500px] h-[500px] bg-[#DFC596]/20 rounded-full blur-[120px] pointer-events-none" />
+        {/* Soft directional feather gradient: ensures high text readability on left while keeping villa, pool & sky vividly visible */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#FAF9F5]/95 via-[#FAF9F5]/75 to-transparent" />
+        {/* Subtle top & bottom blending */}
+        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#FAF9F5]/80 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#FAF9F5] to-transparent" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
@@ -57,26 +59,26 @@ export default function Hero({ onSearch }: HeroProps) {
           {/* Left Column: Headlines & Search (7 cols) */}
           <div className="lg:col-span-7 text-center lg:text-left space-y-7">
             {/* Top Architectural Coordinate Pill */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-[#DFC596] text-[#7E6128] text-[11px] font-bold tracking-[0.2em] uppercase shadow-sm">
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-[#DFC596] text-[#7E6128] text-[11px] font-bold tracking-[0.2em] uppercase shadow-sm">
               <span className="w-1.5 h-1.5 rounded-full bg-[#B89047] animate-pulse" />
               <span>36°53&apos;N 30°42&apos;E • ANTALYA PRIVÉ • DÖŞEMEALTI • LARA • KAŞ</span>
             </div>
 
             {/* Main Editorial Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-[62px] font-serif font-bold text-[#0F1E36] tracking-tight leading-[1.1]">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-[62px] font-serif font-bold text-[#0F1E36] tracking-tight leading-[1.1] drop-shadow-sm">
               Akdeniz’in En Nadide <br className="hidden sm:inline" />
               <span className="gold-gradient-text italic font-serif font-normal">Mülkleri & Prestijli</span> <br />
               Yatırım Danışmanlığı
             </h1>
 
             {/* Editorial Subtitle */}
-            <p className="text-base sm:text-lg text-slate-600 font-light leading-relaxed max-w-2xl mx-auto lg:mx-0">
+            <p className="text-base sm:text-lg text-slate-700 font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0">
               Antalya’nın en seçkin müstakil villaları, falez rezidansları ve yüksek getirili arsa portföyleriyle;
-              <strong className="text-[#0F1E36] font-semibold"> {siteConfig.agentName}</strong> güvencesinde, uluslararası standartlarda ayrıcalıklı bir mülk edinme deneyimi.
+              <strong className="text-[#0F1E36] font-bold"> {siteConfig.agentName}</strong> güvencesinde, uluslararası standartlarda ayrıcalıklı bir mülk edinme deneyimi.
             </p>
 
             {/* High-End Search & Filter Bar */}
-            <div className="bg-white/95 rounded-2xl p-3 sm:p-4 shadow-[0_20px_50px_rgba(15,30,54,0.08)] border border-[#EAE6DF] backdrop-blur-xl">
+            <div className="bg-white/95 rounded-2xl p-3 sm:p-4 shadow-[0_20px_50px_rgba(15,30,54,0.12)] border border-[#EAE6DF] backdrop-blur-xl">
               <form onSubmit={handleFilterSubmit} className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
                 {/* Property Type */}
                 <div className="sm:col-span-5 text-left bg-[#F9F8F5] border border-[#EAE6DF] rounded-xl px-4 py-3 focus-within:border-[#B89047] transition-colors">
@@ -131,14 +133,14 @@ export default function Hero({ onSearch }: HeroProps) {
 
             {/* Quick Filter Tags */}
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 text-xs pt-1">
-              <span className="text-slate-500 font-medium">Öne Çıkanlar:</span>
-              <a href="#portfoy" className="px-3.5 py-1.5 rounded-full bg-white border border-[#EAE6DF] text-[#475569] hover:text-[#0F1E36] hover:border-[#B89047] transition-colors font-medium shadow-sm">
+              <span className="text-slate-600 font-semibold">Öne Çıkanlar:</span>
+              <a href="#portfoy" className="px-3.5 py-1.5 rounded-full bg-white/90 border border-[#EAE6DF] text-[#475569] hover:text-[#0F1E36] hover:border-[#B89047] transition-colors font-semibold shadow-sm backdrop-blur-sm">
                 Döşemealtı Müstakil Villa
               </a>
-              <a href="#portfoy" className="px-3.5 py-1.5 rounded-full bg-white border border-[#EAE6DF] text-[#475569] hover:text-[#0F1E36] hover:border-[#B89047] transition-colors font-medium shadow-sm">
+              <a href="#portfoy" className="px-3.5 py-1.5 rounded-full bg-white/90 border border-[#EAE6DF] text-[#475569] hover:text-[#0F1E36] hover:border-[#B89047] transition-colors font-semibold shadow-sm backdrop-blur-sm">
                 Lara Falez Rezidans
               </a>
-              <a href="#portfoy" className="px-3.5 py-1.5 rounded-full bg-white border border-[#EAE6DF] text-[#475569] hover:text-[#0F1E36] hover:border-[#B89047] transition-colors font-medium shadow-sm">
+              <a href="#portfoy" className="px-3.5 py-1.5 rounded-full bg-white/90 border border-[#EAE6DF] text-[#475569] hover:text-[#0F1E36] hover:border-[#B89047] transition-colors font-semibold shadow-sm backdrop-blur-sm">
                 Vatandaşlığa Uygun
               </a>
             </div>
@@ -146,7 +148,7 @@ export default function Hero({ onSearch }: HeroProps) {
 
           {/* Right Column: Ayşe Nane Mediterranean Executive Portrait Card (5 cols) */}
           <div className="lg:col-span-5 flex justify-center">
-            <div className="relative w-full max-w-md bg-white p-5 rounded-3xl border border-[#DFC596] shadow-[0_25px_60px_rgba(15,30,54,0.1)]">
+            <div className="relative w-full max-w-md bg-white p-5 rounded-3xl border border-[#DFC596] shadow-[0_25px_60px_rgba(15,30,54,0.15)] backdrop-blur-xl">
               {/* Credentials Top Strip */}
               <div className="flex items-center justify-between gap-2 mb-4">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F4F1EA] text-[#7E6128] text-[11px] font-bold border border-[#DFC596]">
@@ -178,7 +180,7 @@ export default function Hero({ onSearch }: HeroProps) {
                         <span>{siteConfig.agentName}</span>
                         <CheckCircle2 className="w-4 h-4 text-[#B89047] fill-[#DFC596]" />
                       </h3>
-                      <p className="text-xs text-[#7E6128] font-medium tracking-wide">
+                      <p className="text-xs text-[#7E6128] font-bold tracking-wide">
                         Lüks Konut & Yatırım Danışmanı • Antalya
                       </p>
                     </div>
@@ -222,9 +224,9 @@ export default function Hero({ onSearch }: HeroProps) {
         </div>
 
         {/* Live Market Metrics Strip */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mt-16 pt-10 border-t border-[#EAE6DF] text-left">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mt-16 pt-10 border-t border-[#EAE6DF]/60 text-left">
           {siteConfig.stats.map((stat, idx) => (
-            <div key={idx} className="luxury-card p-5 rounded-2xl bg-white border border-[#EAE6DF] hover:border-[#DFC596] transition-all">
+            <div key={idx} className="luxury-card p-5 rounded-2xl bg-white/95 backdrop-blur-md border border-[#EAE6DF] hover:border-[#DFC596] transition-all shadow-sm">
               <p className="text-2xl sm:text-3xl font-serif font-bold text-[#7E6128] mb-1">{stat.value}</p>
               <p className="text-sm font-bold text-[#0F1E36] tracking-wide">{stat.label}</p>
               <p className="text-xs text-slate-500 mt-1 line-clamp-1">{stat.sublabel}</p>
