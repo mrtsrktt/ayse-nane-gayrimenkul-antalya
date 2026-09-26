@@ -21,10 +21,10 @@ export default function FloatingWhatsApp() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end">
       {/* Pop-up Chat Card */}
       {isOpen && (
-        <div className="mb-3 w-80 sm:w-96 bg-white rounded-3xl shadow-[0_20px_50px_rgba(15,30,54,0.18)] border border-[#DFC596] overflow-hidden animate-fade-in text-slate-800">
+        <div className="mb-3 w-[calc(100vw-2rem)] sm:w-96 max-w-sm bg-white rounded-3xl shadow-[0_20px_50px_rgba(15,30,54,0.18)] border border-[#DFC596] overflow-hidden animate-fade-in text-slate-800">
           {/* Header */}
           <div className="bg-[#FAF9F5] p-4 flex items-center justify-between border-b border-[#EAE6DF]">
             <div className="flex items-center gap-3">

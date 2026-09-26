@@ -420,8 +420,8 @@ export default function TeamAndCrmPage() {
             </div>
           </div>
 
-          {/* CRM Table */}
-          <div className="overflow-x-auto rounded-2xl border border-[#EAE6DF]">
+          {/* CRM Desktop Table */}
+          <div className="hidden md:block overflow-x-auto rounded-2xl border border-[#EAE6DF]">
             <table className="w-full text-left text-xs">
               <thead className="bg-[#FAF9F5] text-[#0F1E36] font-bold uppercase tracking-wider text-[11px] border-b border-[#EAE6DF]">
                 <tr>
@@ -513,6 +513,81 @@ export default function TeamAndCrmPage() {
                 ))}
               </tbody>
             </table>
+          </div>
+
+          {/* CRM Mobile Cards View */}
+          <div className="md:hidden space-y-3">
+            {filteredClients.map((client) => (
+              <div key={client.id} className="p-4 rounded-2xl bg-[#FAF9F5] border border-[#EAE6DF] space-y-3 shadow-sm">
+                <div className="flex items-start justify-between gap-2">
+                  <div>
+                    <h4 className="font-bold text-[#0F1E36] text-base">{client.name}</h4>
+                    <p className="text-xs text-slate-500">{client.propertyInterest} • {client.location}</p>
+                  </div>
+                  <span className="font-serif font-bold text-[#7E6128] text-sm shrink-0">
+                    {client.budget}
+                  </span>
+                </div>
+
+                <div className="flex items-center justify-between gap-2 pt-1 border-t border-[#EAE6DF]/60">
+                  <select
+                    value={client.stage}
+                    onChange={(e) => handleStageChange(client.id, e.target.value as any)}
+                    className={`text-[10px] font-bold px-2.5 py-1 rounded-full border cursor-pointer focus:outline-none ${getStageBadgeClass(
+                      client.stage
+                    )}`}
+                  >
+                    <option value="Yeni Talep">Yeni Talep</option>
+                    <option value="Görüşme Yapıldı">Görüşme Yapıldı</option>
+                    <option value="Mülk Gezildi">Mülk Gezildi</option>
+                    <option value="Teklif / Pazarlık">Teklif / Pazarlık</option>
+                    <option value="Tapu Aşaması">Tapu Aşaması</option>
+                    <option value="Satış Kapatıldı">Satış Kapatıldı</option>
+                  </select>
+
+                  <span className="text-[11px] text-slate-500 font-medium">
+                    {client.assignedAgent}
+                  </span>
+                </div>
+
+                {client.notes && (
+                  <p className="text-xs text-slate-600 bg-white p-2.5 rounded-xl border border-[#EAE6DF] font-light leading-relaxed">
+                    {client.notes}
+                  </p>
+                )}
+
+                <div className="flex items-center justify-between gap-2 pt-1">
+                  <div className="flex items-center gap-2">
+                    <a
+                      href={`tel:${client.phone}`}
+                      className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white border border-[#EAE6DF] text-xs font-semibold text-[#0F1E36]"
+                    >
+                      <Phone className="w-3 h-3 text-[#B89047]" />
+                      <span>{client.phone}</span>
+                    </a>
+                    <a
+                      href={`https://wa.me/${client.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
+                        `Merhaba ${client.name}, portföy görüşmemiz hakkında bilgi vermek istedim.`
+                      )}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-1.5 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-600"
+                      title="WhatsApp Gönder"
+                    >
+                      <MessageCircle className="w-4 h-4" />
+                    </a>
+                  </div>
+
+                  <button
+                    onClick={() => handleDeleteClient(client.id)}
+                    className="p-1.5 text-slate-400 hover:text-red-600 transition-colors"
+                    title="Sil"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

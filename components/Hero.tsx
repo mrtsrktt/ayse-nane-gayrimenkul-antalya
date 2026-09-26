@@ -35,7 +35,7 @@ export default function Hero({ onSearch }: HeroProps) {
   };
 
   return (
-    <section className="relative min-h-[96vh] flex items-center justify-center pt-36 pb-20 overflow-hidden bg-[#FAF9F5]">
+    <section className="relative min-h-[92vh] flex items-center justify-center pt-24 sm:pt-36 pb-14 sm:pb-20 overflow-hidden bg-[#FAF9F5]">
       {/* Background Architectural Canvas - High Visibility Vivid Mediterranean Villa */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <Image
@@ -47,32 +47,100 @@ export default function Hero({ onSearch }: HeroProps) {
           className="object-cover object-center scale-100 opacity-90"
         />
         {/* Soft directional feather gradient: ensures high text readability on left while keeping villa, pool & sky vividly visible */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#FAF9F5]/95 via-[#FAF9F5]/75 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b sm:bg-gradient-to-r from-[#FAF9F5]/95 via-[#FAF9F5]/80 to-[#FAF9F5]/40 sm:to-transparent" />
         {/* Subtle top & bottom blending */}
-        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#FAF9F5]/80 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#FAF9F5] to-transparent" />
+        <div className="absolute inset-x-0 top-0 h-24 sm:h-28 bg-gradient-to-b from-[#FAF9F5]/85 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-28 sm:h-32 bg-gradient-to-t from-[#FAF9F5] to-transparent" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        {/* Mobile Executive Spotlight Card: Immediately visible on mobile entry above the fold */}
+        <div className="lg:hidden w-full bg-white/95 backdrop-blur-xl border border-[#DFC596] rounded-3xl p-4 shadow-[0_12px_36px_rgba(15,30,54,0.1)] mb-6 text-left relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[#DFC596]/30 via-transparent to-transparent pointer-events-none" />
+
+          <div className="flex items-center gap-3.5 relative z-10">
+            {/* Ayşe Nane High-Res Portrait Frame */}
+            <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden border-2 border-[#B89047] shadow-md shrink-0">
+              <Image
+                src="/ayse-nane.jpg"
+                alt="Ayşe Nane Lüks Gayrimenkul Danışmanı"
+                fill
+                priority
+                className="object-cover object-top"
+              />
+              {/* Active Status Pulse */}
+              <span className="absolute bottom-1 right-1 flex h-3.5 w-3.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border-2 border-white" />
+              </span>
+            </div>
+
+            {/* Executive Info */}
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-1.5 flex-wrap">
+                <h2 className="font-serif font-bold text-lg sm:text-xl text-[#0F1E36] tracking-tight">
+                  {siteConfig.agentName}
+                </h2>
+                <span className="inline-flex items-center gap-1 text-[10px] font-bold bg-[#F4F1EA] text-[#7E6128] border border-[#DFC596] px-2 py-0.5 rounded-full">
+                  <ShieldCheck className="w-3 h-3 text-[#B89047]" /> MYK-5
+                </span>
+              </div>
+
+              <p className="text-xs text-[#7E6128] font-bold mt-0.5 truncate">
+                Lüks Konut & Yatırım Danışmanı • Antalya
+              </p>
+
+              <p className="text-[11px] text-emerald-700 font-medium mt-1 flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span>Çevrim İçi • Hızlı Yanıt</span>
+              </p>
+            </div>
+          </div>
+
+          {/* Quick Mobile Action Buttons */}
+          <div className="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-[#EAE6DF] relative z-10">
+            <a
+              href={`tel:${siteConfig.phone}`}
+              className="bg-[#F8F6F1] hover:bg-[#F0ECE1] text-[#0F1E36] font-bold text-xs py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 border border-[#EAE6DF] transition-colors"
+            >
+              <PhoneCall className="w-3.5 h-3.5 text-[#B89047]" />
+              <span>Hemen Ara</span>
+            </a>
+
+            <a
+              href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(
+                'Merhaba Ayşe Hanım, Antalya gayrimenkul portföyünüz hakkında görüşmek istiyorum.'
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="gold-gradient-button text-xs py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 shadow-md font-bold"
+            >
+              <MessageCircle className="w-3.5 h-3.5" />
+              <span>WhatsApp</span>
+            </a>
+          </div>
+        </div>
+
         {/* Main 2-Column Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
           {/* Left Column: Headlines & Search (7 cols) */}
-          <div className="lg:col-span-7 text-center lg:text-left space-y-7">
+          <div className="lg:col-span-7 text-center lg:text-left space-y-6 sm:space-y-7">
             {/* Top Architectural Coordinate Pill */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-[#DFC596] text-[#7E6128] text-[11px] font-bold tracking-[0.2em] uppercase shadow-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#B89047] animate-pulse" />
-              <span>36°53&apos;N 30°42&apos;E • ANTALYA PRIVÉ • DÖŞEMEALTI • LARA • KAŞ</span>
+            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-[#DFC596] text-[#7E6128] text-[10px] sm:text-[11px] font-bold tracking-[0.15em] sm:tracking-[0.2em] uppercase shadow-sm max-w-full">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#B89047] animate-pulse shrink-0" />
+              <span className="truncate sm:hidden">36°53&apos;N 30°42&apos;E • ANTALYA PRIVÉ</span>
+              <span className="hidden sm:inline">36°53&apos;N 30°42&apos;E • ANTALYA PRIVÉ • DÖŞEMEALTI • LARA • KAŞ</span>
             </div>
 
             {/* Main Editorial Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-[62px] font-serif font-bold text-[#0F1E36] tracking-tight leading-[1.1] drop-shadow-sm">
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl xl:text-[62px] font-serif font-bold text-[#0F1E36] tracking-tight leading-[1.15] drop-shadow-sm">
               Akdeniz’in En Nadide <br className="hidden sm:inline" />
               <span className="gold-gradient-text italic font-serif font-normal">Mülkleri & Prestijli</span> <br />
               Yatırım Danışmanlığı
             </h1>
 
             {/* Editorial Subtitle */}
-            <p className="text-base sm:text-lg text-slate-700 font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0">
+            <p className="text-sm sm:text-lg text-slate-700 font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0">
               Antalya’nın en seçkin müstakil villaları, falez rezidansları ve yüksek getirili arsa portföyleriyle;
               <strong className="text-[#0F1E36] font-bold"> {siteConfig.agentName}</strong> güvencesinde, uluslararası standartlarda ayrıcalıklı bir mülk edinme deneyimi.
             </p>
@@ -132,22 +200,22 @@ export default function Hero({ onSearch }: HeroProps) {
             </div>
 
             {/* Quick Filter Tags */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 text-xs pt-1">
-              <span className="text-slate-600 font-semibold">Öne Çıkanlar:</span>
-              <a href="#portfoy" className="px-3.5 py-1.5 rounded-full bg-white/90 border border-[#EAE6DF] text-[#475569] hover:text-[#0F1E36] hover:border-[#B89047] transition-colors font-semibold shadow-sm backdrop-blur-sm">
-                Döşemealtı Müstakil Villa
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 text-xs pt-1">
+              <span className="text-slate-600 font-semibold text-[11px] sm:text-xs">Öne Çıkanlar:</span>
+              <a href="#portfoy" className="px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-white/90 border border-[#EAE6DF] text-[#475569] hover:text-[#0F1E36] hover:border-[#B89047] transition-colors text-[11px] sm:text-xs font-semibold shadow-sm backdrop-blur-sm">
+                Döşemealtı Villa
               </a>
-              <a href="#portfoy" className="px-3.5 py-1.5 rounded-full bg-white/90 border border-[#EAE6DF] text-[#475569] hover:text-[#0F1E36] hover:border-[#B89047] transition-colors font-semibold shadow-sm backdrop-blur-sm">
+              <a href="#portfoy" className="px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-white/90 border border-[#EAE6DF] text-[#475569] hover:text-[#0F1E36] hover:border-[#B89047] transition-colors text-[11px] sm:text-xs font-semibold shadow-sm backdrop-blur-sm">
                 Lara Falez Rezidans
               </a>
-              <a href="#portfoy" className="px-3.5 py-1.5 rounded-full bg-white/90 border border-[#EAE6DF] text-[#475569] hover:text-[#0F1E36] hover:border-[#B89047] transition-colors font-semibold shadow-sm backdrop-blur-sm">
+              <a href="#portfoy" className="px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-white/90 border border-[#EAE6DF] text-[#475569] hover:text-[#0F1E36] hover:border-[#B89047] transition-colors text-[11px] sm:text-xs font-semibold shadow-sm backdrop-blur-sm">
                 Vatandaşlığa Uygun
               </a>
             </div>
           </div>
 
-          {/* Right Column: Ayşe Nane Mediterranean Executive Portrait Card (5 cols) */}
-          <div className="lg:col-span-5 flex justify-center">
+          {/* Right Column: Ayşe Nane Mediterranean Executive Portrait Card (Desktop only, 5 cols) */}
+          <div className="hidden lg:flex lg:col-span-5 justify-center">
             <div className="relative w-full max-w-md bg-white p-5 rounded-3xl border border-[#DFC596] shadow-[0_25px_60px_rgba(15,30,54,0.15)] backdrop-blur-xl">
               {/* Credentials Top Strip */}
               <div className="flex items-center justify-between gap-2 mb-4">
@@ -224,12 +292,12 @@ export default function Hero({ onSearch }: HeroProps) {
         </div>
 
         {/* Live Market Metrics Strip */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mt-16 pt-10 border-t border-[#EAE6DF]/60 text-left">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 mt-12 sm:mt-16 pt-8 sm:pt-10 border-t border-[#EAE6DF]/60 text-left">
           {siteConfig.stats.map((stat, idx) => (
-            <div key={idx} className="luxury-card p-5 rounded-2xl bg-white/95 backdrop-blur-md border border-[#EAE6DF] hover:border-[#DFC596] transition-all shadow-sm">
-              <p className="text-2xl sm:text-3xl font-serif font-bold text-[#7E6128] mb-1">{stat.value}</p>
-              <p className="text-sm font-bold text-[#0F1E36] tracking-wide">{stat.label}</p>
-              <p className="text-xs text-slate-500 mt-1 line-clamp-1">{stat.sublabel}</p>
+            <div key={idx} className="luxury-card p-4 sm:p-5 rounded-2xl bg-white/95 backdrop-blur-md border border-[#EAE6DF] hover:border-[#DFC596] transition-all shadow-sm">
+              <p className="text-xl sm:text-3xl font-serif font-bold text-[#7E6128] mb-0.5 sm:mb-1">{stat.value}</p>
+              <p className="text-xs sm:text-sm font-bold text-[#0F1E36] tracking-wide">{stat.label}</p>
+              <p className="text-[10px] sm:text-xs text-slate-500 mt-0.5 line-clamp-1">{stat.sublabel}</p>
             </div>
           ))}
         </div>
