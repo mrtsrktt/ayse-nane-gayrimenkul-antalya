@@ -6,16 +6,11 @@ import {
   Calendar,
   Clock,
   ArrowLeft,
-  Share2,
-  Bookmark,
-  CheckCircle,
   MessageCircle,
   Phone,
-  ShieldCheck,
-  Sparkles,
   ChevronRight,
 } from 'lucide-react';
-import { blogPosts, BlogPost } from '@/data/blogPosts';
+import { blogPosts } from '@/data/blogPosts';
 import { siteConfig } from '@/data/siteConfig';
 
 interface PageProps {
@@ -41,37 +36,39 @@ export default async function BlogPostPage({ params }: PageProps) {
   const whatsappInquiry = `Merhaba Ayşe Hanım, web sitenizdeki "${post.title}" başlıklı makalenizi okudum. Bu konu hakkında detaylı danışmanlık almak istiyorum.`;
 
   return (
-    <article className="pt-36 pb-24 bg-[#FAF9F5] min-h-screen text-slate-800">
+    <article className="pt-32 pb-24 bg-paper min-h-screen text-brand-text">
       {/* Top Breadcrumb */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
-        <div className="flex items-center gap-2 text-xs text-slate-500 font-semibold">
-          <Link href="/" className="hover:text-[#B89047] transition-colors">Ana Sayfa</Link>
-          <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
-          <Link href="/blog" className="hover:text-[#B89047] transition-colors">Blog & Analizler</Link>
-          <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
-          <span className="text-[#7E6128] truncate max-w-[200px] sm:max-w-xs">{post.category}</span>
+        <div className="flex items-center gap-2 text-xs text-brand-muted font-medium">
+          <Link href="/" className="hover:text-ink transition-colors">Ana Sayfa</Link>
+          <ChevronRight className="w-3.5 h-3.5 text-limestone" />
+          <Link href="/blog" className="hover:text-ink transition-colors">İçgörüler</Link>
+          <ChevronRight className="w-3.5 h-3.5 text-limestone" />
+          <span className="text-bronze truncate max-w-[200px] sm:max-w-xs">{post.category}</span>
         </div>
       </div>
 
       {/* Article Header */}
-      <header className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6 mb-12">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#DFC596] text-[#7E6128] text-[11px] font-bold uppercase tracking-[0.2em] shadow-sm">
-          <Sparkles className="w-3.5 h-3.5 text-[#B89047]" />
-          {post.category}
+      <header className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-left space-y-6 mb-12">
+        <div className="flex items-center gap-2">
+          <span className="w-5 h-px bg-bronze" />
+          <span className="text-xs font-semibold uppercase tracking-widest text-bronze">
+            {post.category}
+          </span>
         </div>
 
-        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-bold text-[#0F1E36] tracking-tight leading-[1.12]">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-ink leading-[1.18] tracking-tight">
           {post.title}
         </h1>
 
-        <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto font-light">
+        <p className="text-base sm:text-lg text-brand-muted leading-relaxed font-normal">
           {post.summary}
         </p>
 
         {/* Author & Meta Bar */}
-        <div className="flex flex-wrap items-center justify-center gap-6 pt-6 border-t border-[#EAE6DF] text-xs text-slate-500">
+        <div className="flex flex-wrap items-center gap-6 pt-6 border-t border-limestone/50 text-xs text-brand-muted">
           <div className="flex items-center gap-2.5">
-            <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-[#B89047] shadow-sm">
+            <div className="relative w-9 h-9 rounded-full overflow-hidden border border-limestone shrink-0">
               <Image
                 src={post.author.image}
                 alt={post.author.name}
@@ -79,31 +76,31 @@ export default async function BlogPostPage({ params }: PageProps) {
                 className="object-cover object-top"
               />
             </div>
-            <div className="text-left">
-              <p className="font-bold text-[#0F1E36]">{post.author.name}</p>
-              <p className="text-[11px] text-[#7E6128] font-medium">{post.author.role}</p>
+            <div>
+              <p className="font-serif font-bold text-ink">{post.author.name}</p>
+              <p className="text-[11px] text-bronze">{post.author.role}</p>
             </div>
           </div>
 
-          <span className="hidden sm:inline text-slate-300">|</span>
+          <span className="text-limestone">•</span>
 
           <div className="flex items-center gap-1.5">
-            <Calendar className="w-4 h-4 text-[#B89047]" />
+            <Calendar className="w-3.5 h-3.5 text-bronze" />
             <span>{post.publishDate}</span>
           </div>
 
-          <span className="hidden sm:inline text-slate-300">|</span>
+          <span className="text-limestone">•</span>
 
           <div className="flex items-center gap-1.5">
-            <Clock className="w-4 h-4 text-[#B89047]" />
+            <Clock className="w-3.5 h-3.5 text-bronze" />
             <span>{post.readTime}</span>
           </div>
         </div>
       </header>
 
       {/* Large Featured Image */}
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-        <div className="relative h-80 sm:h-[480px] rounded-3xl overflow-hidden shadow-xl bg-slate-100 border border-[#EAE6DF]">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-14">
+        <div className="relative h-72 sm:h-[460px] rounded-2xl overflow-hidden bg-ivory border border-limestone/60 shadow-sm">
           <Image
             src={post.coverImage}
             alt={post.title}
@@ -114,29 +111,29 @@ export default async function BlogPostPage({ params }: PageProps) {
         </div>
       </div>
 
-      {/* Main Reading Content */}
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Reading Body */}
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
         {/* Intro */}
-        <div className="text-lg sm:text-xl font-serif text-[#0F1E36] leading-relaxed mb-10 pb-8 border-b border-[#EAE6DF] first-letter:text-5xl first-letter:font-bold first-letter:text-[#B89047] first-letter:mr-3 first-letter:float-left">
+        <div className="text-lg font-serif text-ink leading-relaxed mb-10 pb-8 border-b border-limestone/40">
           {post.content.intro}
         </div>
 
         {/* Sections */}
-        <div className="space-y-12">
+        <div className="space-y-10">
           {post.content.sections.map((section, idx) => (
-            <div key={idx} className="space-y-4">
-              <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#0F1E36] tracking-tight">
+            <div key={idx} className="space-y-3">
+              <h2 className="text-2xl font-serif font-bold text-ink leading-snug">
                 {section.heading}
               </h2>
 
               {section.paragraphs.map((p, pIdx) => (
-                <p key={pIdx} className="text-base text-slate-700 leading-relaxed font-light">
+                <p key={pIdx} className="text-sm sm:text-base text-brand-muted leading-relaxed font-normal">
                   {p}
                 </p>
               ))}
 
               {section.highlightBox && (
-                <div className="my-6 p-6 rounded-2xl bg-white border-l-4 border-[#B89047] shadow-[0_4px_20px_rgba(15,30,54,0.05)] text-sm text-[#7E6128] font-medium leading-relaxed">
+                <div className="my-6 p-5 rounded-xl bg-ivory border-l-2 border-bronze text-xs sm:text-sm text-brand-text font-medium leading-relaxed">
                   {section.highlightBox}
                 </div>
               )}
@@ -145,11 +142,11 @@ export default async function BlogPostPage({ params }: PageProps) {
         </div>
 
         {/* Conclusion Box */}
-        <div className="mt-14 p-8 rounded-3xl bg-white border border-[#DFC596] shadow-sm">
-          <h3 className="text-xl font-serif font-bold text-[#0F1E36] mb-3">
-            Sonuç ve Uzman Görüşü
+        <div className="mt-12 p-6 sm:p-8 rounded-xl bg-ivory border border-limestone/60">
+          <h3 className="text-lg font-serif font-bold text-ink mb-2">
+            Sonuç ve Danışman Notu
           </h3>
-          <p className="text-sm text-slate-600 leading-relaxed mb-6 font-light">
+          <p className="text-xs sm:text-sm text-brand-muted leading-relaxed mb-5 font-normal">
             {post.content.conclusion}
           </p>
 
@@ -157,7 +154,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(whatsappInquiry)}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 gold-gradient-button text-xs font-bold uppercase tracking-wider px-6 py-4 rounded-xl shadow-md hover:scale-102 transition-transform"
+            className="btn-primary text-xs"
           >
             <MessageCircle className="w-4 h-4" />
             <span>Ayşe Hanım ile Bu Konuyu WhatsApp’ta Görüşün</span>
@@ -165,14 +162,14 @@ export default async function BlogPostPage({ params }: PageProps) {
         </div>
 
         {/* Tags */}
-        <div className="mt-10 pt-6 border-t border-[#EAE6DF] flex flex-wrap items-center gap-2">
-          <span className="text-xs font-bold text-slate-400 uppercase tracking-wider mr-2">
+        <div className="mt-8 pt-6 border-t border-limestone/40 flex flex-wrap items-center gap-2">
+          <span className="text-xs font-semibold text-brand-muted mr-1">
             Etiketler:
           </span>
           {post.tags.map((tag, tIdx) => (
             <span
               key={tIdx}
-              className="text-xs font-medium px-3.5 py-1.5 rounded-lg bg-white text-[#7E6128] border border-[#EAE6DF] shadow-sm"
+              className="text-xs px-2.5 py-1 rounded bg-ivory text-brand-text border border-limestone/50"
             >
               #{tag}
             </span>
@@ -180,8 +177,8 @@ export default async function BlogPostPage({ params }: PageProps) {
         </div>
 
         {/* Author Bio Card */}
-        <div className="mt-12 p-6 sm:p-8 rounded-3xl bg-white border border-[#DFC596] shadow-[0_10px_30px_rgba(15,30,54,0.06)] flex flex-col sm:flex-row items-center gap-6">
-          <div className="relative w-20 h-20 rounded-full overflow-hidden border-2 border-[#B89047] shadow-sm shrink-0">
+        <div className="mt-10 p-6 rounded-xl bg-white border border-limestone/60 flex flex-col sm:flex-row items-center sm:items-start gap-5">
+          <div className="relative w-16 h-16 rounded-full overflow-hidden border border-limestone shrink-0">
             <Image
               src="/ayse-nane.jpg"
               alt="Ayşe Nane"
@@ -189,28 +186,28 @@ export default async function BlogPostPage({ params }: PageProps) {
               className="object-cover object-top"
             />
           </div>
-          <div className="space-y-2 text-center sm:text-left flex-1">
+          <div className="space-y-1.5 flex-1 text-center sm:text-left">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-              <h4 className="text-xl font-serif font-bold text-[#0F1E36]">{siteConfig.agentName}</h4>
-              <span className="text-xs text-[#7E6128] font-bold">{post.author.role}</span>
+              <h4 className="text-base font-serif font-bold text-ink">{siteConfig.agentName}</h4>
+              <span className="text-xs text-bronze font-semibold">{post.author.role}</span>
             </div>
-            <p className="text-xs text-slate-600 leading-relaxed font-light">
-              12 yıldır Antalya, Döşemealtı, Lara, Kaş ve Kalkan bölgelerinde lüks konut, müstakil villalar ve stratejik yatırımlar alanında MYK Seviye 5 lisansıyla hizmet vermektedir.
+            <p className="text-xs text-brand-muted leading-relaxed font-normal">
+              12 yıldır Antalya, Döşemealtı, Lara ve Kaş hattında lüks konut, müstakil villalar ve stratejik yatırımlar alanında MYK Seviye 5 lisansıyla hizmet vermektedir.
             </p>
-            <div className="pt-2 flex flex-wrap items-center justify-center sm:justify-start gap-4 text-xs font-semibold">
+            <div className="pt-2 flex flex-wrap items-center justify-center sm:justify-start gap-4 text-xs font-medium">
               <a
                 href={`tel:${siteConfig.phone}`}
-                className="text-[#0F1E36] hover:text-[#B89047] flex items-center gap-1.5"
+                className="text-ink hover:text-bronze flex items-center gap-1.5"
               >
-                <Phone className="w-3.5 h-3.5 text-[#B89047]" />
+                <Phone className="w-3.5 h-3.5 text-bronze" />
                 <span>{siteConfig.phoneDisplay}</span>
               </a>
-              <span className="text-slate-300">•</span>
+              <span className="text-limestone">•</span>
               <a
                 href={siteConfig.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#C13584] hover:opacity-80"
+                className="text-pink-700 hover:opacity-80"
               >
                 {siteConfig.instagramHandle}
               </a>
@@ -218,13 +215,13 @@ export default async function BlogPostPage({ params }: PageProps) {
           </div>
         </div>
 
-        {/* Navigation Back */}
-        <div className="mt-12 text-center">
+        {/* Back Link */}
+        <div className="mt-10 text-center">
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-600 hover:text-[#0F1E36] transition-colors py-3 px-6 rounded-xl border border-[#EAE6DF] bg-white hover:bg-[#FAF9F5] shadow-sm"
+            className="btn-secondary text-xs inline-flex items-center gap-2"
           >
-            <ArrowLeft className="w-4 h-4" />
+            <ArrowLeft className="w-4 h-4 text-bronze" />
             <span>Tüm Makalelere Dön</span>
           </Link>
         </div>

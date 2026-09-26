@@ -1,108 +1,159 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
-import { BookOpen, Calendar, Clock, ArrowRight, Sparkles } from 'lucide-react';
+import Image from 'next/image';
+import { ArrowRight, Clock, Calendar } from 'lucide-react';
 import { blogPosts } from '@/data/blogPosts';
 
 export default function BlogSection() {
-  const topArticles = blogPosts.slice(0, 3);
+  const featuredPost = blogPosts.find((p) => p.featured) || blogPosts[0];
+  const secondaryPosts = blogPosts.filter((p) => p.slug !== featuredPost.slug).slice(0, 2);
 
   return (
-    <section className="py-24 bg-[#FAF9F5] text-slate-800 relative">
-      <div className="editorial-divider mb-16" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-20 lg:py-28 bg-paper border-t border-limestone/50">
+      <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
-          <div>
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#DFC596] text-[#7E6128] text-xs font-bold tracking-widest uppercase mb-4 shadow-sm">
-              <Sparkles className="w-3.5 h-3.5 text-[#B89047]" />
-              Piyasa Analizleri & Yatırım Bülteni
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 text-left">
+          <div className="max-w-2xl">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="w-5 h-px bg-bronze" />
+              <span className="text-xs font-semibold uppercase tracking-widest text-bronze">
+                Piyasa Raporları & Analizler
+              </span>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-serif font-bold text-[#0F1E36] tracking-tight leading-tight">
-              Akdeniz Gayrimenkul <br className="hidden sm:inline" />
-              <span className="gold-gradient-text italic font-normal">Piyasa Raporları</span>
+
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-ink leading-tight mb-3">
+              Antalya Gayrimenkul İçgörüleri
             </h2>
-            <p className="text-slate-500 text-xs sm:text-sm mt-2 max-w-xl font-light">
-              Döşemealtı villa fiyat dinamikleri, Türk Vatandaşlığı alım mevzuatı ve döviz bazlı kira amortismanı üzerine Ayşe Nane’den güncel analizler.
+
+            <p className="text-xs sm:text-sm text-brand-muted leading-relaxed font-normal">
+              Fiyat trendleri, bölgesel amortisman süreleri, hukuki düzenlemeler ve yatırım stratejilerine dair güncel yazılar.
             </p>
           </div>
 
-          <div className="shrink-0">
-            <Link
-              href="/blog"
-              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider px-6 py-3.5 rounded-xl border border-[#EAE6DF] hover:border-[#B89047] bg-white text-[#0F1E36] hover:bg-[#F4F1EA] transition-all shadow-sm"
-            >
-              <span>Tüm 5 Makaleyi Görüntüle</span>
-              <ArrowRight className="w-4 h-4 text-[#B89047]" />
-            </Link>
-          </div>
+          <Link
+            href="/blog"
+            className="btn-secondary text-xs shrink-0 self-start md:self-end"
+          >
+            <span>Tüm Makaleleri Gör ({blogPosts.length})</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
         </div>
 
-        {/* 3 Articles Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {topArticles.map((post) => (
-            <article
-              key={post.slug}
-              className="group bg-white rounded-3xl overflow-hidden border border-[#EAE6DF] hover:border-[#DFC596] shadow-[0_10px_30px_rgba(15,30,54,0.06)] hover:shadow-[0_20px_45px_rgba(15,30,54,0.12)] transition-all duration-500 flex flex-col justify-between hover:-translate-y-1.5"
-            >
-              <div>
-                <div className="relative h-60 w-full overflow-hidden bg-slate-100">
-                  <Image
-                    src={post.coverImage}
-                    alt={post.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover object-center group-hover:scale-108 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0F1E36]/80 via-transparent to-transparent" />
-                  <div className="absolute top-4 left-4 z-10">
-                    <span className="px-3.5 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest bg-white/95 text-[#7E6128] border border-[#DFC596] shadow-sm backdrop-blur-md">
-                      {post.category}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-6 space-y-3">
-                  <div className="flex items-center gap-3 text-[11px] text-slate-400 font-medium">
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-3 h-3 text-[#B89047]" /> {post.readTime}
-                    </span>
-                    <span>•</span>
-                    <span className="flex items-center gap-1">
-                      <Calendar className="w-3 h-3 text-[#B89047]" /> {post.publishDate}
-                    </span>
-                  </div>
-
-                  <Link href={`/blog/${post.slug}`}>
-                    <h3 className="text-lg font-serif font-bold text-[#0F1E36] group-hover:text-[#B89047] transition-colors leading-snug line-clamp-2">
-                      {post.title}
-                    </h3>
-                  </Link>
-
-                  <p className="text-xs text-slate-500 line-clamp-3 leading-relaxed font-light">
-                    {post.summary}
-                  </p>
+        {/* Editorial Layout: 1 Major Feature + 2 Secondary Columns */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+          {/* Major Lead Article (7 cols) */}
+          <div className="lg:col-span-7 editorial-card overflow-hidden bg-white flex flex-col justify-between group">
+            <Link href={`/blog/${featuredPost.slug}`} className="block">
+              <div className="relative h-64 sm:h-80 w-full overflow-hidden bg-ivory">
+                <Image
+                  src={featuredPost.coverImage}
+                  alt={featuredPost.title}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 60vw"
+                  className="object-cover object-center transition-transform duration-500 group-hover:scale-102"
+                />
+                <div className="absolute top-4 left-4">
+                  <span className="px-3 py-1 rounded bg-paper/95 text-xs font-semibold text-ink border border-limestone/60">
+                    {featuredPost.category}
+                  </span>
                 </div>
               </div>
+            </Link>
 
-              <div className="p-6 pt-0 border-t border-slate-100 flex items-center justify-between">
-                <span className="text-[11px] font-medium text-slate-500">
-                  Yazar: <strong className="text-[#0F1E36]">{post.author.name}</strong>
-                </span>
+            <div className="p-6 sm:p-8 flex flex-col justify-between flex-1 space-y-4">
+              <div className="space-y-3">
+                <div className="flex items-center gap-4 text-xs text-brand-muted">
+                  <span className="flex items-center gap-1.5">
+                    <Calendar className="w-3.5 h-3.5 text-bronze" />
+                    <span>{featuredPost.publishDate}</span>
+                  </span>
+                  <span>•</span>
+                  <span className="flex items-center gap-1.5">
+                    <Clock className="w-3.5 h-3.5 text-bronze" />
+                    <span>{featuredPost.readTime}</span>
+                  </span>
+                </div>
+
+                <Link href={`/blog/${featuredPost.slug}`}>
+                  <h3 className="text-xl sm:text-2xl font-serif font-bold text-ink leading-snug group-hover:text-bronze transition-colors">
+                    {featuredPost.title}
+                  </h3>
+                </Link>
+
+                <p className="text-xs sm:text-sm text-brand-muted leading-relaxed font-normal line-clamp-3">
+                  {featuredPost.summary}
+                </p>
+              </div>
+
+              <div className="pt-4 border-t border-limestone/40 flex items-center justify-between">
+                <div className="flex items-center gap-2.5">
+                  <div className="relative w-8 h-8 rounded-full overflow-hidden border border-limestone">
+                    <Image
+                      src={featuredPost.author.image}
+                      alt={featuredPost.author.name}
+                      fill
+                      sizes="32px"
+                      className="object-cover object-top"
+                    />
+                  </div>
+                  <div>
+                    <p className="font-serif font-bold text-xs text-ink">{featuredPost.author.name}</p>
+                    <p className="text-[10px] text-brand-muted">{featuredPost.author.role}</p>
+                  </div>
+                </div>
 
                 <Link
-                  href={`/blog/${post.slug}`}
-                  className="text-xs font-bold text-[#B89047] hover:text-[#7E6128] flex items-center gap-1 transition-colors"
+                  href={`/blog/${featuredPost.slug}`}
+                  className="text-xs font-semibold text-bronze hover:text-ink flex items-center gap-1"
                 >
-                  <span>Oku</span>
+                  <span>Yazıyı Oku</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
-            </article>
-          ))}
+            </div>
+          </div>
+
+          {/* 2 Secondary Articles (5 cols) */}
+          <div className="lg:col-span-5 flex flex-col justify-between gap-6">
+            {secondaryPosts.map((post) => (
+              <div
+                key={post.slug}
+                className="editorial-card p-6 bg-white flex flex-col justify-between flex-1 group"
+              >
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between text-xs text-brand-muted">
+                    <span className="px-2.5 py-0.5 rounded bg-ivory text-[11px] font-semibold text-brand-text border border-limestone/50">
+                      {post.category}
+                    </span>
+                    <span className="text-[11px]">{post.readTime}</span>
+                  </div>
+
+                  <Link href={`/blog/${post.slug}`}>
+                    <h4 className="text-lg font-serif font-bold text-ink leading-snug group-hover:text-bronze transition-colors">
+                      {post.title}
+                    </h4>
+                  </Link>
+
+                  <p className="text-xs text-brand-muted leading-relaxed line-clamp-2">
+                    {post.summary}
+                  </p>
+                </div>
+
+                <div className="pt-4 mt-4 border-t border-limestone/30 flex items-center justify-between text-xs">
+                  <span className="text-brand-muted text-[11px]">{post.publishDate}</span>
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="font-semibold text-bronze hover:text-ink flex items-center gap-1"
+                  >
+                    <span>İncele</span>
+                    <ArrowRight className="w-3 h-3" />
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

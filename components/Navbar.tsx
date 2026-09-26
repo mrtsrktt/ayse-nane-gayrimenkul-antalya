@@ -3,13 +3,14 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Phone, MessageCircle, Menu, X, ShieldCheck, Globe, Instagram, Lock } from 'lucide-react';
+import { Phone, MessageCircle, Menu, X, ChevronDown } from 'lucide-react';
 import { siteConfig } from '@/data/siteConfig';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [language, setLanguage] = useState<'TR' | 'EN' | 'RU'>('TR');
+  const [langMenuOpen, setLangMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,100 +23,40 @@ export default function Navbar() {
   const navLinks = [
     { name: 'Portföy', href: '/#portfoy' },
     { name: 'Bölgeler', href: '/#bolgeler' },
-    { name: 'Mülk Değerleme', href: '/#degerleme' },
-    { name: 'Yatırım Getirisi', href: '/#yatirim-hesapla' },
-    { name: 'Blog', href: '/blog' },
-    { name: 'Ekip & CRM', href: '/ekip', isLock: true },
+    { name: 'Hizmetler', href: '/#degerleme' },
     { name: 'Hakkımda', href: '/#hakkimda' },
+    { name: 'İçgörüler', href: '/blog' },
     { name: 'İletişim', href: '/#iletisim' },
   ];
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-      {/* Top Warm Stone Bar */}
-      <div className="bg-[#F4F1EA] text-[#475569] text-xs border-b border-[#EAE6DF] py-1.5 sm:py-2 px-3 sm:px-8">
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
-          <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#EAE6DF] text-[#7E6128] text-[10px] sm:text-xs font-bold border border-[#DFC596]">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#B89047]" />
-              MYK-5 Lisanslı Danışman
-            </span>
-            <span className="hidden md:inline text-slate-300">|</span>
-            <span className="hidden md:inline text-[#0F1E36] font-medium text-xs">
-              Antalya Lüks Konut & Yatırım Danışmanlığı
-            </span>
-          </div>
-
-          <div className="flex items-center gap-3 sm:gap-5 ml-auto">
-            {/* Instagram Profile */}
-            <a
-              href={siteConfig.instagramUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1 text-[#475569] hover:text-[#C13584] transition-colors"
-              title="Ayşe Nane Instagram"
-            >
-              <Instagram className="w-3.5 h-3.5 text-[#C13584]" />
-              <span className="hidden md:inline font-medium text-xs">{siteConfig.instagramHandle}</span>
-            </a>
-
-            {/* Direct Call */}
-            <a
-              href={`tel:${siteConfig.phone}`}
-              className="flex items-center gap-1 text-[#0F1E36] hover:text-[#B89047] font-semibold transition-colors text-xs"
-            >
-              <Phone className="w-3.5 h-3.5 text-[#B89047]" />
-              <span className="hidden sm:inline">{siteConfig.phoneDisplay}</span>
-              <span className="sm:hidden font-bold">Ara</span>
-            </a>
-
-            {/* Language Switcher */}
-            <div className="flex items-center gap-0.5 sm:gap-1 bg-white rounded-lg border border-[#EAE6DF] px-1 sm:px-1.5 py-0.5 shadow-sm">
-              <Globe className="w-3 h-3 text-[#B89047]" />
-              {(['TR', 'EN', 'RU'] as const).map((lang) => (
-                <button
-                  key={lang}
-                  onClick={() => setLanguage(lang)}
-                  className={`text-[9px] sm:text-[10px] px-1 sm:px-1.5 py-0.5 rounded transition-all font-semibold ${
-                    language === lang
-                      ? 'bg-[#B89047] text-white'
-                      : 'text-slate-500 hover:text-[#0F1E36]'
-                  }`}
-                >
-                  {lang}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Navbar */}
       <div
-        className={`transition-all duration-300 px-3 sm:px-8 ${
+        className={`transition-all duration-300 border-b ${
           scrolled
-            ? 'bg-white/95 backdrop-blur-xl shadow-lg py-2.5 sm:py-3.5 border-b border-[#EAE6DF]'
-            : 'bg-white/90 backdrop-blur-md py-3 sm:py-5 border-b border-[#EAE6DF]/60 shadow-sm'
+            ? 'bg-paper/95 backdrop-blur-md border-limestone/60 py-3 shadow-[0_2px_12px_rgba(16,28,44,0.03)]'
+            : 'bg-paper/90 backdrop-blur-sm border-limestone/40 py-4'
         }`}
       >
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          {/* Brand Logo with Ayşe Hanım Portrait */}
-          <Link href="/" className="group flex items-center gap-2.5 sm:gap-3">
-            <div className="relative w-9 h-9 sm:w-11 sm:h-11 rounded-full border-2 border-[#B89047] overflow-hidden shadow-sm group-hover:scale-105 transition-transform shrink-0">
+        <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+          {/* Brand Logo & Subtle Consultant Mark */}
+          <Link href="/" className="group flex items-center gap-3">
+            <div className="relative w-9 h-9 rounded-full overflow-hidden border border-limestone shrink-0 transition-transform group-hover:scale-105">
               <Image
                 src="/ayse-nane.jpg"
                 alt="Ayşe Nane"
                 fill
                 priority
+                sizes="36px"
                 className="object-cover object-top"
               />
             </div>
-            <div>
-              <span className="block font-serif text-lg sm:text-2xl font-bold tracking-wider text-[#0F1E36] group-hover:text-[#B89047] transition-colors leading-tight">
+            <div className="flex flex-col">
+              <span className="font-serif text-lg tracking-tight font-bold text-ink leading-tight">
                 AYŞE NANE
               </span>
-              <span className="block text-[9px] sm:text-[10px] tracking-[0.2em] sm:tracking-[0.25em] uppercase text-[#B89047] font-semibold">
-                Gayrimenkul & Yatırım
+              <span className="text-[10px] tracking-widest uppercase text-brand-muted font-medium">
+                Antalya Gayrimenkul
               </span>
             </div>
           </Link>
@@ -126,118 +67,136 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-xs font-semibold uppercase tracking-wider text-[#475569] hover:text-[#B89047] transition-colors relative py-1 flex items-center gap-1.5"
+                className="text-xs font-medium tracking-wide text-brand-text hover:text-bronze transition-colors py-1 relative"
               >
-                <span>{link.name}</span>
-                {link.isLock && (
-                  <span className="inline-flex items-center gap-1 text-[9px] bg-[#F4F1EA] text-[#7E6128] border border-[#DFC596] px-1.5 py-0.5 rounded-full font-bold">
-                    <Lock className="w-2.5 h-2.5 text-[#B89047]" /> CRM
-                  </span>
-                )}
+                {link.name}
               </Link>
             ))}
           </nav>
 
-          {/* Action Buttons */}
-          <div className="hidden sm:flex items-center gap-3">
-            <a
-              href="#degerleme"
-              className="text-xs uppercase tracking-wider font-bold px-4 py-2.5 rounded-xl border border-[#B89047] text-[#7E6128] bg-[#FDFCF9] hover:bg-[#F4F1EA] transition-all"
-            >
-              Mülk Değerleme
-            </a>
+          {/* Desktop Action Area */}
+          <div className="hidden lg:flex items-center gap-4">
+            {/* Language Selector Dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => setLangMenuOpen(!langMenuOpen)}
+                className="flex items-center gap-1 text-xs font-semibold text-brand-muted hover:text-ink px-2 py-1 rounded transition-colors"
+                aria-expanded={langMenuOpen}
+              >
+                <span>{language}</span>
+                <ChevronDown className="w-3 h-3 text-limestone" />
+              </button>
+
+              {langMenuOpen && (
+                <div className="absolute right-0 mt-1 py-1 w-20 bg-white border border-limestone rounded-lg shadow-lg z-50">
+                  {(['TR', 'EN', 'RU'] as const).map((lang) => (
+                    <button
+                      key={lang}
+                      onClick={() => {
+                        setLanguage(lang);
+                        setLangMenuOpen(false);
+                      }}
+                      className={`block w-full text-left px-3 py-1 text-xs font-semibold ${
+                        language === lang ? 'text-bronze bg-ivory' : 'text-brand-muted hover:text-ink'
+                      }`}
+                    >
+                      {lang}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Direct Phone / WhatsApp action */}
             <a
               href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(
-                'Merhaba Ayşe Hanım, Antalya gayrimenkul portföyünüz ve danışmanlık hizmetleriniz hakkında bilgi almak istiyorum.'
+                'Merhaba Ayşe Hanım, Antalya gayrimenkul portföyünüz hakkında bilgi almak istiyorum.'
               )}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="gold-gradient-button text-xs uppercase tracking-wider font-bold px-4 py-2.5 rounded-xl flex items-center gap-2 shadow-md hover:scale-105 transition-transform"
+              className="text-xs font-medium text-brand-muted hover:text-ink flex items-center gap-1.5 transition-colors"
             >
-              <MessageCircle className="w-4 h-4" />
-              <span>WhatsApp Hattı</span>
+              <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
+              <span>WhatsApp</span>
+            </a>
+
+            {/* Primary Action Button */}
+            <a
+              href="#degerleme"
+              className="btn-primary"
+            >
+              Mülk Değerleme
             </a>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 rounded-xl text-[#0F1E36] hover:bg-[#F4F1EA] transition-colors"
-            aria-label="Menüyü Aç"
-          >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          {/* Mobile Menu Toggle Button */}
+          <div className="flex items-center gap-2 lg:hidden">
+            <a
+              href={`tel:${siteConfig.phone}`}
+              className="p-2 text-ink hover:text-bronze transition-colors"
+              aria-label="Telefonla Ara"
+            >
+              <Phone className="w-4 h-4 text-bronze" />
+            </a>
+
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 text-ink hover:text-bronze rounded-lg transition-colors"
+              aria-label="Menü"
+              aria-expanded={mobileMenuOpen}
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Menu Panel */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-white/98 backdrop-blur-2xl border-b border-[#EAE6DF] px-5 py-5 transition-all shadow-2xl">
-          {/* Mobile Drawer Consultant Spotlight */}
-          <div className="flex items-center gap-3.5 p-3.5 bg-[#FAF9F5] rounded-2xl border border-[#DFC596] mb-4">
-            <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-[#B89047] shrink-0">
-              <Image
-                src="/ayse-nane.jpg"
-                alt="Ayşe Nane"
-                fill
-                className="object-cover object-top"
-              />
-            </div>
-            <div className="flex-1 min-w-0">
-              <div className="flex items-center gap-1.5">
-                <span className="font-serif font-bold text-sm text-[#0F1E36]">Ayşe Nane</span>
-                <span className="text-[9px] bg-[#F4F1EA] text-[#7E6128] border border-[#DFC596] px-1.5 py-0.5 rounded-full font-bold">
-                  MYK-5
-                </span>
-              </div>
-              <p className="text-[11px] text-[#7E6128] font-medium truncate">
-                Lüks Konut & Yatırım Danışmanı
-              </p>
-            </div>
-            <a
-              href={`tel:${siteConfig.phone}`}
-              className="p-2.5 rounded-xl bg-white border border-[#EAE6DF] text-[#0F1E36] hover:bg-[#F4F1EA] shadow-sm shrink-0"
-              title="Telefonla Ara"
-            >
-              <Phone className="w-4 h-4 text-[#B89047]" />
-            </a>
-          </div>
-
-          <div className="flex flex-col gap-3">
+        <div className="lg:hidden bg-paper/98 backdrop-blur-xl border-b border-limestone px-6 py-6 transition-all shadow-xl">
+          <div className="flex flex-col gap-4">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-sm font-semibold text-[#0F1E36] hover:text-[#B89047] py-2 border-b border-slate-100 flex items-center justify-between"
+                className="text-sm font-medium text-brand-text hover:text-bronze py-2 border-b border-limestone/30 flex items-center justify-between"
               >
                 <span>{link.name}</span>
-                {link.isLock && (
-                  <span className="inline-flex items-center gap-1 text-[10px] bg-[#F4F1EA] text-[#7E6128] border border-[#DFC596] px-2 py-0.5 rounded-full font-bold">
-                    <Lock className="w-2.5 h-2.5" /> Danışman Portalı
-                  </span>
-                )}
               </Link>
             ))}
-            <div className="pt-4 flex flex-col gap-3">
+
+            <div className="pt-2 flex flex-col gap-3">
               <a
                 href="#degerleme"
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-center text-xs uppercase tracking-wider font-bold px-4 py-3 rounded-xl border border-[#B89047] text-[#7E6128] bg-[#FDFCF9]"
+                className="btn-primary w-full text-center"
               >
-                Ücretsiz Mülk Değerleme Formu
+                Ücretsiz Mülk Değerleme
               </a>
-              <a
-                href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(
-                  'Merhaba Ayşe Hanım, portföyünüz hakkında bilgi almak istiyorum.'
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="gold-gradient-button text-center text-xs uppercase tracking-wider font-bold px-4 py-3 rounded-xl flex items-center justify-center gap-2"
-              >
-                <MessageCircle className="w-4 h-4" />
-                <span>WhatsApp İle İletişime Geç</span>
-              </a>
+
+              <div className="flex items-center justify-between pt-2 text-xs text-brand-muted">
+                <a
+                  href={`tel:${siteConfig.phone}`}
+                  className="font-medium text-brand-text hover:text-bronze"
+                >
+                  {siteConfig.phoneDisplay}
+                </a>
+
+                <div className="flex items-center gap-2">
+                  {(['TR', 'EN', 'RU'] as const).map((lang) => (
+                    <button
+                      key={lang}
+                      onClick={() => setLanguage(lang)}
+                      className={`text-xs px-2 py-0.5 rounded font-semibold ${
+                        language === lang ? 'text-bronze font-bold' : 'text-brand-muted'
+                      }`}
+                    >
+                      {lang}
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>

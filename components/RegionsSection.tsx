@@ -1,15 +1,20 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
-import { MapPin, TrendingUp, Sparkles, ArrowRight } from 'lucide-react';
-import { regionsData } from '@/data/regions';
+import { ArrowRight, MapPin, Compass } from 'lucide-react';
+import { regionsData, RegionGuide } from '@/data/regions';
 
 interface RegionsSectionProps {
   onSelectRegion: (regionName: string) => void;
 }
 
 export default function RegionsSection({ onSelectRegion }: RegionsSectionProps) {
+  const [featuredRegionId, setFeaturedRegionId] = useState('dosemealti');
+
+  const featuredRegion = regionsData.find((r) => r.id === featuredRegionId) || regionsData[0];
+  const otherRegions = regionsData.filter((r) => r.id !== featuredRegionId);
+
   const handleRegionClick = (name: string) => {
     onSelectRegion(name);
     const el = document.getElementById('portfoy');
@@ -19,97 +24,143 @@ export default function RegionsSection({ onSelectRegion }: RegionsSectionProps) 
   };
 
   return (
-    <section id="bolgeler" className="py-24 bg-[#FAF9F5] text-slate-800 relative">
-      <div className="editorial-divider mb-16" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#DFC596] text-[#7E6128] text-xs font-bold tracking-widest uppercase mb-4 shadow-sm">
-            <Sparkles className="w-3.5 h-3.5 text-[#B89047]" />
-            Bölgesel Yatırım & Yaşam Atlası
+    <section id="bolgeler" className="py-20 lg:py-28 bg-ivory/50 border-t border-limestone/50">
+      <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="max-w-2xl mb-12 text-left">
+          <div className="flex items-center gap-2 mb-3">
+            <span className="w-5 h-px bg-bronze" />
+            <span className="text-xs font-semibold uppercase tracking-widest text-bronze">
+              Bölgesel Yaşam & Mikro-Piyasa Rehberi
+            </span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-serif font-bold text-[#0F1E36] tracking-tight leading-tight mb-4">
-            Antalya’nın En Değerli <br className="hidden sm:inline" />
-            <span className="gold-gradient-text italic font-normal">Mikro-Yatırım Havzaları</span>
+
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-ink leading-tight mb-4">
+            Antalya’nın Öne Çıkan Yaşam Havzaları
           </h2>
-          <p className="text-slate-500 text-sm sm:text-base leading-relaxed">
-            Her bölgenin kendine has mimarisi, döviz getiri dinamikleri ve yaşam ritmi vardır. Doğru mikromarketi seçmek yatırımınızın değerini katlar.
+
+          <p className="text-sm sm:text-base text-brand-muted leading-relaxed font-normal">
+            Her bölgenin kendine has mimari karakteri, yaşam ritmi ve getiri dinamikleri bulunur. İhtiyacınıza en uygun lokasyonu keşfedin.
           </p>
         </div>
 
-        {/* Regions Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {regionsData.map((region) => (
-            <div
-              key={region.id}
-              className="group bg-white rounded-3xl overflow-hidden border border-[#EAE6DF] hover:border-[#B89047]/60 shadow-[0_10px_30px_rgba(15,30,54,0.06)] hover:shadow-[0_20px_45px_rgba(15,30,54,0.12)] transition-all duration-500 flex flex-col justify-between hover:-translate-y-1.5"
-            >
-              <div>
-                {/* Region Image */}
-                <div className="relative h-64 w-full overflow-hidden bg-slate-100">
-                  <Image
-                    src={region.image}
-                    alt={region.name}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover object-center group-hover:scale-108 transition-transform duration-1000"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0F1E36]/80 via-transparent to-transparent" />
+        {/* Editorial Layout: Large Featured Region + Compact Regional Grid */}
+        <div className="space-y-8">
+          {/* 1. Large Featured Region Showcase */}
+          <div className="editorial-card overflow-hidden bg-white border border-limestone/60 grid grid-cols-1 lg:grid-cols-12">
+            <div className="lg:col-span-7 relative h-72 sm:h-96 lg:h-full min-h-[320px] bg-paper">
+              <Image
+                src={featuredRegion.image}
+                alt={featuredRegion.name}
+                fill
+                sizes="(max-width: 1024px) 100vw, 60vw"
+                className="object-cover object-center"
+              />
+              <div className="absolute top-4 left-4">
+                <span className="px-3 py-1 rounded bg-paper/95 text-xs font-semibold text-ink border border-limestone/60">
+                  Öne Çıkan Bölge
+                </span>
+              </div>
+            </div>
 
-                  {/* Top Badge */}
-                  <div className="absolute top-4 left-4 z-10">
-                    <span className="px-3.5 py-1.5 rounded-full text-[11px] font-bold tracking-widest uppercase bg-white/95 text-[#7E6128] border border-[#DFC596] shadow-sm backdrop-blur-md">
-                      {region.propertyCount} Özel Portföy
-                    </span>
-                  </div>
-
-                  {/* Bottom Title on Image */}
-                  <div className="absolute bottom-4 left-4 right-4 z-10">
-                    <h3 className="text-2xl font-serif font-bold text-white mb-0.5 drop-shadow-md">
-                      {region.name}
-                    </h3>
-                    <p className="text-xs text-white/90 font-medium line-clamp-1">
-                      {region.tagline}
-                    </p>
-                  </div>
+            <div className="lg:col-span-5 p-6 sm:p-10 flex flex-col justify-between space-y-6">
+              <div className="space-y-4">
+                <div className="flex items-center gap-2 text-xs text-brand-muted">
+                  <MapPin className="w-3.5 h-3.5 text-bronze" />
+                  <span className="font-semibold text-ink">{featuredRegion.name}</span>
+                  <span>•</span>
+                  <span>{featuredRegion.propertyCount} Aktif Portföy</span>
                 </div>
 
-                {/* Content & Metrics */}
-                <div className="p-6 space-y-4">
-                  <p className="text-xs text-slate-500 leading-relaxed line-clamp-3">
-                    {region.description}
-                  </p>
+                <h3 className="text-2xl sm:text-3xl font-serif font-bold text-ink leading-snug">
+                  {featuredRegion.tagline}
+                </h3>
 
-                  <div className="grid grid-cols-2 gap-3 py-3 px-3.5 bg-[#FAF9F5] rounded-2xl border border-[#EAE6DF] text-xs">
-                    <div>
-                      <span className="text-[10px] text-slate-400 uppercase tracking-wider block">Değer Artış Trendi</span>
-                      <span className="font-bold text-[#0F1E36] mt-0.5 flex items-center gap-1">
-                        <TrendingUp className="w-3.5 h-3.5 text-emerald-600" /> {region.averagePriceTrend}
+                <p className="text-xs sm:text-sm text-brand-muted leading-relaxed">
+                  {featuredRegion.description}
+                </p>
+
+                <div className="space-y-2 pt-2">
+                  <span className="text-[11px] font-bold text-brand-text uppercase tracking-wider block">
+                    Bölgesel Karakteristik
+                  </span>
+                  <div className="flex flex-wrap gap-2">
+                    {featuredRegion.highlights.map((h, i) => (
+                      <span
+                        key={i}
+                        className="px-2.5 py-1 rounded bg-ivory text-xs text-brand-text border border-limestone/50"
+                      >
+                        {h}
                       </span>
-                    </div>
-                    <div>
-                      <span className="text-[10px] text-slate-400 uppercase tracking-wider block">Yaşam Stili</span>
-                      <span className="font-bold text-[#7E6128] mt-0.5 truncate block">
-                        {region.lifestyle}
-                      </span>
-                    </div>
+                    ))}
                   </div>
                 </div>
               </div>
 
-              {/* Action Button */}
-              <div className="p-6 pt-0">
+              <div className="pt-4 border-t border-limestone/40 flex items-center justify-between">
+                <div>
+                  <span className="text-[11px] text-brand-muted block">Yaşam Ritmi</span>
+                  <span className="text-xs font-semibold text-ink">{featuredRegion.lifestyle}</span>
+                </div>
+
                 <button
-                  onClick={() => handleRegionClick(region.name)}
-                  className="w-full text-xs font-bold text-[#0F1E36] bg-[#F8F6F1] hover:bg-[#B89047] hover:text-white py-3 px-4 rounded-xl transition-all border border-[#EAE6DF] flex items-center justify-center gap-2 group-hover:border-[#B89047]"
+                  onClick={() => handleRegionClick(featuredRegion.name)}
+                  className="btn-primary text-xs"
                 >
-                  <span>{region.name} İlanlarını Filtrele</span>
-                  <ArrowRight className="w-4 h-4 text-[#B89047] group-hover:text-white transition-colors" />
+                  <span>Bölgeyi Portföyde Filtrele</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>
             </div>
-          ))}
+          </div>
+
+          {/* 2. Secondary Regions Row / Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            {regionsData.map((reg) => {
+              const isSelected = reg.id === featuredRegionId;
+              return (
+                <div
+                  key={reg.id}
+                  onClick={() => setFeaturedRegionId(reg.id)}
+                  className={`p-4 rounded-xl border transition-all cursor-pointer flex flex-col justify-between ${
+                    isSelected
+                      ? 'bg-white border-bronze shadow-[0_4px_16px_rgba(16,28,44,0.06)] ring-1 ring-bronze'
+                      : 'bg-white/80 border-limestone/60 hover:border-bronze/50 hover:bg-white'
+                  }`}
+                >
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <h4 className="font-serif font-bold text-base text-ink">{reg.name}</h4>
+                      <span className="text-[10px] text-brand-muted font-medium">
+                        {reg.propertyCount} İlan
+                      </span>
+                    </div>
+
+                    <p className="text-[11px] text-brand-muted line-clamp-2 leading-relaxed font-light">
+                      {reg.tagline}
+                    </p>
+                  </div>
+
+                  <div className="pt-3 mt-3 border-t border-limestone/30 flex items-center justify-between text-xs">
+                    <span className="text-[11px] text-bronze font-medium">
+                      {isSelected ? 'İnceleniyor' : 'Detayı Gör'}
+                    </span>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleRegionClick(reg.name);
+                      }}
+                      className="text-brand-muted hover:text-ink text-[11px] font-semibold flex items-center gap-1"
+                      title="Portföyü Filtrele"
+                    >
+                      <span>Filtrele</span>
+                      <ArrowRight className="w-3 h-3 text-bronze" />
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

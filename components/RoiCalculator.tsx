@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import { Calculator, TrendingUp, DollarSign, Clock, ShieldCheck, Sparkles, ArrowRight, MessageCircle } from 'lucide-react';
+import { Calculator, ArrowRight, MessageCircle } from 'lucide-react';
 import { siteConfig } from '@/data/siteConfig';
 
 export default function RoiCalculator() {
@@ -39,47 +39,48 @@ export default function RoiCalculator() {
     return `${new Intl.NumberFormat('tr-TR', { maximumFractionDigits: 0 }).format(val)} ${symbol}`;
   };
 
-  return (
-    <section id="yatirim-hesapla" className="py-24 bg-[#FAF9F5] text-slate-800 relative">
-      <div className="editorial-divider mb-16" />
+  const whatsappMessage = `Merhaba Ayşe Hanım, web sitenizdeki yatırım simülatöründe ${formatCurrency(priceInSelectedCurrency)} bütçe ve %${expectedRentalYieldPercent} kira getirisi için hesaplama yaptım. Bu kritere uygun Antalya portföy seçeneklerini görüşmek istiyorum.`;
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  return (
+    <section id="yatirim-hesapla" className="py-20 lg:py-28 bg-paper">
+      <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#DFC596] text-[#7E6128] text-xs font-bold tracking-widest uppercase mb-4 shadow-sm">
-            <Calculator className="w-3.5 h-3.5 text-[#B89047]" />
-            Finansal Cockpit & ROI Analizi
+        <div className="max-w-2xl mb-12 text-left">
+          <div className="flex items-center gap-2 mb-3">
+            <span className="w-5 h-px bg-bronze" />
+            <span className="text-xs font-semibold uppercase tracking-widest text-bronze">
+              Yatırım Analizi & Amortisman Simülatörü
+            </span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-serif font-bold text-[#0F1E36] tracking-tight leading-tight mb-4">
-            Antalya Gayrimenkul <br className="hidden sm:inline" />
-            <span className="gold-gradient-text italic font-normal">Yatırım ve Amortisman Simülatörü</span>
+
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-ink leading-tight mb-4">
+            Gayrimenkul Getiri Projeksiyonu
           </h2>
-          <p className="text-slate-500 text-sm sm:text-base leading-relaxed">
-            Seçtiğiniz mülk bütçesi için yıllık döviz bazlı kira getirisi, değer artışı ve 5 yıllık toplam sermaye projeksiyonunu anında hesaplayın.
+
+          <p className="text-sm sm:text-base text-brand-muted leading-relaxed font-normal">
+            Bütçenize uygun tahmini yıllık kira geliri, sermaye değer artışı ve amortisman süresini değişken parametrelerle simüle edin.
           </p>
         </div>
 
-        {/* Main Cockpit Container */}
-        <div className="bg-white rounded-3xl p-6 sm:p-10 border border-[#DFC596] shadow-[0_20px_50px_rgba(15,30,54,0.08)] grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          {/* Left Controls Column (6 cols) */}
+        {/* 2-Column Clean Cockpit */}
+        <div className="bg-white rounded-xl border border-limestone/60 p-6 sm:p-10 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+          {/* Controls (6 cols) */}
           <div className="lg:col-span-6 space-y-6">
             {/* Currency Selector */}
-            <div className="flex items-center justify-between pb-4 border-b border-slate-100">
-              <span className="text-xs font-bold text-slate-600 uppercase tracking-wider">
-                Hesaplama Para Birimi
-              </span>
-              <div className="flex items-center gap-1 bg-[#FAF9F5] p-1 rounded-xl border border-[#EAE6DF]">
+            <div className="flex items-center justify-between pb-4 border-b border-limestone/40">
+              <span className="text-xs font-semibold text-brand-text">Para Birimi</span>
+              <div className="flex items-center gap-1 bg-ivory p-1 rounded-lg border border-limestone/50">
                 {(['TRY', 'EUR', 'USD'] as const).map((curr) => (
                   <button
                     key={curr}
                     onClick={() => setCurrency(curr)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                    className={`px-3 py-1 rounded text-xs font-semibold transition-all ${
                       currency === curr
-                        ? 'gold-gradient-button text-white shadow-sm'
-                        : 'text-slate-500 hover:text-[#0F1E36]'
+                        ? 'bg-ink text-white shadow-sm'
+                        : 'text-brand-muted hover:text-ink'
                     }`}
                   >
-                    {curr === 'TRY' ? '₺ TL' : curr === 'EUR' ? '€ Euro' : '$ Dolar'}
+                    {curr === 'TRY' ? '₺ TRY' : curr === 'EUR' ? '€ EUR' : '$ USD'}
                   </button>
                 ))}
               </div>
@@ -88,10 +89,8 @@ export default function RoiCalculator() {
             {/* Slider 1: Purchase Price */}
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
-                  Mülk Alım Bütçesi
-                </label>
-                <span className="font-serif font-bold text-xl text-[#0F1E36]">
+                <label className="text-xs font-semibold text-brand-text">Mülk Alım Bütçesi</label>
+                <span className="font-serif font-bold text-lg text-ink">
                   {formatCurrency(priceInSelectedCurrency)}
                 </span>
               </div>
@@ -102,22 +101,20 @@ export default function RoiCalculator() {
                 step={1000000}
                 value={purchasePriceTRY}
                 onChange={(e) => setPurchasePriceTRY(Number(e.target.value))}
-                className="w-full h-2 bg-[#FAF9F5] rounded-lg appearance-none cursor-pointer accent-[#B89047]"
+                className="w-full h-1.5 bg-ivory rounded-lg appearance-none cursor-pointer accent-bronze"
               />
-              <div className="flex justify-between text-[10px] text-slate-400">
-                <span>5M ₺ (~130K €)</span>
-                <span>50M ₺ (~1.3M €)</span>
-                <span>150M ₺ (~3.9M €)</span>
+              <div className="flex justify-between text-[11px] text-brand-muted">
+                <span>5M ₺</span>
+                <span>50M ₺</span>
+                <span>150M ₺</span>
               </div>
             </div>
 
             {/* Slider 2: Rental Yield */}
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
-                  Beklenen Yıllık Kira Getirisi
-                </label>
-                <span className="font-serif font-bold text-xl text-[#B89047]">
+                <label className="text-xs font-semibold text-brand-text">Tahmini Yıllık Kira Getirisi</label>
+                <span className="font-serif font-bold text-lg text-bronze">
                   %{expectedRentalYieldPercent}
                 </span>
               </div>
@@ -128,22 +125,20 @@ export default function RoiCalculator() {
                 step={0.5}
                 value={expectedRentalYieldPercent}
                 onChange={(e) => setExpectedRentalYieldPercent(Number(e.target.value))}
-                className="w-full h-2 bg-[#FAF9F5] rounded-lg appearance-none cursor-pointer accent-[#B89047]"
+                className="w-full h-1.5 bg-ivory rounded-lg appearance-none cursor-pointer accent-bronze"
               />
-              <div className="flex justify-between text-[10px] text-slate-400">
-                <span>%4 (Uzun Dönem Standart)</span>
+              <div className="flex justify-between text-[11px] text-brand-muted">
+                <span>%4 (Standart Daire)</span>
                 <span>%8.5 (Lüks Rezidans)</span>
-                <span>%15 (Kalkan Sezonluk Villa)</span>
+                <span>%15 (Sezonluk Villa)</span>
               </div>
             </div>
 
             {/* Slider 3: Capital Growth */}
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
-                  Tahmini Yıllık Değer Artışı
-                </label>
-                <span className="font-serif font-bold text-xl text-emerald-700">
+                <label className="text-xs font-semibold text-brand-text">Tahmini Yıllık Sermaye Değer Artışı</label>
+                <span className="font-serif font-bold text-lg text-ink">
                   %{expectedAnnualCapitalGrowth}
                 </span>
               </div>
@@ -154,76 +149,75 @@ export default function RoiCalculator() {
                 step={1}
                 value={expectedAnnualCapitalGrowth}
                 onChange={(e) => setExpectedAnnualCapitalGrowth(Number(e.target.value))}
-                className="w-full h-2 bg-[#FAF9F5] rounded-lg appearance-none cursor-pointer accent-[#B89047]"
+                className="w-full h-1.5 bg-ivory rounded-lg appearance-none cursor-pointer accent-bronze"
               />
-              <div className="flex justify-between text-[10px] text-slate-400">
-                <span>%8 (Döviz Bazlı Muhafazakar)</span>
-                <span>%18 (Antalya Ortalaması)</span>
-                <span>%30 (Gelişen Bölgeler)</span>
+              <div className="flex justify-between text-[11px] text-brand-muted">
+                <span>%8 (Döviz Bazlı)</span>
+                <span>%18 (Bölge Ortalaması)</span>
+                <span>%30 (Yüksek Prim)</span>
               </div>
             </div>
           </div>
 
-          {/* Right Results Column (6 cols) */}
-          <div className="lg:col-span-6 bg-[#FAF9F5] p-6 sm:p-8 rounded-2xl border border-[#EAE6DF] space-y-6">
-            <h3 className="text-sm font-bold uppercase tracking-wider text-slate-500 pb-3 border-b border-[#EAE6DF]">
-              Finansal Projeksiyon & Getiri Özeti
-            </h3>
+          {/* Results Summary (6 cols) */}
+          <div className="lg:col-span-6 bg-ivory/70 rounded-xl p-6 sm:p-8 border border-limestone/60 flex flex-col justify-between space-y-6">
+            <div>
+              <span className="text-[11px] font-bold text-bronze uppercase tracking-wider block mb-1">
+                5 Yıllık Kümülatif Projeksiyon
+              </span>
+              <div className="text-3xl sm:text-4xl font-serif font-bold text-ink mb-1">
+                +{formatCurrency(total5YearGain)}
+              </div>
+              <p className="text-xs text-brand-muted">
+                Toplam 5 yıllık kira getirisi ve sermaye değer kazancı tahmini
+              </p>
+            </div>
 
-            {/* Key KPI Cards */}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="p-4 rounded-xl bg-white border border-[#EAE6DF] shadow-sm">
-                <span className="text-[10px] uppercase font-bold text-slate-400 block mb-1">
-                  Aylık Tahmini Kira
-                </span>
-                <span className="text-xl sm:text-2xl font-serif font-bold text-[#0F1E36]">
+            <div className="grid grid-cols-2 gap-4 py-4 border-y border-limestone/50 text-xs">
+              <div>
+                <span className="text-brand-muted block text-[11px]">Aylık Kira Getirisi</span>
+                <span className="font-serif font-bold text-base text-ink block mt-0.5">
                   {formatCurrency(monthlyRentalIncome)}
                 </span>
               </div>
 
-              <div className="p-4 rounded-xl bg-white border border-[#EAE6DF] shadow-sm">
-                <span className="text-[10px] uppercase font-bold text-slate-400 block mb-1">
-                  Amortisman Süresi
+              <div>
+                <span className="text-brand-muted block text-[11px]">Yıllık Kira Geliri</span>
+                <span className="font-serif font-bold text-base text-ink block mt-0.5">
+                  {formatCurrency(annualRentalIncome)}
                 </span>
-                <span className="text-xl sm:text-2xl font-serif font-bold text-[#B89047]">
+              </div>
+
+              <div>
+                <span className="text-brand-muted block text-[11px]">Tahmini Amortisman</span>
+                <span className="font-serif font-bold text-base text-ink block mt-0.5">
                   {paybackYears.toFixed(1)} Yıl
                 </span>
               </div>
-            </div>
 
-            {/* 5-Year Projection Banner */}
-            <div className="p-5 rounded-2xl bg-white border border-[#DFC596] shadow-sm space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-slate-600 uppercase tracking-wider">
-                  5 Yıl Sonraki Tahmini Mülk Değeri
-                </span>
-                <span className="font-serif font-bold text-xl text-[#0F1E36]">
+              <div>
+                <span className="text-brand-muted block text-[11px]">5. Yıl Mülk Değeri</span>
+                <span className="font-serif font-bold text-base text-ink block mt-0.5">
                   {formatCurrency(futureValue5Years)}
                 </span>
               </div>
-
-              <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
-                <span className="text-slate-500">5 Yıllık Net Kazanç (Kira + Değerleme):</span>
-                <span className="font-bold text-emerald-700 text-sm">
-                  + {formatCurrency(total5YearGain)}
-                </span>
-              </div>
             </div>
 
-            {/* CTA */}
-            <a
-              href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(
-                `Merhaba Ayşe Hanım, web sitenizdeki yatırım hesaplayıcısında ${formatCurrency(
-                  priceInSelectedCurrency
-                )} bütçe için projeksiyon oluşturdum. Bu bütçeye uygun portföy önerilerinizi görüşmek istiyorum.`
-              )}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full gold-gradient-button text-xs font-bold uppercase tracking-wider py-4 rounded-xl flex items-center justify-center gap-2 shadow-md hover:scale-102 transition-transform"
-            >
-              <MessageCircle className="w-4 h-4" />
-              <span>Bu Bütçeye Uygun Portföyleri WhatsApp’tan İste</span>
-            </a>
+            <div className="space-y-4">
+              <p className="text-[11px] text-brand-muted italic leading-relaxed">
+                * Not: Hesaplamalar geçmiş bölge verilerine dayalı tahmini simülasyonlardır. Vergilendirme, tapu harcı ve bakım giderlerine göre net rakamlar değişebilir; kesin taahhüt niteliği taşımaz.
+              </p>
+
+              <a
+                href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full btn-primary text-xs py-3 text-center"
+              >
+                <span>Özel Yatırım Fizibilitesi Talep Edin</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </a>
+            </div>
           </div>
         </div>
       </div>

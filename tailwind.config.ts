@@ -13,43 +13,65 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        sand: {
-          50: '#FDFCFB',
-          100: '#FAF9F5',
-          200: '#F4F1EA',
-          300: '#EAE6DF',
-          400: '#D5CFC5',
-          500: '#B8B0A2',
+        ink: {
+          DEFAULT: '#101C2C',
+          50: '#F0F3F7',
+          100: '#D9E0E8',
+          200: '#B0C0D1',
+          800: '#182538',
+          900: '#101C2C',
+          950: '#0B131E',
         },
-        gold: {
-          50: '#FDFBF7',
-          100: '#FAF4E8',
-          200: '#F3E4C6',
-          300: '#EBD1A0',
-          400: '#DEC07E',
-          500: '#B89047',
-          600: '#9E7A36',
-          700: '#7E6128',
-          800: '#5F491E',
-          900: '#3F3014',
+        ivory: {
+          DEFAULT: '#F6F2EA',
+          50: '#FDFAF5',
+          100: '#F6F2EA',
+          200: '#EAE4D6',
+          300: '#DDD5C2',
         },
-        aegean: {
-          50: '#F0F4F8',
-          100: '#D9E2EC',
-          200: '#BCCCDC',
-          300: '#9FB3C8',
-          700: '#1E3A5F',
-          800: '#142742',
-          900: '#0F1E36',
-          950: '#0A1424',
+        paper: {
+          DEFAULT: '#FCFBF8',
+          50: '#FFFFFF',
+          100: '#FCFBF8',
+          200: '#F5F3ED',
+        },
+        limestone: {
+          DEFAULT: '#D9D1C4',
+          100: '#EFECE6',
+          200: '#E3DDD2',
+          300: '#D9D1C4',
+          400: '#C2B8A8',
+        },
+        bronze: {
+          DEFAULT: '#9A7845',
+          50: '#FBF8F3',
+          100: '#F4ECE0',
+          200: '#E6D4BE',
+          500: '#9A7845',
+          600: '#836537',
+          700: '#69512A',
+        },
+        olive: {
+          DEFAULT: '#4D594E',
+          100: '#E7EAE7',
+          500: '#4D594E',
+          700: '#3A443B',
+        },
+        brand: {
+          text: '#18202A',
+          muted: '#66707A',
         },
       },
       fontFamily: {
-        sans: ['var(--font-sans)', 'Plus Jakarta Sans', 'system-ui', 'sans-serif'],
-        serif: ['var(--font-serif)', 'Cormorant Garamond', 'Georgia', 'serif'],
+        serif: ['var(--font-serif)', 'Libre Baskerville', 'Georgia', 'serif'],
+        sans: ['var(--font-sans)', 'Manrope', 'system-ui', 'sans-serif'],
+      },
+      maxWidth: {
+        'content': '1320px',
       },
     },
   },
   plugins: [],
 };
+
 export default config;

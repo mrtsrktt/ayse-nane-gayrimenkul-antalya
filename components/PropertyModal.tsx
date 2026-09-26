@@ -11,10 +11,8 @@ import {
   Check,
   MessageCircle,
   Phone,
-  Sparkles,
   ChevronLeft,
   ChevronRight,
-  ShieldCheck,
   Share2,
 } from 'lucide-react';
 import { Property } from '@/data/properties';
@@ -29,6 +27,7 @@ export default function PropertyModal({ property, onClose }: PropertyModalProps)
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [inquiryName, setInquiryName] = useState('');
   const [inquiryPhone, setInquiryPhone] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [copiedLink, setCopiedLink] = useState(false);
 
@@ -62,11 +61,16 @@ export default function PropertyModal({ property, onClose }: PropertyModalProps)
 
   const handleInquirySubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
+    setIsSubmitting(true);
+    // Real inquiry transition (redirects or opens WhatsApp with detailed lead prefill)
+    const inquiryText = `Merhaba Ayşe Hanım, web sitenizdeki "${property.title}" (${formattedTRY}) portföyü için randevu/detay talep ediyorum. İsmim: ${inquiryName}, Telefonum: ${inquiryPhone}.`;
+    const targetUrl = `https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(inquiryText)}`;
+
     setTimeout(() => {
-      setIsSubmitted(false);
-      onClose();
-    }, 3000);
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+      window.open(targetUrl, '_blank');
+    }, 600);
   };
 
   const handleShare = () => {
@@ -77,79 +81,89 @@ export default function PropertyModal({ property, onClose }: PropertyModalProps)
     }
   };
 
-  const whatsappMessage = `Merhaba Ayşe Hanım, "${property.title}" (${property.location} - ${formattedTRY}) hakkında yerinde inceleme randevusu oluşturmak istiyorum.`;
+  const whatsappMessage = `Merhaba Ayşe Hanım, "${property.title}" (${property.location} - ${formattedTRY}) ilanı hakkında detaylı bilgi ve yerinde sunum talep ediyorum.`;
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 animate-fade-in text-slate-800">
-      <div className="relative bg-white w-full max-w-5xl rounded-3xl overflow-hidden shadow-2xl border border-[#DFC596] my-8 flex flex-col max-h-[92vh]">
-        {/* Header Bar */}
-        <div className="bg-[#FAF9F5] px-6 py-4 flex items-center justify-between border-b border-[#EAE6DF]">
+    <div
+      role="dialog"
+      aria-modal="true"
+      className="fixed inset-0 z-50 overflow-y-auto bg-ink/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6"
+    >
+      <div className="relative bg-white w-full max-w-5xl rounded-2xl overflow-hidden shadow-2xl border border-limestone my-6 flex flex-col max-h-[92vh]">
+        {/* Modal Top Strip */}
+        <div className="bg-ivory/60 px-6 py-4 flex items-center justify-between border-b border-limestone/50">
           <div className="flex items-center gap-3">
-            <span className="px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider gold-gradient-button text-white shadow-sm">
+            <span className="px-3 py-1 rounded bg-white text-xs font-semibold text-ink border border-limestone/60">
               {property.typeName}
             </span>
-            <span className="text-xs text-slate-500 hidden sm:inline">İlan No: #{property.id.slice(0, 8).toUpperCase()}</span>
+            <span className="text-xs text-brand-muted hidden sm:inline">
+              Portföy Kodu: #{property.id.slice(0, 8).toUpperCase()}
+            </span>
           </div>
 
           <div className="flex items-center gap-2">
             <button
               onClick={handleShare}
-              className="p-2 text-slate-600 hover:text-[#0F1E36] hover:bg-slate-100 rounded-full transition-colors text-xs flex items-center gap-1.5"
+              className="p-2 text-brand-muted hover:text-ink hover:bg-white rounded-lg transition-colors text-xs flex items-center gap-1.5"
               title="Bağlantıyı Kopyala"
             >
-              <Share2 className="w-4 h-4 text-[#B89047]" />
-              <span className="hidden sm:inline font-semibold">{copiedLink ? 'Kopyalandı!' : 'Paylaş'}</span>
+              <Share2 className="w-4 h-4 text-bronze" />
+              <span className="hidden sm:inline font-medium">
+                {copiedLink ? 'Kopyalandı' : 'Paylaş'}
+              </span>
             </button>
+
             <button
               onClick={onClose}
-              className="p-2 text-slate-600 hover:text-[#0F1E36] hover:bg-slate-100 rounded-full transition-colors"
+              className="p-2 text-brand-muted hover:text-ink hover:bg-white rounded-lg transition-colors"
               aria-label="Kapat"
             >
-              <X className="w-6 h-6" />
+              <X className="w-5 h-5" />
             </button>
           </div>
         </div>
 
-        {/* Scrollable Modal Body */}
+        {/* Scrollable Modal Content */}
         <div className="overflow-y-auto p-6 sm:p-8 space-y-8 flex-1 bg-white">
-          {/* Main Title & Price */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-[#EAE6DF] pb-6">
+          {/* Title & Price Header */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-limestone/40 pb-6">
             <div>
-              <div className="flex items-center gap-2 text-xs font-bold text-[#7E6128] uppercase tracking-widest mb-1.5">
-                <MapPin className="w-4 h-4 text-[#B89047]" />
+              <div className="flex items-center gap-1.5 text-xs font-medium text-brand-muted mb-1.5">
+                <MapPin className="w-3.5 h-3.5 text-bronze" />
                 <span>{property.location}</span>
+                {property.suitableForCitizenship && (
+                  <span className="ml-2 text-olive font-semibold">• Vatandaşlığa Uygun</span>
+                )}
               </div>
-              <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#0F1E36] leading-snug">
+
+              <h2 className="text-2xl sm:text-3xl font-serif font-bold text-ink leading-snug">
                 {property.title}
               </h2>
-              <p className="text-slate-500 text-xs sm:text-sm mt-1">{property.subtitle}</p>
+              <p className="text-brand-muted text-xs sm:text-sm mt-1">{property.subtitle}</p>
             </div>
 
-            <div className="text-left md:text-right shrink-0 bg-[#FAF9F5] md:bg-transparent p-4 md:p-0 rounded-2xl border border-[#EAE6DF] md:border-0">
-              <span className="text-3xl sm:text-4xl font-serif font-bold text-[#7E6128] block">
+            <div className="text-left md:text-right shrink-0 bg-ivory/50 md:bg-transparent p-4 md:p-0 rounded-xl border border-limestone/40 md:border-0">
+              <span className="text-2xl sm:text-3xl font-serif font-bold text-ink block">
                 {formattedTRY}
               </span>
-              <span className="text-sm font-semibold text-slate-500 block">
-                Yaklaşık {formattedEUR}
+              <span className="text-xs font-medium text-brand-muted block mt-0.5">
+                ~ {formattedEUR}
               </span>
-              {property.rentalYield && (
-                <span className="inline-block mt-1 text-xs font-bold text-emerald-700 bg-emerald-50 px-3 py-0.5 rounded-full border border-emerald-200">
-                  {property.rentalYield}
-                </span>
-              )}
             </div>
           </div>
 
-          {/* Image Gallery */}
+          {/* Image Gallery Showcase */}
           <div className="space-y-3">
-            <div className="relative h-72 sm:h-96 md:h-[420px] rounded-2xl overflow-hidden bg-slate-100 border border-[#EAE6DF]">
+            <div className="relative h-64 sm:h-96 md:h-[400px] rounded-xl overflow-hidden bg-ivory border border-limestone/60">
               <Image
                 src={property.images[currentImageIndex] || property.images[0]}
                 alt={property.title}
                 fill
                 priority
+                sizes="(max-width: 1024px) 100vw, 850px"
                 className="object-cover object-center"
               />
+
               {property.images.length > 1 && (
                 <>
                   <button
@@ -158,105 +172,105 @@ export default function PropertyModal({ property, onClose }: PropertyModalProps)
                         prev === 0 ? property.images.length - 1 : prev - 1
                       )
                     }
-                    className="absolute left-4 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-white/80 hover:bg-white text-[#0F1E36] shadow-md backdrop-blur-md transition-colors"
-                    aria-label="Önceki Fotoğraf"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/90 hover:bg-white text-ink shadow transition-colors"
+                    aria-label="Önceki Görsel"
                   >
-                    <ChevronLeft className="w-5 h-5" />
+                    <ChevronLeft className="w-4 h-4" />
                   </button>
+
                   <button
                     onClick={() =>
                       setCurrentImageIndex((prev) =>
                         prev === property.images.length - 1 ? 0 : prev + 1
                       )
                     }
-                    className="absolute right-4 top-1/2 -translate-y-1/2 p-2.5 rounded-full bg-white/80 hover:bg-white text-[#0F1E36] shadow-md backdrop-blur-md transition-colors"
-                    aria-label="Sonraki Fotoğraf"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white/90 hover:bg-white text-ink shadow transition-colors"
+                    aria-label="Sonraki Görsel"
                   >
-                    <ChevronRight className="w-5 h-5" />
+                    <ChevronRight className="w-4 h-4" />
                   </button>
                 </>
               )}
-              <div className="absolute bottom-3 right-3 px-3 py-1 rounded-full bg-black/70 text-white text-xs font-medium backdrop-blur-md">
-                {currentImageIndex + 1} / {property.images.length} Fotoğraf
+
+              <div className="absolute bottom-3 right-3 px-2.5 py-1 rounded bg-ink/75 text-paper text-[11px] font-medium backdrop-blur-sm">
+                {currentImageIndex + 1} / {property.images.length}
               </div>
             </div>
 
-            {/* Thumbnails */}
+            {/* Gallery Thumbnails */}
             {property.images.length > 1 && (
-              <div className="flex gap-2 overflow-x-auto pb-2">
+              <div className="flex gap-2 overflow-x-auto pb-1">
                 {property.images.map((img, idx) => (
                   <button
                     key={idx}
                     onClick={() => setCurrentImageIndex(idx)}
-                    className={`relative w-20 h-16 rounded-xl overflow-hidden shrink-0 border-2 transition-all ${
+                    className={`relative w-20 h-14 rounded-lg overflow-hidden shrink-0 border-2 transition-all ${
                       currentImageIndex === idx
-                        ? 'border-[#B89047] scale-105 shadow-md'
+                        ? 'border-bronze opacity-100'
                         : 'border-transparent opacity-60 hover:opacity-100'
                     }`}
                   >
-                    <Image src={img} alt="" fill className="object-cover" />
+                    <Image src={img} alt="" fill sizes="80px" className="object-cover" />
                   </button>
                 ))}
               </div>
             )}
           </div>
 
-          {/* Quick Specs Bar */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-5 bg-[#FAF9F5] rounded-2xl border border-[#EAE6DF] text-center">
+          {/* Specs Ribbon */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-4 bg-ivory/60 rounded-xl border border-limestone/50 text-center text-xs">
             {property.bedrooms !== 'Arsa' && property.bedrooms !== 'Ticari' && (
               <div>
-                <span className="text-xs text-slate-400 block mb-1 uppercase font-bold">Oda Sayısı</span>
-                <span className="text-lg font-bold text-[#0F1E36] flex items-center justify-center gap-1.5">
-                  <Bed className="w-4 h-4 text-[#B89047]" /> {property.bedrooms}
-                </span>
+                <span className="text-[10px] text-brand-muted block uppercase font-bold">Oda Sayısı</span>
+                <span className="text-base font-serif font-bold text-ink mt-0.5 block">{property.bedrooms}</span>
               </div>
             )}
             {property.bathrooms > 0 && (
               <div>
-                <span className="text-xs text-slate-400 block mb-1 uppercase font-bold">Banyo</span>
-                <span className="text-lg font-bold text-[#0F1E36] flex items-center justify-center gap-1.5">
-                  <Bath className="w-4 h-4 text-[#B89047]" /> {property.bathrooms}
-                </span>
+                <span className="text-[10px] text-brand-muted block uppercase font-bold">Banyo</span>
+                <span className="text-base font-serif font-bold text-ink mt-0.5 block">{property.bathrooms}</span>
               </div>
             )}
             <div>
-              <span className="text-xs text-slate-400 block mb-1 uppercase font-bold">Net Kullanım</span>
-              <span className="text-lg font-bold text-[#0F1E36] flex items-center justify-center gap-1.5">
-                <Maximize2 className="w-4 h-4 text-[#B89047]" /> {property.area} m²
-              </span>
+              <span className="text-[10px] text-brand-muted block uppercase font-bold">Net Alan</span>
+              <span className="text-base font-serif font-bold text-ink mt-0.5 block">{property.area} m²</span>
             </div>
-            {property.lotArea && (
+            {property.lotArea ? (
               <div>
-                <span className="text-xs text-slate-400 block mb-1 uppercase font-bold">Arsa / Parsel</span>
-                <span className="text-lg font-bold text-[#0F1E36]">{property.lotArea} m²</span>
+                <span className="text-[10px] text-brand-muted block uppercase font-bold">Arsa Payı</span>
+                <span className="text-base font-serif font-bold text-ink mt-0.5 block">{property.lotArea} m²</span>
+              </div>
+            ) : (
+              <div>
+                <span className="text-[10px] text-brand-muted block uppercase font-bold">Yapı Durumu</span>
+                <span className="text-base font-serif font-bold text-ink mt-0.5 block">{property.buildingAge}</span>
               </div>
             )}
           </div>
 
-          {/* Two Columns: Details & Contact Form */}
+          {/* Details & Contact Section */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            {/* Left Content (8 cols) */}
-            <div className="lg:col-span-8 space-y-6">
-              {/* Description */}
+            {/* Description & Features (7 cols) */}
+            <div className="lg:col-span-7 space-y-6">
               <div>
-                <h3 className="text-lg font-serif font-bold text-[#0F1E36] mb-3 flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-[#B89047]" /> Mülk Açıklaması
+                <h3 className="text-base font-serif font-bold text-ink mb-2">
+                  Mülk Detayları & Mimari Karakter
                 </h3>
-                <p className="text-slate-600 leading-relaxed text-sm sm:text-base font-light">
+                <p className="text-xs sm:text-sm text-brand-muted leading-relaxed font-normal">
                   {property.description}
                 </p>
               </div>
 
               {/* Highlights */}
               {property.highlights && property.highlights.length > 0 && (
-                <div className="bg-[#FAF9F5] p-5 rounded-2xl border border-[#DFC596]">
-                  <h4 className="text-xs font-bold text-[#7E6128] uppercase tracking-widest mb-3">
-                    Lokasyon & Yatırım Avantajları
+                <div className="p-4 rounded-xl bg-ivory/50 border border-limestone/50">
+                  <h4 className="text-[11px] font-bold text-brand-text uppercase tracking-wider mb-2.5">
+                    Lokasyon ve Yatırım Avantajları
                   </h4>
-                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm text-slate-700">
+                  <ul className="space-y-1.5 text-xs text-brand-muted">
                     {property.highlights.map((h, i) => (
-                      <li key={i} className="flex items-center gap-2 font-medium">
-                        <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+                      <li key={i} className="flex items-start gap-2">
+                        <Check className="w-3.5 h-3.5 text-bronze mt-0.5 shrink-0" />
                         <span>{h}</span>
                       </li>
                     ))}
@@ -264,20 +278,18 @@ export default function PropertyModal({ property, onClose }: PropertyModalProps)
                 </div>
               )}
 
-              {/* Features Grid */}
+              {/* Features List */}
               <div>
-                <h3 className="text-lg font-serif font-bold text-[#0F1E36] mb-4">
-                  Öne Çıkan Mimari & Donanım Özellikleri
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                <h4 className="text-xs font-bold text-ink uppercase tracking-wider mb-3">
+                  Donanım Özellikleri
+                </h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-brand-text">
                   {property.features.map((feature, idx) => (
                     <div
                       key={idx}
-                      className="flex items-center gap-2.5 p-3 rounded-xl bg-[#FAF9F5] border border-[#EAE6DF] text-xs sm:text-sm font-medium text-slate-700"
+                      className="flex items-center gap-2 p-2.5 rounded-lg bg-paper border border-limestone/40"
                     >
-                      <div className="w-5 h-5 rounded-full bg-[#EAE6DF] flex items-center justify-center shrink-0">
-                        <Check className="w-3.5 h-3.5 text-[#B89047]" />
-                      </div>
+                      <Check className="w-3 h-3 text-bronze shrink-0" />
                       <span>{feature}</span>
                     </div>
                   ))}
@@ -285,11 +297,11 @@ export default function PropertyModal({ property, onClose }: PropertyModalProps)
               </div>
             </div>
 
-            {/* Right Contact Card (4 cols) */}
-            <div className="lg:col-span-4 space-y-4">
-              <div className="bg-[#FAF9F5] p-6 rounded-2xl border border-[#DFC596] shadow-sm">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-[#B89047] shrink-0">
+            {/* Direct Contact Card (5 cols) */}
+            <div className="lg:col-span-5 space-y-4">
+              <div className="p-6 rounded-xl bg-ivory/70 border border-limestone/60">
+                <div className="flex items-center gap-3.5 pb-4 border-b border-limestone/50 mb-4">
+                  <div className="relative w-12 h-12 rounded-full overflow-hidden border border-limestone shrink-0">
                     <Image
                       src="/ayse-nane.jpg"
                       alt={siteConfig.agentName}
@@ -298,73 +310,66 @@ export default function PropertyModal({ property, onClose }: PropertyModalProps)
                     />
                   </div>
                   <div>
-                    <h4 className="font-serif font-bold text-base text-[#0F1E36]">{siteConfig.agentName}</h4>
-                    <p className="text-xs text-[#7E6128] font-bold">Lüks Gayrimenkul Danışmanı</p>
-                    <span className="inline-flex items-center gap-1 text-[10px] text-slate-500 mt-1">
-                      <ShieldCheck className="w-3 h-3 text-[#B89047]" /> MYK Seviye 5 Lisanslı
-                    </span>
+                    <h4 className="font-serif font-bold text-base text-ink">{siteConfig.agentName}</h4>
+                    <p className="text-[11px] text-brand-muted">MYK Seviye 5 Lisanslı Danışman</p>
                   </div>
                 </div>
 
-                <div className="space-y-2.5 pt-2 border-t border-[#EAE6DF]">
+                <p className="text-xs text-brand-muted leading-relaxed mb-4">
+                  Bu portföy hakkında yerinde sunum ve detaylı ekspertiz raporu almak için doğrudan iletişime geçebilirsiniz.
+                </p>
+
+                <form onSubmit={handleInquirySubmit} className="space-y-3 mb-4">
+                  <input
+                    type="text"
+                    required
+                    placeholder="Adınız ve Soyadınız"
+                    value={inquiryName}
+                    onChange={(e) => setInquiryName(e.target.value)}
+                    className="w-full bg-white border border-limestone/80 rounded-lg p-2.5 text-xs text-ink placeholder-brand-muted focus:outline-none focus:border-bronze"
+                  />
+                  <input
+                    type="tel"
+                    required
+                    placeholder="Telefon Numaranız"
+                    value={inquiryPhone}
+                    onChange={(e) => setInquiryPhone(e.target.value)}
+                    className="w-full bg-white border border-limestone/80 rounded-lg p-2.5 text-xs text-ink placeholder-brand-muted focus:outline-none focus:border-bronze"
+                  />
+
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full btn-primary text-xs py-3"
+                  >
+                    {isSubmitting ? 'Yönlendiriliyor...' : 'Randevu & Bilgi Talep Et'}
+                  </button>
+
+                  {isSubmitted && (
+                    <p className="text-[11px] text-emerald-700 font-medium text-center pt-1">
+                      Talebiniz hazırlandı, WhatsApp üzerinden doğrudan bağlanıyorsunuz.
+                    </p>
+                  )}
+                </form>
+
+                <div className="grid grid-cols-2 gap-2 pt-2 border-t border-limestone/40">
+                  <a
+                    href={`tel:${siteConfig.phone}`}
+                    className="btn-secondary text-xs py-2 text-center"
+                  >
+                    <Phone className="w-3.5 h-3.5 text-bronze" />
+                    <span>Ara</span>
+                  </a>
+
                   <a
                     href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold text-xs py-3 px-4 rounded-xl flex items-center justify-center gap-2 shadow-md hover:opacity-95"
+                    className="btn-secondary text-xs py-2 text-center hover:border-emerald-600 hover:text-emerald-700"
                   >
-                    <MessageCircle className="w-4 h-4" />
-                    <span>WhatsApp’tan Hemen Yazın</span>
+                    <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>WhatsApp</span>
                   </a>
-
-                  <a
-                    href={`tel:${siteConfig.phone}`}
-                    className="w-full bg-white hover:bg-[#F4F1EA] text-[#0F1E36] font-bold text-xs py-3 px-4 rounded-xl flex items-center justify-center gap-2 border border-[#EAE6DF] shadow-sm transition-colors"
-                  >
-                    <Phone className="w-4 h-4 text-[#B89047]" />
-                    <span>Arayın: {siteConfig.phoneDisplay}</span>
-                  </a>
-                </div>
-
-                {/* Instant Inquiry Form */}
-                <div className="mt-6 pt-5 border-t border-[#EAE6DF]">
-                  <h5 className="text-xs font-bold text-[#7E6128] uppercase tracking-widest mb-3">
-                    Yerinde İnceleme / Bilgi Talebi
-                  </h5>
-                  {isSubmitted ? (
-                    <div className="p-3 bg-emerald-50 border border-emerald-300 rounded-xl text-center text-xs text-emerald-700 font-bold">
-                      Talebiniz Ayşe Hanım’a ulaştı. En kısa sürede sizinle iletişime geçilecektir.
-                    </div>
-                  ) : (
-                    <form onSubmit={handleInquirySubmit} className="space-y-3">
-                      <div>
-                        <input
-                          type="text"
-                          required
-                          placeholder="Adınız Soyadınız"
-                          value={inquiryName}
-                          onChange={(e) => setInquiryName(e.target.value)}
-                          className="w-full bg-white border border-[#EAE6DF] rounded-xl px-3 py-2 text-xs text-[#0F1E36] placeholder-slate-400 focus:outline-none focus:border-[#B89047]"
-                        />
-                      </div>
-                      <div>
-                        <input
-                          type="tel"
-                          required
-                          placeholder="Telefon Numaranız"
-                          value={inquiryPhone}
-                          onChange={(e) => setInquiryPhone(e.target.value)}
-                          className="w-full bg-white border border-[#EAE6DF] rounded-xl px-3 py-2 text-xs text-[#0F1E36] placeholder-slate-400 focus:outline-none focus:border-[#B89047]"
-                        />
-                      </div>
-                      <button
-                        type="submit"
-                        className="w-full gold-gradient-button text-xs font-bold py-2.5 rounded-xl uppercase tracking-wider shadow-sm"
-                      >
-                        Randevu Talebi Gönder
-                      </button>
-                    </form>
-                  )}
                 </div>
               </div>
             </div>

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ChevronDown, Sparkles, MessageCircle } from 'lucide-react';
+import { ChevronDown, MessageCircle } from 'lucide-react';
 import { faqData } from '@/data/faq';
 import { siteConfig } from '@/data/siteConfig';
 
@@ -13,54 +13,52 @@ export default function FaqSection() {
   };
 
   return (
-    <section id="sss" className="py-24 bg-[#FAF9F5] text-slate-800 relative">
-      <div className="editorial-divider mb-16" />
-
+    <section id="sss" className="py-20 lg:py-28 bg-ivory/30 border-t border-limestone/50">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#DFC596] text-[#7E6128] text-xs font-bold tracking-widest uppercase mb-4 shadow-sm">
-            <Sparkles className="w-3.5 h-3.5 text-[#B89047]" />
-            Şeffaf Bilgilendirme & Hukuk
+        {/* Section Header */}
+        <div className="max-w-2xl mb-12 text-left">
+          <div className="flex items-center gap-2 mb-3">
+            <span className="w-5 h-px bg-bronze" />
+            <span className="text-xs font-semibold uppercase tracking-widest text-bronze">
+              Sıkça Sorulan Sorular
+            </span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-serif font-bold text-[#0F1E36] tracking-tight leading-tight mb-4">
-            Sıkça Sorulan <br className="hidden sm:inline" />
-            <span className="gold-gradient-text italic font-normal">Hukuki & Mali Sorular</span>
+
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-ink leading-tight mb-4">
+            Hukuki ve Mali Süreçler
           </h2>
-          <p className="text-slate-500 text-sm sm:text-base leading-relaxed font-light">
-            Antalya’da gayrimenkul alım, satım, tapu devirleri, değerleme ve vatandaşlık süreçleri hakkında merak edilenler.
+
+          <p className="text-xs sm:text-sm text-brand-muted leading-relaxed font-normal">
+            Antalya’da gayrimenkul alımı, tapu devirleri, değerleme, vatandaşlık kriterleri ve danışmanlık hizmetlerine dair temel bilgiler.
           </p>
         </div>
 
         {/* FAQ Accordion List */}
-        <div className="space-y-4">
+        <div className="space-y-3">
           {faqData.map((item) => {
             const isOpen = openId === item.id;
             return (
               <div
                 key={item.id}
-                className="bg-white rounded-2xl border border-[#EAE6DF] overflow-hidden transition-all duration-300 shadow-[0_4px_20px_rgba(15,30,54,0.04)] hover:border-[#DFC596]"
+                className="bg-white rounded-xl border border-limestone/60 overflow-hidden transition-all duration-200"
               >
                 <button
                   onClick={() => toggleFAQ(item.id)}
-                  className="w-full p-6 text-left flex items-center justify-between gap-4 hover:bg-[#FAF9F5] transition-colors"
+                  className="w-full p-5 text-left flex items-center justify-between gap-4 hover:bg-ivory/50 transition-colors"
                   aria-expanded={isOpen}
                 >
-                  <div className="flex items-center gap-3">
-                    <span className="w-2 h-2 rounded-full bg-[#B89047] shrink-0" />
-                    <span className="text-sm sm:text-base font-serif font-bold text-[#0F1E36]">
-                      {item.question}
-                    </span>
-                  </div>
+                  <span className="text-sm sm:text-base font-serif font-bold text-ink">
+                    {item.question}
+                  </span>
                   <ChevronDown
-                    className={`w-5 h-5 text-[#B89047] shrink-0 transition-transform duration-300 ${
+                    className={`w-4 h-4 text-bronze shrink-0 transition-transform duration-200 ${
                       isOpen ? 'transform rotate-180' : ''
                     }`}
                   />
                 </button>
 
                 {isOpen && (
-                  <div className="px-6 pb-6 pt-2 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 font-light">
+                  <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-brand-muted leading-relaxed border-t border-limestone/30 font-normal">
                     {item.answer}
                   </div>
                 )}
@@ -70,23 +68,26 @@ export default function FaqSection() {
         </div>
 
         {/* Bottom Callout */}
-        <div className="mt-12 text-center bg-white p-8 rounded-3xl border border-[#DFC596] shadow-sm">
-          <p className="text-sm font-semibold text-[#0F1E36] mb-2">
-            Sorunuzun cevabını bulamadınız mı?
-          </p>
-          <p className="text-xs text-slate-500 mb-6 font-light">
-            Tapu, eksper, vergi veya vatandaşlık mevzuatıyla ilgili sorularınız için doğrudan Ayşe Hanım ile görüşebilirsiniz.
-          </p>
+        <div className="mt-10 p-6 bg-white rounded-xl border border-limestone/60 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div>
+            <p className="font-serif font-bold text-base text-ink">
+              Özel bir mülk sorunuz veya danışmanlık talebiniz mi var?
+            </p>
+            <p className="text-xs text-brand-muted mt-0.5">
+              Tapu, ekspertiz ve yasal süreçler hakkında Ayşe Nane ile doğrudan görüşebilirsiniz.
+            </p>
+          </div>
+
           <a
             href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(
-              'Merhaba Ayşe Hanım, web sitenizdeki SSS bölümünü okudum ve bir soru sormak istiyorum.'
+              'Merhaba Ayşe Hanım, web sitenizdeki SSS bölümünü inceledim ve özel bir konuda danışmak istiyorum.'
             )}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 gold-gradient-button text-xs font-bold uppercase tracking-wider px-6 py-3.5 rounded-xl shadow-md hover:scale-102 transition-transform"
+            className="btn-primary text-xs shrink-0"
           >
-            <MessageCircle className="w-4 h-4" />
-            <span>Ayşe Hanım’a WhatsApp’tan Sorun</span>
+            <MessageCircle className="w-3.5 h-3.5" />
+            <span>WhatsApp ile Sorun</span>
           </a>
         </div>
       </div>

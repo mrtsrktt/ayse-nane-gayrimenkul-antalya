@@ -1,275 +1,233 @@
 'use client';
 
 import React, { useState } from 'react';
-import {
-  Calculator,
-  CheckCircle2,
-  Camera,
-  Globe2,
-  ShieldCheck,
-  TrendingUp,
-  MessageCircle,
-  Sparkles,
-} from 'lucide-react';
-import confetti from 'canvas-confetti';
+import Link from 'next/link';
+import { TrendingUp, Camera, Globe, ArrowRight, ShieldCheck, Check } from 'lucide-react';
 import { siteConfig } from '@/data/siteConfig';
 
 export default function ValuationSection() {
   const [formData, setFormData] = useState({
     fullName: '',
     phone: '',
-    email: '',
     propertyType: 'villa',
     district: 'Döşemealtı',
     area: '',
-    rooms: '4+1',
-    note: '',
+    notes: '',
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      confetti({
-        particleCount: 80,
-        spread: 70,
-        origin: { y: 0.6 },
-      });
-    } catch {
-      // safe fallback
-    }
-    setSubmitted(true);
+    setIsSubmitting(true);
+
+    const message = `Merhaba Ayşe Hanım, web sitenizdeki Ücretsiz Mülk Değerleme Formunu doldurdum:
+- Mülk Sahibi: ${formData.fullName}
+- Telefon: ${formData.phone}
+- Mülk Tipi: ${formData.propertyType}
+- Bölge: ${formData.district}
+- Yaklaşık Alan: ${formData.area ? `${formData.area} m²` : 'Belirtilmedi'}
+- Notlar: ${formData.notes || 'Yok'}
+Değerleme ve satış stratejisi hakkında görüşmek istiyorum.`;
+
+    const targetUrl = `https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setSubmitted(true);
+      window.open(targetUrl, '_blank');
+    }, 600);
   };
 
   const benefits = [
     {
       icon: TrendingUp,
-      title: 'Doğru Emsal Değerleme',
-      desc: 'Bölgedeki son 6 ayın gerçek tapu devir verileri ve piyasa dinamikleriyle mülkünüzün en yüksek ve gerçekçi değerini tespit ediyoruz.',
+      title: 'Gerçek Tapu Emsal Analizi',
+      desc: 'Spekülatif ilan fiyatları yerine bölgedeki son 6 ayın tescilli tapu satış rayiçlerine dayalı gerçekçi fiyatlandırma.',
     },
     {
       icon: Camera,
-      title: 'Profesyonel Prodüksiyon',
-      desc: '4K Drone çekimleri, profesyonel mimari fotoğrafçılık ve 3D sanal tur ile mülkünüzü en etkileyici şekilde vitrine taşıyoruz.',
+      title: 'Mimari Prodüksiyon & Sunum',
+      desc: 'Mülkünüzün mimari değerini ortaya koyan profesyonel fotoğraf, 4K video ve özel portföy dosyası hazırlığı.',
     },
     {
-      icon: Globe2,
-      title: 'Küresel Yatırımcı Ağı',
-      desc: 'Portföyünüzü sadece Türkiye değil; Almanya, Rusya, İngiltere ve Körfez ülkelerindeki hazır nitelikli alıcılarımıza sunuyoruz.',
-    },
-    {
-      icon: ShieldCheck,
-      title: 'Uçtan Uca Tapu Güvencesi',
-      desc: 'Pazarlıktan kapora sözleşmesine, belediye rayiç belgesinden tapu devrine kadar tüm yasal süreçleri güvenle yürütüyoruz.',
+      icon: Globe,
+      title: 'Nitelikli Alıcı Ağı',
+      desc: 'Portföyünüzü yerli sermayenin yanı sıra Avrupa ve Körfez bölgesindeki doğrulanmış yatırımcı havuzuna ulaştırma.',
     },
   ];
 
   return (
-    <section id="degerleme" className="py-24 bg-[#FAF9F5] text-slate-800 relative">
-      <div className="editorial-divider mb-16" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Left Info Column (6 cols) */}
-          <div className="lg:col-span-6 space-y-8">
+    <section id="degerleme" className="py-20 lg:py-28 bg-ink text-paper relative overflow-hidden">
+      <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          {/* Left Value Proposition (6 cols) */}
+          <div className="lg:col-span-6 space-y-8 text-left">
             <div>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#DFC596] text-[#7E6128] text-[11px] font-bold uppercase tracking-[0.2em] mb-4 shadow-sm">
-                <Sparkles className="w-3.5 h-3.5 text-[#B89047]" />
-                Mülk Sahiplerine Özel Danışmanlık
+              <div className="flex items-center gap-2 mb-3">
+                <span className="w-5 h-px bg-bronze" />
+                <span className="text-xs font-semibold uppercase tracking-widest text-bronze">
+                  Mülk Sahiplerine Özel Danışmanlık
+                </span>
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#0F1E36] tracking-tight leading-tight">
-                Mülkünüzün Gerçek Değerini <br />
-                <span className="gold-gradient-text italic font-serif font-normal">Ücretsiz & Bilimsel</span> Olarak Öğrenin
+
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-white leading-tight mb-4">
+                Mülkünüzün Güncel Değerini Emsal Verileriyle Öğrenin
               </h2>
-              <p className="text-slate-600 text-sm sm:text-base leading-relaxed mt-4 font-light">
-                Antalya’da villanızı, rezidans dairenizi veya arsanızı satmak istiyorsanız; yanlış fiyatlandırma ile zaman kaybetmeyin. Ayşe Nane’nin 12 yıllık bölge tecrübesiyle hazırlanan detaylı ekspertiz ve pazarlama planıyla mülkünüzü en doğru alıcıyla buluşturun.
+
+              <p className="text-sm sm:text-base text-limestone leading-relaxed font-light">
+                Antalya’da villanızı, dairenizi veya arsanızı satmayı planlıyorsanız; yanlış fiyatlandırma ile zaman kaybetmeyin. Ayşe Nane’nin bölge tecrübesiyle hazırlanan objektif değerleme raporuyla doğru alıcıya ulaşın.
               </p>
             </div>
 
-            {/* Benefits Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {benefits.map((item, idx) => (
-                <div
-                  key={idx}
-                  className="p-5 rounded-2xl bg-white border border-[#EAE6DF] shadow-[0_4px_20px_rgba(15,30,54,0.04)] hover:border-[#DFC596] transition-colors"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-[#F4F1EA] border border-[#DFC596] flex items-center justify-center mb-3">
-                    <item.icon className="w-5 h-5 text-[#B89047]" />
+            {/* 3 Concrete Benefits */}
+            <div className="space-y-4 pt-2">
+              {benefits.map((b, i) => (
+                <div key={i} className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-lg bg-ink-800 border border-limestone/20 flex items-center justify-center shrink-0">
+                    <b.icon className="w-4 h-4 text-bronze" />
                   </div>
-                  <h3 className="text-sm font-bold text-[#0F1E36] mb-1">{item.title}</h3>
-                  <p className="text-xs text-slate-500 leading-relaxed font-light">{item.desc}</p>
+                  <div>
+                    <h3 className="text-sm font-serif font-bold text-white mb-0.5">{b.title}</h3>
+                    <p className="text-xs text-limestone leading-relaxed font-light">{b.desc}</p>
+                  </div>
                 </div>
               ))}
             </div>
-
-            {/* Direct WhatsApp Callout */}
-            <div className="pt-2 flex flex-wrap items-center gap-4 text-xs text-slate-600">
-              <span>Form doldurmak istemiyor musunuz?</span>
-              <a
-                href={`https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(
-                  'Merhaba Ayşe Hanım, Antalya’daki mülkümü satmak istiyorum ve değerleme talep ediyorum.'
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-[#B89047] hover:text-[#7E6128] font-bold underline underline-offset-4"
-              >
-                <MessageCircle className="w-4 h-4 text-emerald-600" />
-                WhatsApp’tan Hemen İletişime Geçin
-              </a>
-            </div>
           </div>
 
-          {/* Right Form Column (6 cols) */}
+          {/* Right Lead Capture Form (6 cols) */}
           <div className="lg:col-span-6">
-            <div className="bg-white border border-[#DFC596] rounded-3xl p-6 sm:p-10 shadow-[0_20px_50px_rgba(15,30,54,0.08)] relative">
-              {submitted ? (
-                <div className="text-center py-12 space-y-4">
-                  <div className="w-16 h-16 rounded-full bg-emerald-50 border border-emerald-300 text-emerald-600 flex items-center justify-center mx-auto">
-                    <CheckCircle2 className="w-8 h-8" />
-                  </div>
-                  <h3 className="text-2xl font-serif font-bold text-[#0F1E36]">Değerleme Talebiniz Alındı!</h3>
-                  <p className="text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
-                    Sayın <strong>{formData.fullName}</strong>, ilettiğiniz bilgiler doğrultusunda ön emsal analizi hazırlanmaktadır. Ayşe Nane en kısa sürede sizinle iletişime geçecektir.
-                  </p>
-                  <button
-                    onClick={() => setSubmitted(false)}
-                    className="mt-4 text-xs font-bold text-[#B89047] hover:underline"
-                  >
-                    Yeni bir mülk değerleme formu doldur
-                  </button>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="border-b border-slate-100 pb-4 mb-2">
-                    <h3 className="text-xl font-serif font-bold text-[#0F1E36] flex items-center gap-2">
-                      <Calculator className="w-5 h-5 text-[#B89047]" /> Ücretsiz Ekspertiz Talep Formu
-                    </h3>
-                    <p className="text-xs text-slate-500 mt-1">
-                      Mülk bilgilerinizi iletin, 24 saat içinde kapsamlı değerleme raporunuzu sunalım.
-                    </p>
-                  </div>
+            <div className="bg-paper text-brand-text p-6 sm:p-10 rounded-xl border border-limestone/50 shadow-2xl">
+              <div className="mb-6">
+                <h3 className="text-xl font-serif font-bold text-ink">
+                  Ücretsiz Mülk Değerleme Formu
+                </h3>
+                <p className="text-xs text-brand-muted mt-1">
+                  Mülk detaylarını iletin; 24 saat içinde bölge emsalleriyle hazırlanan ön rapor tarafınıza iletilsin.
+                </p>
+              </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div>
-                      <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1">
-                        Adınız & Soyadınız *
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        placeholder="Örn: Mehmet Yılmaz"
-                        value={formData.fullName}
-                        onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                        className="w-full bg-[#FAF9F5] border border-[#EAE6DF] rounded-xl px-3.5 py-3 text-xs text-[#0F1E36] placeholder-slate-400 focus:outline-none focus:border-[#B89047]"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1">
-                        Telefon Numaranız *
-                      </label>
-                      <input
-                        type="tel"
-                        required
-                        placeholder="0505 172 52 84"
-                        value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full bg-[#FAF9F5] border border-[#EAE6DF] rounded-xl px-3.5 py-3 text-xs text-[#0F1E36] placeholder-slate-400 focus:outline-none focus:border-[#B89047]"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div>
-                      <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1">
-                        Mülk Türü
-                      </label>
-                      <select
-                        value={formData.propertyType}
-                        onChange={(e) => setFormData({ ...formData, propertyType: e.target.value })}
-                        className="w-full bg-[#FAF9F5] border border-[#EAE6DF] rounded-xl px-3.5 py-3 text-xs text-[#0F1E36] focus:outline-none focus:border-[#B89047] cursor-pointer"
-                      >
-                        <option value="villa">Müstakil Villa / Malikâne</option>
-                        <option value="apartment">Rezidans / Daire</option>
-                        <option value="land">İmarlı Arsa / Arazi</option>
-                        <option value="commercial">Ticari Mülk / Otel</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1">
-                        Bulunduğu Bölge
-                      </label>
-                      <select
-                        value={formData.district}
-                        onChange={(e) => setFormData({ ...formData, district: e.target.value })}
-                        className="w-full bg-[#FAF9F5] border border-[#EAE6DF] rounded-xl px-3.5 py-3 text-xs text-[#0F1E36] focus:outline-none focus:border-[#B89047] cursor-pointer"
-                      >
-                        <option value="Döşemealtı">Döşemealtı</option>
-                        <option value="Lara">Lara / Muratpaşa</option>
-                        <option value="Konyaaltı">Konyaaltı</option>
-                        <option value="Kaş">Kaş / Kalkan</option>
-                        <option value="Belek">Belek / Serik</option>
-                        <option value="Alanya">Alanya</option>
-                        <option value="Diğer">Diğer Antalya Bölgesi</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div>
-                      <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1">
-                        Yaklaşık Alan (m²)
-                      </label>
-                      <input
-                        type="number"
-                        placeholder="Örn: 250"
-                        value={formData.area}
-                        onChange={(e) => setFormData({ ...formData, area: e.target.value })}
-                        className="w-full bg-[#FAF9F5] border border-[#EAE6DF] rounded-xl px-3.5 py-3 text-xs text-[#0F1E36] placeholder-slate-400 focus:outline-none focus:border-[#B89047]"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1">
-                        Oda Sayısı / Durum
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="Örn: 4+1 veya Arsa"
-                        value={formData.rooms}
-                        onChange={(e) => setFormData({ ...formData, rooms: e.target.value })}
-                        className="w-full bg-[#FAF9F5] border border-[#EAE6DF] rounded-xl px-3.5 py-3 text-xs text-[#0F1E36] placeholder-slate-400 focus:outline-none focus:border-[#B89047]"
-                      />
-                    </div>
-                  </div>
-
+              <form onSubmit={handleSubmit} className="space-y-4 text-left">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1">
-                      Ek Bilgiler & Mülkün Öne Çıkan Detayları
+                    <label className="block text-[11px] font-bold text-brand-text uppercase mb-1">
+                      Adınız ve Soyadınız *
                     </label>
-                    <textarea
-                      rows={3}
-                      placeholder="Özel havuz, deniz manzarası, tapu durumu veya beklediğiniz tahmini fiyat aralığı..."
-                      value={formData.note}
-                      onChange={(e) => setFormData({ ...formData, note: e.target.value })}
-                      className="w-full bg-[#FAF9F5] border border-[#EAE6DF] rounded-xl px-3.5 py-2.5 text-xs text-[#0F1E36] placeholder-slate-400 focus:outline-none focus:border-[#B89047] resize-none"
+                    <input
+                      type="text"
+                      required
+                      placeholder="Ad Soyad"
+                      value={formData.fullName}
+                      onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                      className="w-full bg-ivory border border-limestone/70 rounded-lg p-2.5 text-xs text-ink placeholder-brand-muted focus:outline-none focus:border-bronze"
                     />
                   </div>
 
-                  <button
-                    type="submit"
-                    className="w-full gold-gradient-button text-xs font-bold uppercase tracking-wider py-4 px-6 rounded-xl shadow-lg mt-2 flex items-center justify-center gap-2"
-                  >
-                    <span>Ücretsiz Değerleme Raporumu Hazırla</span>
-                  </button>
+                  <div>
+                    <label className="block text-[11px] font-bold text-brand-text uppercase mb-1">
+                      Telefon Numaranız *
+                    </label>
+                    <input
+                      type="tel"
+                      required
+                      placeholder="+90 5XX XXX XX XX"
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      className="w-full bg-ivory border border-limestone/70 rounded-lg p-2.5 text-xs text-ink placeholder-brand-muted focus:outline-none focus:border-bronze"
+                    />
+                  </div>
+                </div>
 
-                  <p className="text-[11px] text-slate-400 text-center">
-                    Bilgileriniz 6698 sayılı KVKK kapsamında gizli tutulur ve 3. şahıslarla asla paylaşılmaz.
-                  </p>
-                </form>
-              )}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[11px] font-bold text-brand-text uppercase mb-1">
+                      Mülk Türü
+                    </label>
+                    <select
+                      value={formData.propertyType}
+                      onChange={(e) => setFormData({ ...formData, propertyType: e.target.value })}
+                      className="w-full bg-ivory border border-limestone/70 rounded-lg p-2.5 text-xs text-ink focus:outline-none focus:border-bronze cursor-pointer"
+                    >
+                      <option value="villa">Müstakil Villa / Malikâne</option>
+                      <option value="apartment">Rezidans / Daire</option>
+                      <option value="land">Yatırımlık Arsa</option>
+                      <option value="commercial">Ticari Varlık</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-[11px] font-bold text-brand-text uppercase mb-1">
+                      Bulunduğu Bölge
+                    </label>
+                    <select
+                      value={formData.district}
+                      onChange={(e) => setFormData({ ...formData, district: e.target.value })}
+                      className="w-full bg-ivory border border-limestone/70 rounded-lg p-2.5 text-xs text-ink focus:outline-none focus:border-bronze cursor-pointer"
+                    >
+                      <option value="Döşemealtı">Döşemealtı</option>
+                      <option value="Lara">Lara & Şirinyalı</option>
+                      <option value="Konyaaltı">Konyaaltı</option>
+                      <option value="Kaş / Kalkan">Kaş / Kalkan</option>
+                      <option value="Belek">Belek</option>
+                      <option value="Alanya">Alanya</option>
+                      <option value="Diğer">Diğer Antalya İlçeleri</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-[11px] font-bold text-brand-text uppercase mb-1">
+                    Yaklaşık Alan (m²)
+                  </label>
+                  <input
+                    type="number"
+                    placeholder="Örn: 350"
+                    value={formData.area}
+                    onChange={(e) => setFormData({ ...formData, area: e.target.value })}
+                    className="w-full bg-ivory border border-limestone/70 rounded-lg p-2.5 text-xs text-ink placeholder-brand-muted focus:outline-none focus:border-bronze"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] font-bold text-brand-text uppercase mb-1">
+                    Mülk Hakkında Ek Bilgi (Opsiyonel)
+                  </label>
+                  <textarea
+                    rows={2}
+                    placeholder="Oda sayısı, manzarası veya satıştaki özel beklentileriniz..."
+                    value={formData.notes}
+                    onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
+                    className="w-full bg-ivory border border-limestone/70 rounded-lg p-2.5 text-xs text-ink placeholder-brand-muted focus:outline-none focus:border-bronze"
+                  />
+                </div>
+
+                <div className="flex items-start gap-2 pt-1 text-[11px] text-brand-muted">
+                  <input type="checkbox" required id="kvkk-check" className="mt-1 accent-bronze cursor-pointer" />
+                  <label htmlFor="kvkk-check" className="cursor-pointer">
+                    Paylaştığım iletişim bilgilerimin ekspertiz raporu sunumu amacıyla işlenmesini ve{' '}
+                    <Link href="/kvkk" target="_blank" className="text-bronze underline font-semibold">
+                      KVKK Aydınlatma Metni
+                    </Link>
+                    &apos;ni okuduğumu onaylıyorum.
+                  </label>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full btn-primary py-3.5 text-xs font-bold"
+                >
+                  {isSubmitting ? 'Rapor Talebi Hazırlanıyor...' : 'Ücretsiz Değerleme Talep Et'}
+                </button>
+
+                {submitted && (
+                  <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-lg text-xs text-emerald-800">
+                    Talebiniz WhatsApp üzerinden Ayşe Hanım&apos;a iletildi. En geç 24 saat içinde sizinle iletişime geçilecektir.
+                  </div>
+                )}
+              </form>
             </div>
           </div>
         </div>

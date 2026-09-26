@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import { Sparkles, SlidersHorizontal, RefreshCw, ArrowRight } from 'lucide-react';
+import { SlidersHorizontal, RotateCcw, Filter, ChevronDown } from 'lucide-react';
 import { properties, Property } from '@/data/properties';
 import PropertyCard from './PropertyCard';
 import PropertyModal from './PropertyModal';
@@ -19,6 +19,7 @@ export default function PropertyPortfolio({
   const [selectedDistrict, setSelectedDistrict] = useState(initialLocation);
   const [sortBy, setSortBy] = useState<'featured' | 'price-desc' | 'price-asc'>('featured');
   const [activeProperty, setActiveProperty] = useState<Property | null>(null);
+  const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
 
   React.useEffect(() => {
     if (initialType) setSelectedType(initialType);
@@ -26,8 +27,8 @@ export default function PropertyPortfolio({
   }, [initialType, initialLocation]);
 
   const categories = [
-    { id: 'all', label: 'Tüm Portföy' },
-    { id: 'villa', label: 'Lüks Villalar' },
+    { id: 'all', label: 'Tüm Koleksiyon' },
+    { id: 'villa', label: 'Müstakil Villalar' },
     { id: 'apartment', label: 'Rezidans & Penthouse' },
     { id: 'land', label: 'Yatırımlık Arsa' },
     { id: 'commercial', label: 'Ticari Mülkler' },
@@ -39,7 +40,7 @@ export default function PropertyPortfolio({
     { id: 'Lara', label: 'Lara & Falezler' },
     { id: 'Konyaaltı', label: 'Konyaaltı' },
     { id: 'Kaş', label: 'Kaş & Kalkan' },
-    { id: 'Belek', label: 'Belek Golf' },
+    { id: 'Belek', label: 'Belek' },
     { id: 'Alanya', label: 'Alanya' },
   ];
 
@@ -69,38 +70,41 @@ export default function PropertyPortfolio({
     setSortBy('featured');
   };
 
-  return (
-    <section id="portfoy" className="py-24 bg-[#FAF9F5] text-slate-800 relative">
-      <div className="editorial-divider mb-16" />
+  const isFiltered = selectedType !== 'all' || selectedDistrict !== 'all';
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  return (
+    <section id="portfoy" className="py-20 lg:py-28 bg-paper">
+      <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#DFC596] text-[#7E6128] text-xs font-bold tracking-widest uppercase mb-4 shadow-sm">
-            <Sparkles className="w-3.5 h-3.5 text-[#B89047]" />
-            Özel & Doğrulanmış Lüks Portföy
+        <div className="max-w-2xl mb-12 text-left">
+          <div className="flex items-center gap-2 mb-3">
+            <span className="w-5 h-px bg-bronze" />
+            <span className="text-xs font-semibold uppercase tracking-widest text-bronze">
+              Portföy & Gayrimenkul Koleksiyonu
+            </span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-serif font-bold text-[#0F1E36] tracking-tight leading-tight mb-4">
-            Antalya’nın En Seçkin <br className="hidden sm:inline" />
-            <span className="gold-gradient-text italic font-normal">Gayrimenkul Koleksiyonu</span>
+
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-ink leading-tight mb-4">
+            Doğrulanmış ve Seçkin Mülkler
           </h2>
-          <p className="text-slate-500 text-sm sm:text-base leading-relaxed">
-            Hukuki, imar ve ekspertiz incelemeleri bizzat Ayşe Nane tarafından tamamlanmış; tapu devrine ve vatandaşlık kriterlerine uygun nadide mülkler.
+
+          <p className="text-sm sm:text-base text-brand-muted leading-relaxed font-normal">
+            Hukuki, imar ve tapu denetimleri bizzat yapılmış; vatandaşlık kriterlerine ve güvenli alım-satım standartlarına uygun gayrimenkul seçkisi.
           </p>
         </div>
 
-        {/* Filter Controls Bar */}
-        <div className="space-y-4 mb-12">
+        {/* Desktop Single-Line Filter Toolbar */}
+        <div className="hidden lg:flex items-center justify-between border-y border-limestone/50 py-4 mb-10 gap-6">
           {/* Category Tabs */}
-          <div className="flex flex-wrap items-center justify-center gap-2">
+          <div className="flex items-center gap-1">
             {categories.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setSelectedType(cat.id)}
-                className={`text-xs sm:text-sm font-bold px-5 py-3 rounded-2xl transition-all duration-300 ${
+                className={`text-xs font-semibold px-3.5 py-2 rounded-lg transition-colors ${
                   selectedType === cat.id
-                    ? 'gold-gradient-button text-white shadow-md'
-                    : 'bg-white text-slate-600 hover:text-[#0F1E36] hover:bg-[#F4F1EA] border border-[#EAE6DF] shadow-sm'
+                    ? 'bg-ink text-paper'
+                    : 'text-brand-muted hover:text-ink hover:bg-ivory'
                 }`}
               >
                 {cat.label}
@@ -108,80 +112,206 @@ export default function PropertyPortfolio({
             ))}
           </div>
 
-          {/* District Pills & Sorting */}
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-2">
-            {/* Districts */}
-            <div className="flex flex-wrap items-center gap-1.5">
-              {districts.map((dist) => (
-                <button
-                  key={dist.id}
-                  onClick={() => setSelectedDistrict(dist.id)}
-                  className={`text-xs font-semibold px-3.5 py-1.5 rounded-xl transition-all ${
-                    selectedDistrict === dist.id
-                      ? 'bg-[#0F1E36] text-white shadow-sm'
-                      : 'bg-white text-slate-500 hover:text-[#0F1E36] border border-[#EAE6DF]'
-                  }`}
-                >
-                  {dist.label}
-                </button>
-              ))}
+          {/* Region & Sort Controls */}
+          <div className="flex items-center gap-3">
+            {/* Region Selector */}
+            <div className="flex items-center gap-1.5 bg-ivory/80 px-3 py-1.5 rounded-lg border border-limestone/50">
+              <span className="text-[11px] text-brand-muted font-medium">Bölge:</span>
+              <select
+                value={selectedDistrict}
+                onChange={(e) => setSelectedDistrict(e.target.value)}
+                className="bg-transparent text-xs font-semibold text-ink focus:outline-none cursor-pointer"
+              >
+                {districts.map((d) => (
+                  <option key={d.id} value={d.id}>
+                    {d.label}
+                  </option>
+                ))}
+              </select>
             </div>
 
-            {/* Sorting & Reset */}
-            <div className="flex items-center gap-3">
-              <div className="flex items-center gap-2 bg-white px-3 py-1.5 rounded-xl border border-[#EAE6DF] shadow-sm">
-                <SlidersHorizontal className="w-3.5 h-3.5 text-[#B89047]" />
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value as any)}
-                  className="bg-transparent text-xs font-semibold text-[#0F1E36] focus:outline-none cursor-pointer"
-                >
-                  <option value="featured">Öne Çıkan Sıralama</option>
-                  <option value="price-desc">Fiyat: Yüksekten Düşüğe</option>
-                  <option value="price-asc">Fiyat: Düşükten Yükseğe</option>
-                </select>
-              </div>
-
-              {(selectedType !== 'all' || selectedDistrict !== 'all') && (
-                <button
-                  onClick={handleResetFilters}
-                  className="p-2 rounded-xl bg-white border border-[#EAE6DF] text-slate-500 hover:text-[#0F1E36] shadow-sm"
-                  title="Filtreleri Sıfırla"
-                >
-                  <RefreshCw className="w-3.5 h-3.5" />
-                </button>
-              )}
+            {/* Sort Dropdown */}
+            <div className="flex items-center gap-1.5 bg-ivory/80 px-3 py-1.5 rounded-lg border border-limestone/50">
+              <span className="text-[11px] text-brand-muted font-medium">Sırala:</span>
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value as any)}
+                className="bg-transparent text-xs font-semibold text-ink focus:outline-none cursor-pointer"
+              >
+                <option value="featured">Öne Çıkanlar</option>
+                <option value="price-desc">Fiyat: Yüksekten Düşüğe</option>
+                <option value="price-asc">Fiyat: Düşükten Yükseğe</option>
+              </select>
             </div>
+
+            {/* Reset Button */}
+            {isFiltered && (
+              <button
+                onClick={handleResetFilters}
+                className="p-2 text-brand-muted hover:text-ink rounded-lg hover:bg-ivory transition-colors"
+                title="Filtreleri Sıfırla"
+                aria-label="Filtreleri sıfırla"
+              >
+                <RotateCcw className="w-4 h-4" />
+              </button>
+            )}
           </div>
         </div>
 
-        {/* Properties Grid */}
-        {filteredProperties.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProperties.map((property) => (
-              <PropertyCard
-                key={property.id}
-                property={property}
-                onOpenModal={(prop) => setActiveProperty(prop)}
-              />
-            ))}
-          </div>
-        ) : (
-          <div className="text-center py-16 bg-white rounded-3xl border border-[#EAE6DF] shadow-sm">
-            <p className="text-slate-500 text-sm mb-4">
-              Seçtiğiniz kriterlere uygun ilan bulunamadı.
-            </p>
+        {/* Mobile Filter Toggle & Collapsible Bar */}
+        <div className="lg:hidden mb-8 space-y-3">
+          <div className="flex items-center justify-between bg-ivory p-3 rounded-xl border border-limestone/60">
             <button
-              onClick={handleResetFilters}
-              className="gold-gradient-button text-xs font-bold px-6 py-2.5 rounded-xl uppercase tracking-wider"
+              onClick={() => setMobileFilterOpen(!mobileFilterOpen)}
+              className="flex items-center gap-2 text-xs font-semibold text-ink"
             >
+              <Filter className="w-4 h-4 text-bronze" />
+              <span>Filtrele & Sırala</span>
+              {isFiltered && (
+                <span className="w-2 h-2 rounded-full bg-bronze" />
+              )}
+            </button>
+
+            <span className="text-xs text-brand-muted">
+              {filteredProperties.length} İlan
+            </span>
+          </div>
+
+          {mobileFilterOpen && (
+            <div className="bg-white p-4 rounded-xl border border-limestone/60 space-y-3">
+              {/* Category Pills */}
+              <div>
+                <label className="block text-[10px] font-bold text-brand-muted uppercase mb-1.5">
+                  Mülk Tipi
+                </label>
+                <div className="flex flex-wrap gap-1.5">
+                  {categories.map((cat) => (
+                    <button
+                      key={cat.id}
+                      onClick={() => setSelectedType(cat.id)}
+                      className={`text-xs px-2.5 py-1.5 rounded-lg font-medium transition-colors ${
+                        selectedType === cat.id
+                          ? 'bg-ink text-white'
+                          : 'bg-ivory text-brand-text'
+                      }`}
+                    >
+                      {cat.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* District & Sort Dropdowns */}
+              <div className="grid grid-cols-2 gap-2 pt-2 border-t border-limestone/30">
+                <div>
+                  <label className="block text-[10px] font-bold text-brand-muted uppercase mb-1">
+                    Bölge
+                  </label>
+                  <select
+                    value={selectedDistrict}
+                    onChange={(e) => setSelectedDistrict(e.target.value)}
+                    className="w-full bg-ivory border border-limestone/60 rounded-lg p-2 text-xs text-ink font-semibold"
+                  >
+                    {districts.map((d) => (
+                      <option key={d.id} value={d.id}>
+                        {d.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-[10px] font-bold text-brand-muted uppercase mb-1">
+                    Sıralama
+                  </label>
+                  <select
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value as any)}
+                    className="w-full bg-ivory border border-limestone/60 rounded-lg p-2 text-xs text-ink font-semibold"
+                  >
+                    <option value="featured">Öne Çıkanlar</option>
+                    <option value="price-desc">Fiyat: Yüksek</option>
+                    <option value="price-asc">Fiyat: Düşük</option>
+                  </select>
+                </div>
+              </div>
+
+              {isFiltered && (
+                <button
+                  onClick={handleResetFilters}
+                  className="w-full text-center text-xs font-semibold text-bronze pt-1"
+                >
+                  Tüm Filtreleri Temizle
+                </button>
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* Editorial Portfolio Showcase Grid */}
+        {filteredProperties.length === 0 ? (
+          <div className="py-16 text-center bg-ivory/50 rounded-2xl border border-limestone/40">
+            <p className="font-serif text-xl font-bold text-ink mb-2">Aramanıza Uygun İlan Bulunamadı</p>
+            <p className="text-xs text-brand-muted max-w-md mx-auto mb-4">
+              Seçtiğiniz kriterlerde şu anda yayında olan bir portföy bulunmuyor. Farklı bir bölge veya mülk tipi seçebilirsiniz.
+            </p>
+            <button onClick={handleResetFilters} className="btn-secondary text-xs">
               Tüm Portföyü Göster
             </button>
+          </div>
+        ) : (
+          <div className="space-y-8">
+            {/* When not filtered: First item is large featured, followed by 2 editorial cards, then 3-column grid */}
+            {!isFiltered && filteredProperties.length >= 3 ? (
+              <>
+                {/* 1. Large Lead Feature */}
+                <PropertyCard
+                  property={filteredProperties[0]}
+                  onOpenModal={setActiveProperty}
+                  isFeatured={true}
+                />
+
+                {/* 2. Editorial Duo (2 cards) */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+                  {filteredProperties.slice(1, 3).map((item) => (
+                    <PropertyCard
+                      key={item.id}
+                      property={item}
+                      onOpenModal={setActiveProperty}
+                    />
+                  ))}
+                </div>
+
+                {/* 3. Remaining Properties (3-column grid) */}
+                {filteredProperties.length > 3 && (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 pt-4">
+                    {filteredProperties.slice(3).map((item) => (
+                      <PropertyCard
+                        key={item.id}
+                        property={item}
+                        onOpenModal={setActiveProperty}
+                      />
+                    ))}
+                  </div>
+                )}
+              </>
+            ) : (
+              /* When filtered: Direct responsive grid */
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                {filteredProperties.map((item) => (
+                  <PropertyCard
+                    key={item.id}
+                    property={item}
+                    onOpenModal={setActiveProperty}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         )}
       </div>
 
-      {/* Property Details Modal */}
+      {/* Property Detail Modal */}
       {activeProperty && (
         <PropertyModal
           property={activeProperty}

@@ -240,44 +240,43 @@ export default function TeamAndCrmPage() {
   };
 
   return (
-    <div className="pt-32 pb-24 bg-[#FAF9F5] min-h-screen text-slate-800">
+    <div className="pt-32 pb-24 bg-paper min-h-screen text-brand-text">
       {/* Security Banner Notice */}
-      <div className="bg-[#F4F1EA] text-slate-700 border-b border-[#EAE6DF] py-3 px-4 sm:px-8">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 text-xs">
+      <div className="bg-ivory text-brand-muted border-b border-limestone/50 py-3 px-4 sm:px-8">
+        <div className="max-w-content mx-auto flex flex-wrap items-center justify-between gap-3 text-xs">
           <div className="flex items-center gap-2">
-            <span className="p-1 rounded-lg bg-white border border-[#DFC596] text-[#B89047]">
+            <span className="p-1 rounded-lg bg-white border border-limestone text-bronze">
               <Lock className="w-3.5 h-3.5" />
             </span>
-            <span className="font-bold text-[#0F1E36]">
-              Ayşe Nane & Ekibi İç Portalı (CRM & Danışman Masası)
+            <span className="font-bold text-ink">
+              Dahili Danışman Masası & CRM Simülasyonu
             </span>
-            <span className="hidden md:inline text-slate-300">|</span>
-            <span className="text-slate-500 hidden md:inline">
-              Müşteri Görüşme ve Portföy Takip Sistemi
+            <span className="hidden md:inline text-limestone">|</span>
+            <span className="text-brand-muted hidden md:inline">
+              Bu alan dahili kullanım içindir; sunulan kayıtlar demo amaçlı kurgulanmıştır.
             </span>
           </div>
 
-          <div className="inline-flex items-center gap-1.5 text-[11px] text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200 font-semibold">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span>Yönetici Önizleme Modu Aktif (Şifresiz Erişim)</span>
+          <div className="inline-flex items-center gap-1.5 text-[11px] text-brand-muted bg-white px-3 py-1 rounded-full border border-limestone font-medium">
+            <span>Demo Veri Ortamı</span>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 space-y-14">
+      <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8 mt-10 space-y-12">
         {/* Section 1: Team Roster */}
         <div>
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 text-left">
             <div>
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#7E6128] block mb-1">
-                Lüks Gayrimenkul & Yatırım Kadrosu
+              <span className="text-xs font-semibold uppercase tracking-widest text-bronze block mb-1">
+                Gayrimenkul & Yatırım Kadrosu
               </span>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-[#0F1E36] tracking-tight">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-ink tracking-tight">
                 Ayşe Nane ve Danışman Ekibi
               </h1>
             </div>
-            <p className="text-xs sm:text-sm text-slate-500 max-w-md font-light">
-              Hukuki, finansal ve saha uzmanlığını bir araya getiren A sınıfı danışman kadromuzla Antalya’da kusursuz mülk alım-satım deneyimi.
+            <p className="text-xs sm:text-sm text-brand-muted max-w-md font-normal">
+              Hukuki, finansal ve saha uzmanlığını bir araya getiren danışman kadromuzla Antalya’da güvenli mülk alım-satım deneyimi.
             </p>
           </div>
 
@@ -285,38 +284,38 @@ export default function TeamAndCrmPage() {
             {teamMembers.map((member, idx) => (
               <div
                 key={idx}
-                className="bg-white rounded-3xl p-5 border border-[#EAE6DF] shadow-[0_10px_30px_rgba(15,30,54,0.06)] hover:border-[#DFC596] transition-all duration-300 flex flex-col justify-between"
+                className="editorial-card p-5 bg-white flex flex-col justify-between"
               >
                 <div>
-                  <div className="relative h-64 w-full rounded-2xl overflow-hidden bg-slate-100 mb-4 border border-[#EAE6DF] group">
+                  <div className="relative h-64 w-full rounded-lg overflow-hidden bg-ivory mb-4 border border-limestone/50 group">
                     <Image
                       src={member.image}
                       alt={member.name}
                       fill
-                      className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                      className="object-cover object-top transition-transform duration-500 group-hover:scale-102"
                     />
                     <div className="absolute top-3 left-3">
-                      <span className="px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-white/95 text-[#7E6128] border border-[#DFC596] shadow-sm backdrop-blur-md">
+                      <span className="px-2.5 py-0.5 rounded text-[10px] font-semibold bg-paper/95 text-ink border border-limestone/60">
                         {member.badge}
                       </span>
                     </div>
                   </div>
 
-                  <h3 className="font-serif font-bold text-xl text-[#0F1E36]">{member.name}</h3>
-                  <p className="text-xs font-bold text-[#7E6128] mb-2">{member.role}</p>
-                  <p className="text-xs text-slate-500 leading-relaxed font-light">{member.focus}</p>
+                  <h3 className="font-serif font-bold text-lg text-ink">{member.name}</h3>
+                  <p className="text-xs font-semibold text-bronze mb-1">{member.role}</p>
+                  <p className="text-xs text-brand-muted leading-relaxed font-normal">{member.focus}</p>
                 </div>
 
-                <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
+                <div className="mt-5 pt-3 border-t border-limestone/30 flex items-center justify-between text-xs">
                   <a
                     href={`tel:${member.phone}`}
-                    className="flex items-center gap-1.5 text-[#0F1E36] hover:text-[#B89047] font-semibold"
+                    className="flex items-center gap-1.5 text-brand-text hover:text-bronze font-medium"
                   >
-                    <Phone className="w-3.5 h-3.5 text-[#B89047]" />
+                    <Phone className="w-3.5 h-3.5 text-bronze" />
                     <span>{member.phone}</span>
                   </a>
-                  <span className="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">
-                    Müsait
+                  <span className="text-[10px] font-semibold text-olive bg-ivory px-2 py-0.5 rounded border border-limestone/40">
+                    Aktif
                   </span>
                 </div>
               </div>
@@ -325,28 +324,27 @@ export default function TeamAndCrmPage() {
         </div>
 
         {/* Section 2: Interactive CRM Dashboard */}
-        <div className="bg-white rounded-3xl p-6 sm:p-10 border border-[#DFC596] shadow-[0_20px_50px_rgba(15,30,54,0.08)] space-y-8">
+        <div className="editorial-card p-6 sm:p-8 bg-white space-y-6">
           {/* CRM Header & KPI Stats */}
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-slate-100">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-limestone/40 text-left">
             <div>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#FAF9F5] border border-[#DFC596] text-[#7E6128] text-[11px] font-bold mb-2 shadow-sm">
-                <FileText className="w-3.5 h-3.5 text-[#B89047]" />
-                Müşteri & Görüşme Takip Masası (CRM)
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#0F1E36]">
+              <span className="text-xs font-semibold uppercase tracking-widest text-bronze block mb-1">
+                Dahili CRM Masası
+              </span>
+              <h2 className="text-2xl font-serif font-bold text-ink">
                 Görüşülen Müşteriler & Portföy Talepleri
               </h2>
-              <p className="text-xs text-slate-500 mt-1 font-light">
-                Görüşme notları, bütçeler, teklif aşamaları ve bir sonraki randevu tarihleri.
+              <p className="text-xs text-brand-muted mt-0.5">
+                Görüşme notları, bütçeler ve aşama takibi (Demo veri simülasyonu).
               </p>
             </div>
 
             <button
               onClick={() => setShowAddModal(true)}
-              className="gold-gradient-button text-xs font-bold uppercase tracking-wider px-5 py-3.5 rounded-xl shadow-md flex items-center justify-center gap-2 shrink-0 hover:scale-102 transition-transform"
+              className="btn-primary text-xs shrink-0"
             >
               <PlusCircle className="w-4 h-4" />
-              <span>Yeni Müşteri & Görüşme Ekle</span>
+              <span>Yeni Görüşme Kaydı Ekle</span>
             </button>
           </div>
 

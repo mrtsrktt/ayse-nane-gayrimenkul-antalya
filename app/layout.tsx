@@ -1,14 +1,30 @@
 import type { Metadata } from 'next';
+import { Libre_Baskerville, Manrope } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 
+const libreBaskerville = Libre_Baskerville({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-serif',
+  display: 'swap',
+});
+
+const manrope = Manrope({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-sans',
+  display: 'swap',
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://aysenanegayrimenkul.com'),
   title: 'Ayşe Nane | Antalya Lüks Gayrimenkul & Yatırım Danışmanlığı',
   description:
-    'Antalya, Kaş, Kalkan, Lara ve Konyaaltı’nda lüks villalar, panoramik sahil rezidansları ve yüksek getirili arsa yatırımları. MYK Seviye 5 Lisanslı Danışman Ayşe Nane ile güvenli mülk alım-satımı.',
+    'Antalya, Kaş, Kalkan ve Lara hattında seçkin müstakil villalar, panoramik rezidanslar ve yüksek getirili mülk yatırımları. MYK Seviye 5 Lisanslı Danışman Ayşe Nane ile güvenilir danışmanlık.',
   keywords: [
     'Antalya lüks villa',
     'Antalya satılık gayrimenkul',
@@ -17,14 +33,13 @@ export const metadata: Metadata = {
     'Döşemealtı satılık villa',
     'Lara deniz manzaralı rezidans',
     'Kaş Kalkan lüks villa',
-    'Antalya vatandaşlık yatırımı',
     'Antalya emlak değerleme',
   ],
   authors: [{ name: 'Ayşe Nane' }],
   openGraph: {
     title: 'Ayşe Nane | Antalya Lüks Gayrimenkul & Yatırım Danışmanı',
     description:
-      'Antalya ve Akdeniz çanağında seçkin villalar, rezidanslar ve yüksek getirili yatırımlar. 12 yıllık bölgesel uzmanlık ve yasal güvence.',
+      'Antalya ve Akdeniz çanağında seçkin villalar, rezidanslar ve stratejik gayrimenkul yatırımları. 12 yıllık bölgesel uzmanlık ve yasal güvence.',
     url: 'https://aysenanegayrimenkul.com',
     siteName: 'Ayşe Nane Gayrimenkul',
     images: [
@@ -49,8 +64,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="tr" className="scroll-smooth bg-[#FAF9F5]">
-      <body className="bg-[#FAF9F5] text-slate-800 font-sans antialiased selection:bg-gold-500 selection:text-white">
+    <html lang="tr" className={`scroll-smooth ${libreBaskerville.variable} ${manrope.variable}`}>
+      <body className="bg-paper text-brand-text font-sans antialiased selection:bg-bronze selection:text-white">
         <Navbar />
         <main className="min-h-screen">{children}</main>
         <Footer />
